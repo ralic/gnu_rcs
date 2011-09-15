@@ -3,25 +3,7 @@ HACKING RCS                                             -*- org -*-
 This file is both a guide for newcomers and a todo list for oldstayers.
 It lives in the repo but is not included in the distribution.
 
-* 5.8
-*** build/packaging
-***** better autoconf usage
-******* DONE no-fuss "make check"
-******* DONE precious env vars
-******* general spiffing
-***** DONE automake
-*** bugfixes
-***** DONE --help, --version
-***** DONE avoid mktemp (debian #291542)
-***** DONE add documentation in texinfo format
-***** DONE rcsdiff longopt handling (debian #334004)
-***** DONE document rlog -q (debian #69257)
-***** DONE temp file security hole in rcsfreeze (debian #27845)
-***** DONE don't say "path" when referring to file names
-*** features
-***** DONE recognize keyword ‘commitid’ (debian #352527)
-***** DONE ident accept numbers as well as letters (debian #157891)
-
+* next: bug and doc fixes
 * coding standards
 *** indent -gnu -nut (sounds enticing, no?)
 *** no trailing whitespace
