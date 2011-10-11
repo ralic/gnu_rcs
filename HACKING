@@ -4,6 +4,7 @@ This file is both a guide for newcomers and a todo list for oldstayers.
 It lives in the repo but is not included in the distribution.
 
 * next: bug and doc fixes
+* entropy: [[http://hydra.nixos.org/jobset/gnu/rcs-master][hydra]] ([[http://hydra.nixos.org/project/gnu][gnu]])
 * coding standards
 *** indent -gnu -nut (sounds enticing, no?)
 *** no trailing whitespace
