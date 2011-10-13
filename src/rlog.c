@@ -785,7 +785,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "rlog",
-      .help = help,
+      .help = rlog_help,
       .exiterr = exiterr
     };
 
