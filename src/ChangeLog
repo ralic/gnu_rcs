@@ -1,3 +1,9 @@
+2011-10-30  Thien-Thi Nguyen  <ttn@gnuvola.org>
+
+	[dist] Decruft: Don't distribute TAGS.
+
+	* Makefile.am (EXTRA_DIST): Remove TAGS, $(TESTS).
+
 2011-10-29  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	[int] Make ‘accumulate_range’ faster.
