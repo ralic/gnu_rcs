@@ -1,3 +1,12 @@
+2011-10-30  Thien-Thi Nguyen  <ttn@gnuvola.org>
+
+	[doc] Decruft: Don't mention ucontext.h author.
+
+	Omission from 2011-06-14, "Separate ISR
+	scratch and alt sig stack allocations".
+
+	* doc/rcs.texi (Credits): Don't mention ucontext.h author.
+
 2011-10-29  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	[boot int] Require INFILE for extract-help.
