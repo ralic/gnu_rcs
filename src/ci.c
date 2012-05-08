@@ -80,15 +80,6 @@ cleanup (void)
   dirtempunlink ();
 }
 
-static exiting void
-exiterr (void)
-{
-  ORCSerror ();
-  dirtempunlink ();
-  tempunlink ();
-  exit_failurefully ();
-}
-
 #define ACCF(...)  accf (PLEXUS, __VA_ARGS__)
 
 #define OK(x)     (x)->string = finish_string (PLEXUS, &((x)->size))
@@ -631,7 +622,7 @@ main (int argc, char **argv)
       .invoke = argv[0],
       .name = "ci",
       .help = ci_help,
-      .exiterr = exiterr
+      .tyag = BOG_FULL
     };
 
   CHECK_HV ();

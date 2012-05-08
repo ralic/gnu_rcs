@@ -83,12 +83,6 @@ cleanup (void)
   fro_zclose (&FLOW (from));
 }
 
-static exiting void
-exiterr (void)
-{
-  exit_failurefully ();
-}
-
 static void
 getlocker (char *argv)
 /* Get the login names of lockers from command line
@@ -749,7 +743,7 @@ main (int argc, char **argv)
       .invoke = argv[0],
       .name = "rlog",
       .help = rlog_help,
-      .exiterr = exiterr
+      .tyag = TYAG_IMMEDIATE
     };
 
   CHECK_HV ();

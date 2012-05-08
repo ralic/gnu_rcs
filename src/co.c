@@ -84,15 +84,6 @@ cleanup (void)
   dirtempunlink ();
 }
 
-static exiting void
-exiterr (void)
-{
-  ORCSerror ();
-  dirtempunlink ();
-  tempunlink ();
-  exit_failurefully ();
-}
-
 static bool
 rmworkfile (void)
 /* Prepare to remove ‘MANI (filename)’, if it exists, and if it is read-only.
@@ -418,7 +409,7 @@ main (int argc, char **argv)
       .invoke = argv[0],
       .name = "co",
       .help = co_help,
-      .exiterr = exiterr
+      .tyag = BOG_FULL
     };
 
   CHECK_HV ();

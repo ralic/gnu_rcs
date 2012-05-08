@@ -84,15 +84,6 @@ cleanup (void)
   dirtempunlink ();
 }
 
-static exiting void
-exiterr (void)
-{
-  ORCSerror ();
-  dirtempunlink ();
-  tempunlink ();
-  exit_failurefully ();
-}
-
 static void
 getassoclst (struct link **tp, char *sp)
 /* Associate a symbolic name to a revision or branch,
@@ -1071,7 +1062,7 @@ main (int argc, char **argv)
       .invoke = argv[0],
       .name = "rcs",
       .help = rcs_help,
-      .exiterr = exiterr
+      .tyag = BOG_FULL
     };
 
   CHECK_HV ();
