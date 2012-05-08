@@ -1,3 +1,13 @@
+2012-05-08  Thien-Thi Nguyen  <ttn@gnuvola.org>
+
+	[int] Expose ‘okalloc’ instead of ‘oom’.
+
+	* rcsedit.c (okalloc): Move func from here...
+	* b-divvy.c (oom): Make static.
+	(okalloc): ...to here; make non-static.
+	* b-divvy.h (oom): Delete func decl.
+	(okalloc): Add func decl.
+
 2012-04-06  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	[C] Fix bug: Avoid ‘bool’ for temporary ‘int’ values.
