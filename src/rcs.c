@@ -567,7 +567,7 @@ removerevs (void)
 
   if (delrev.code == 0)
     {                           /* -o rev or -o branch */
-      if (length & 1)
+      if (ODDP (length))
         temp = SEARCH (target->num, length + 1);
       else if (cmp)
         {
@@ -586,7 +586,7 @@ removerevs (void)
       return true;
     }
 
-  if (length & 1)
+  if (ODDP (length))
     {                           /* invalid branch after -o */
       RERR ("invalid branch range %s after -o", numrev.string);
       return false;
@@ -780,7 +780,7 @@ setlock (char const *rev, struct wlink **tp_deltas)
       target = gr_revno (numrev.string, tp_deltas);
       if (target)
         {
-          if (!(countnumflds (numrev.string) & 1)
+          if (EVENP (countnumflds (numrev.string))
               && !NUM_EQ (target->num, numrev.string))
             RERR ("can't lock nonexisting revision %s", numrev.string);
           else
@@ -854,7 +854,7 @@ dolocks (struct wlink **tp_deltas)
         target = gr_revno (numrev.string, tp_deltas);
         if (target)
           {
-            if (!(countnumflds (numrev.string) & 1)
+            if (EVENP (countnumflds (numrev.string))
                 && !NUM_EQ (target->num, numrev.string))
               RERR ("can't unlock nonexisting revision %s", bye);
             else
@@ -917,7 +917,7 @@ rcs_setstate (char const *rev, char const *status,
       target = gr_revno (numrev.string, tp_deltas);
       if (target)
         {
-          if (!(countnumflds (numrev.string) & 1)
+          if (EVENP (countnumflds (numrev.string))
               && !NUM_EQ (target->num, numrev.string))
             RERR ("can't set state of nonexisting revision %s", numrev.string);
           else if (STR_DIFF (target->state, status))

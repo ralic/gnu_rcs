@@ -183,7 +183,7 @@ addbranch (struct delta *branchpoint, struct cbuf *num,
           JAM (num, branchpoint->num);
           ADD (num, ".1.1");
         }
-      else if (numlength & 1)
+      else if (ODDP (numlength))
         ADD (num, ".1");
       newbranch.next = NULL;
 
@@ -204,7 +204,7 @@ addbranch (struct delta *branchpoint, struct cbuf *num,
   else
     {
       /* Place the branch properly.  */
-      field = numlength - ((numlength & 1) ^ 1);
+      field = numlength - EVENP (numlength);
       /* Field of branch number.  */
       btrail = &branchpoint->branches;
       while (d = (*btrail)->entry,
@@ -222,7 +222,7 @@ addbranch (struct delta *branchpoint, struct cbuf *num,
           /* Insert/append new branchhead.  */
           newbranch.next = *btrail;
           *btrail = &newbranch;
-          if (numlength & 1)
+          if (ODDP (numlength))
             ADD (num, ".1");
         }
       else
@@ -239,7 +239,7 @@ addbranch (struct delta *branchpoint, struct cbuf *num,
             }
           if (!removedlock && 0 <= (removedlock = removelock (targetdelta)))
             {
-              if (numlength & 1)
+              if (ODDP (numlength))
                 incnum (targetdelta->num, num);
               targetdelta->ilk = &newdelta;
               newdelta.ilk = NULL;
@@ -426,7 +426,7 @@ addelta (struct wlink **tp_deltas)
 
       /* Put new revision on side branch.  First, get branch point.  */
       tp = old.string;
-      for (i = newdnumlength - ((newdnumlength & 1) ^ 1); --i;)
+      for (i = newdnumlength - EVENP (newdnumlength); --i;)
         while (*tp++ != '.')
           continue;
       /* Ignore rest to get old delta.  */
@@ -521,7 +521,7 @@ xpandfile (struct fro *unexfile, struct delta const *delta,
       FINISH_EXPCTX (&ctx);
     }
   *exname = targetname;
-  return r & 1;
+  return ODDP (r);
 }
 
 /* --------------------- G E T L O G M S G --------------------------------*/
