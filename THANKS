@@ -21,15 +21,23 @@ Brendan Kehoe of Cygnus Support suggested rlog's -N option.  Paul
 D. Smith of Data General suggested improvements in option and error
 processing.  Adam Hammer of Purdue QAed.
 
-Thien-Thi Nguyen wrote the changes for RCS 5.8.  A big thanks go to
-the following people for reporting problems (and suggesting solutions)
-with the pretest releases:
+Thien-Thi Nguyen wrote the changes for RCS 5.8 through 5.8.1.
+A big thanks go to the following people for suggesting features
+and reporting bugs (sometimes with fixes) for these releases:
+  Aaron W. Swenson
+  Ian Delaney
   Karl Berry
   Keith Thompson
   Klaus T. Aehlig
   Ludovic Courtès
+  Michael Sanders
+  Mike Dooley
   Mike Mestnik
   Nelson H. F. Beebe
+  Oliver Billmann
+  Paul Ackersviller
   Paul Eggert
   Ralf Wildenhues
   Rob Vermaas
+  Romain Francoise
+  (and others who prefer anonymity)
