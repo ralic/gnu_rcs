@@ -12,4 +12,9 @@ Paul Eggert wrote the changes for RCS versions 5.5 and 5.6 (1991).
 Paul Eggert wrote most of the changes for RCS 5.7 (1995).
 K. Richard Pixley of Cygnus Support contributed several bug fixes.
 
-Thien-Thi Nguyen wrote the changes for RCS version 5.8.
+Thien-Thi Nguyen wrote the changes for RCS versions 5.8
+through 5.8.1, with some help (tiny changes) from:
+  Ian Delaney
+  Karl Berry
+  Oliver Billmann
+  Paul Eggert
