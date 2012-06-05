@@ -3,6 +3,110 @@ Copyright (C) 2010-2012 Thien-Thi Nguyen
 See the end for copying conditions.
 
 
+- 5.8.1 | 2012-06-05
+
+  - Bugs fixed
+
+    - Debug output removed
+
+	Due to an oversight, release 5.8 rlog included code to write
+	debugging output to stderr for invocations using the ‘-d’ option
+	and a date range (e.g., ‘rlog -d 2010<2012’).
+
+    - Criteria for avoiding read-only checks refined
+
+	For "make check", some test cases are inhibited if the user
+	running the test is not effectively blocked from writing a
+	purportedly read-only file, such as when "make check" is run by
+	the super user, or for certain (weird) NFS situations.
+
+	Previously, to determine this condition, we considered only the
+	operating system type, a very crude (and incomplete) proxy.
+	Now, we explicitly check with a shell sequence comprising the
+	umask(1) and test(1) commands, plus output-redirection.
+
+    - Regression in ‘-zLT’ handling
+
+	On a 64-bit x86 system, RCS 5.8 introduced a regression whereby:
+
+	 rlog -zLT -d>2011-05-04
+
+	would select the correct entry but display its date always with
+	default (01) month and day, i.e., YYYY-01-01.  This is now fixed
+	(see also tests/t320).
+
+    - Regression in ‘ci -d -T’ handling
+
+	RCS 5.8 introduced a regression whereby:
+
+	  ci -l -d -T FILE
+
+	would set the mtime of RCS/FILE,v (the comma-v file) to the
+	epoch.  This is now fixed (see also tests/t810).
+
+  - Use ‘diff --label’ instead of ‘diff -L’
+
+	Previously, RCS used GNU diff's ‘-L’ option.  According to Paul
+	Eggert (a GNU diffutils maintainer):
+
+	  That option has been undocumented since diffutils 2.8
+	  (released in March 2002) and the option is intended to
+	  be replaced sometime soon with a different meaning.
+
+	Now, RCS uses ‘diff --label’, thus immune to the planned change.
+
+  - Miscellaneous changes
+    - Make help extraction noisy (on failure)
+    - Silence some compiler warnings
+    - Increase coverage of "make check"
+
+  - Documentation improvements
+
+    - Manpage rcsintro(1) dropped
+
+	This manpage is redundant, and (arguably) should not have been
+	in section 1 in the first place.
+
+    - Use "Invoking COMMAND" instead of "COMMAND" as node names
+
+	This makes it easier for ‘info --usage COMMAND’ to DTRT, and
+	makes GNU (info "(standards) Manual Structure Details") happy.
+
+    - explicitly UTF-8
+
+	This is to prepare for a (future) GNU Texinfo release that
+	renders @code in a more pretty way when the encoding is UTF-8.
+	If you're reading this (from the future) with such a Texinfo at
+	hand, feel free to regenerate the docs in doc/ prior to install.
+
+    - CVS is not GNU
+
+	Previously, we incorrectly said "GNU CVS", succumbing to a
+	common misunderstanding.  Now we know better.
+
+  - TAGS file no longer distributed
+
+	To create, configure normally and do "make TAGS".
+
+  - New configure script option ‘--enable-coverage’
+
+	Specifying ‘--enable-coverage’ causes ‘_Exit’ to be an alias for
+	‘exit’ and CFLAGS to append ‘--coverage’ if the compiler is GCC.
+	This is needed because the coverage machinery writes the .gcda
+	files only on ‘exit’.
+
+	This option is for maintainers; most people can ignore it.
+
+  - Portability improvements
+    - Use more gnulib modules
+    - Use portable Makefile subst-ref variable syntax
+    - Use portable shell command-output interpolation syntax
+  - Maintenance tools upgraded
+    - GNU Automake 1.12
+    - GNU Autoconf 2.69
+    - gnulib-tool (GNU gnulib 2012-06-03 16:29:00) 0.0.7432-f6c24-modified
+
+
 - 5.8 | 2011-08-30
 
   - License now GPLv3+ (see COPYING)

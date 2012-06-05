@@ -1,5 +1,9 @@
 2012-06-05  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
+	Release: 5.8.1
+
+2012-06-05  Thien-Thi Nguyen  <ttn@gnuvola.org>
+
 	[v] Update known-failures for 5.7.
 
 	* known-failures.in (5.7): Add t608.
