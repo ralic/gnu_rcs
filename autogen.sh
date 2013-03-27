@@ -40,7 +40,6 @@ actually doc/INSTALL.UTF-8 INSTALL
 actually build-aux/config.guess
 actually build-aux/config.sub
 actually build-aux/install-sh
-actually build-aux/missing
 actually build-aux/mdate-sh
 actually build-aux/texinfo.tex
 actually build-aux/depcomp
