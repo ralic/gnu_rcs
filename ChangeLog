@@ -1,5 +1,11 @@
 2013-03-27  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[boot int] Bump Automake min vers to 1.12.2; specify ‘serial-tests’.
+
+	* configure.ac (AM_INIT_AUTOMAKE): ...here.
+
+2013-03-27  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[boot int] Don't get build-aux/missing from gnulib.
 
 	Gnulib no longer has ‘missing’ as of late June 2012:
