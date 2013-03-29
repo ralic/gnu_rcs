@@ -18,6 +18,12 @@ It lives in the repo but is not included in the distribution.
              auto-mode-alist
              :test 'equal)
     :END:
+*** man/b-* and man/*.?in
+    :ELISP:
+    (pushnew '("rcs[^/]*/man/\\(b-.+\\|.+[.][0-9]in\\)$" . nroff-mode)
+             auto-mode-alist
+             :test 'equal)
+    :END:
 *** bootstrap
 ***** gnulib-tool must be somewhere on PATH
 ***** do "sh autogen.sh"
