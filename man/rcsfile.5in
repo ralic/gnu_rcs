@@ -276,3 +276,4 @@ B12:	triangle_down("1.2")
 .BR rcsmerge (1),
 .BR rlog (1).
 .so b-tichy-cite
+.so b-info

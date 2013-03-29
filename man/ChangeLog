@@ -1,3 +1,21 @@
+2013-03-29  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[man] Add "full docs in info rcs" blurb.
+
+	* b-info: New file.
+	* Makefile.am (bits): Add b-info.
+	* ci.1in: Add ‘.so b-info’.
+	* co.1in: Likewise.
+	* ident.1in: Likewise.
+	* merge.1in: Likewise.
+	* rcs.1in: Likewise.
+	* rcsclean.1in: Likewise.
+	* rcsdiff.1in: Likewise.
+	* rcsfreeze.1in: Likewise.
+	* rcsmerge.1in: Likewise.
+	* rlog.1in: Likewise.
+	* rcsfile.5in: Likewise.
+
 2012-06-05  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	Release: 5.8.1

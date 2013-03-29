@@ -29,6 +29,7 @@ bits = b-base \
   b-emptylogmessage \
   b-environment \
   b-identification \
+  b-info \
   b-tichy-cite
 
 EXTRA_DIST = $(dist_man_MANS:=in) $(BUILT_SOURCES) $(bits)
