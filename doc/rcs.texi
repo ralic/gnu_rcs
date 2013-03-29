@@ -35,6 +35,10 @@ Note that @option{-V@var{n}} is @emph{not} a valid option for
 @rcscommand{\command\}, in contrast to most other RCS commands
 @end macro
 
+@macro UCS {hex}
+@t{U+\hex\}
+@end macro
+
 @copying
 This manual is for GNU RCS (version @value{VERSION}, @value{UPDATED}).
 
@@ -77,6 +81,7 @@ Texts.  A copy of the license is included in the appendix entitled
 @menu
 * Overview::            General purpose and information.
 * Usage::               How to use RCS.
+* File format::         What is stored on disk.
 
 * Still missing::       What RCS lacks, perhaps perpetually.
 * Reporting bugs::      Sending bug reports and feature suggestions.
@@ -1514,6 +1519,181 @@ or by the user if @var{who} is omitted.
 @item -q
 No effect, included for consistency with other commands.
 @end table
+
+
+@c ---------------------------------------------------------------------------
+@node File format
+@chapter File format
+@cindex RCSfile format
+@cindex format, RCSfile
+
+An @repo{}'s contents are described by the grammar below@footnote{This
+chapter is adapted from the @samp{rcsfile(5)} manpage, written by
+@WFT{}.}.
+@cindex encoding, file format
+Overall, the format is free--format text.
+In most environments RCS uses the ISO 8859/1 encoding: visible graphic
+characters are (octal) codes 041--176 and 240--377, and whitespace
+characters are codes 010--015 and 040.
+@TODO{} Discuss or point to encoding compatability issues.
+
+@menu
+* comma-v grammar::
+* comma-v particulars::
+@end menu
+
+@node comma-v grammar
+@section File format grammar
+@cindex grammar, file format
+
+The meta syntax in this section uses the following conventions:
+@samp{|} (@UCS{7C}) separates alternatives;
+@samp{@{} (@UCS{7B}) and @samp{@}} (@UCS{7D}) enclose optional phrases;
+@samp{@{} and @samp{@}*} (trailing @UCS{2A}) enclose phrases that can be
+repeated zero or more times;
+@samp{@{} and @samp{@}+} (trailing @UCS{2B}) enclose phrases that must
+appear at least once and can be repeated;
+terminal symbols are in @samp{""} (two @UCS{22}).
+
+@example
+rcstext   ::=  admin @{delta@}* desc @{deltatext@}*
+
+admin     ::=  "head"         @{num@} ";"
+               @{ "branch"     @{num@} ";" @}
+               "access"       @{id@}* ";"
+               "symbols"      @{ sym ":" num @}* ";"
+               "locks"        @{ id ":" num @}* ";"
+               @{ "strict" ";" @}
+               @{ "integrity " @{string@} ";" @}
+               @{ "comment"    @{string@} ";" @}
+               @{ "expand"     @{string@} ";" @}
+
+delta     ::=  num
+               "date"       num ";"
+               "author"     id ";"
+               "state"      @{id@} ";"
+               "branches"   @{num@}* ";"
+               "next"       @{num@} ";"
+               @{ "commitid" sym ";" @}
+
+desc      ::=  "desc"  string
+
+deltatext ::=  num
+               "log"   string
+               "text"  string
+
+num       ::=  @{ digit | "." @}+
+
+digit     ::=  "0" @r{through} "9"
+
+id        ::=  @{ idchar | "." @}+
+
+sym       ::=  @{idchar@}+
+
+idchar    ::=  @r{any visible graphic character except} special
+
+special   ::=  "$" | "," | "." | ":" | ";" | "@@"
+
+string    ::=  "@@" @{ @r{any character, with} @@ @r{doubled} @}* "@@"
+
+word      ::=  id | num | string | ":"
+@end example
+
+@node comma-v particulars
+@section Additional particulars of the file format
+
+@itemize
+@item
+@cindex whitespace, file format
+Whitespace has no significance except in strings.
+However, whitespace cannot appear within an @code{id}, @code{num}, or
+@code{sym}, and an @repo{} must end with newline (@UCS{0A}).
+Strings are enclosed by @samp{@@} (@UCS{40}).
+If a string contains a @samp{@@}, it must be doubled; otherwise, strings
+can contain arbitrary binary data.
+
+@item
+@cindex case sensitivity, file format
+Identifiers are case sensitive.
+Keywords are in lower case only.
+The sets of keywords and identifiers can overlap.
+
+@item
+@cindex dates, file format
+Dates, which appear after the @code{date} keyword, are of the form
+@code{Y.mm.dd.hh.mm.ss}, where @code{Y} is the year, @code{mm} the month
+(01--12), @code{dd} the day (01--31), @code{hh} the hour (00--23),
+@code{mm} the minute (00--59), and @code{ss} the second (00--60).
+@code{Y} contains just the last two digits of the year for years from
+1900 through 1999, and all the digits of years thereafter.
+Dates use the Gregorian calendar; times use UTC.
+
+@item
+@cindex node layout, file format
+@cindex layout of nodes, file format
+The @code{delta} nodes form a tree.
+All nodes whose numbers consist of a single pair (e.g., 2.3, 2.1, 1.3)
+are on the trunk, and are linked through the @code{next} field in order
+of decreasing numbers.
+The @code{head} field in the @code{admin} node points to the head of
+that sequence (i.e., contains the highest pair).
+The @code{branch} node in the @code{admin} node indicates the default
+branch (or revision) for most RCS operations.
+If empty, the default branch is the highest branch on the trunk.
+
+All @code{delta} nodes whose numbers consist of 2@var{n} fields (@var{n}
+@geq{} 2) (e.g., 3.1.1.1, 2.1.2.2) are linked as follows.
+All nodes whose first 2@var{n}@minus{}1 number fields are identical are
+linked through the @code{next} field in order of increasing numbers.
+For each such sequence, the @code{delta} node whose number is identical
+to the first 2@var{n}@minus{}2 number fields of the @code{delta} nodes
+on that sequence is called the @dfn{branchpoint}.
+The @code{branches} field of a node contains a list of the numbers of
+the first nodes of all sequences for which it is a branchpoint.
+This list is ordered in increasing numbers.
+@xref{Example RCS File Organization}.
+
+@float Figure, Example RCS File Organization
+@example
+                           Head
+                             |
+                             |
+                             v                        / \
+                         ---------                   /   \
+   / \          / \      |       |      / \         /     \
+  /   \        /   \     |  2.1  |     /   \       /       \
+ /     \      /     \    |       |    /     \     /         \
+/1.2.1.3\    /1.3.1.1\   |       |   /1.2.2.2\   /1.2.2.1.1.1\
+---------    ---------   ---------   ---------   -------------
+    ^            ^           |           ^             ^
+    |            |           |           |             |
+    |            |           v           |             |
+   / \           |       ---------      / \            |
+  /   \          |       \  1.3  /     /   \           |
+ /     \         ---------\     /     /     \-----------
+/1.2.1.1\      1.3.1       \   /     /1.2.2.1\     1.2.2.1.1
+---------                   \ /      ---------
+    ^                        |           ^
+    |                        |           |
+    |                        v           |
+    |                    ---------       |
+    |                    \  1.2  /       |
+    ----------------------\     /---------
+  1.2.1                    \   /       1.2.2
+                            \ /
+                             |
+                             |
+                             v
+                         ---------
+                         \  1.1  /
+                          \     /
+                           \   /
+                            \ /
+@end example
+@caption{The organization of an example @repo{}.}
+@shortcaption{Example RCS File Organization}
+@end float
+@end itemize
 
 
 @c ---------------------------------------------------------------------------

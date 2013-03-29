@@ -1,3 +1,13 @@
+2013-03-29  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[doc] Add chapter describing the comma-v file format.
+
+	* doc/rcs.texi (UCS): New macro.
+	(Top): Add "File format" to menu.
+	(File format): New node/chapter.
+	(comma-v grammar): New node/section.
+	(comma-v particulars): New node/section.
+
 2013-03-27  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[boot int] Bump Automake min vers to 1.12.2; specify ‘serial-tests’.
