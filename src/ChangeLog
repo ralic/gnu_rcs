@@ -1,3 +1,10 @@
+2013-03-30  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Fix bug: Define syntax for ‘integrity’ value.
+
+	* b-grok.c (full): If ‘integrity’ has a value and that
+	value includes an internal '@' (U+40), signal a syntax error.
+
 2012-06-05  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	Release: 5.8.1

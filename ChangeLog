@@ -1,3 +1,13 @@
+2013-03-30  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Fix bug: Define syntax for ‘integrity’ value.
+
+	* doc/rcs.texi (comma-v grammar): Change production ‘admin’
+	clause ‘integrity’ value to use ‘intstring’ instead of ‘string’;
+	add productions ‘intchar’, ‘thirdp’, ‘intstring’.
+	(comma-v particulars): Explain past changes and current
+	state of third-party interop space, wrt the file format.
+
 2013-03-29  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[doc] Add chapter describing the comma-v file format.

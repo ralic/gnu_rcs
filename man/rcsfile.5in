@@ -53,7 +53,7 @@ nonterminal symbols are in
 		\f3access\fP	{\f2id\fP}*\f3;\fP
 		\f3symbols\fP	{\f2sym\fP \f3:\fP \f2num\fP}*\f3;\fP
 		\f3locks\fP	{\f2id\fP \f3:\fP \f2num\fP}*\f3;\fP  {\f3strict  ;\fP}
-		{ \f3integrity\fP	{\f2string\fP}\f3;\fP }
+		{ \f3integrity\fP	{\f2intstring\fP}\f3;\fP }
 		{ \f3comment\fP	{\f2string\fP}\f3;\fP }
 		{ \f3expand\fP	{\f2string\fP}\f3;\fP }
 .LP
@@ -86,7 +86,35 @@ nonterminal symbols are in
 \f2string\fP	::=	\f3@\fP{any character, with \f3@\fP doubled}*\f3@\fP
 .LP
 \f2word\fP	::=	\f2id\fP | \f2num\fP | \f2string\fP | \f3:\fP
+.LP
+\f2intchar\fP	::=	any character, except \f3@\fP
+.LP
+\f2thirdp\fP	::=	\f3^L\fP {\f2intchar\fP}*
+.LP
+\f2intstring\fP	::=	\f3@\fP {\f2intchar\fP}* {\f2thirdp\fP}* \f3@\fP
 .fi
+.PP
+In releases prior to 5.8 (2011-08-30), the grammar included the
+.I newphrase
+production and used it in the
+.IR admin ,
+.I delta
+and
+.I deltatext
+productions.
+This allowed third-party programs to interoperate with \*r
+by storing opaque (to \*r) data in the file.
+As of 5.8, in the name of progress (towards more systematic file
+integrity support), the only area reserved for third-party interop is in
+the (string) value of the
+.I integrity
+field, specifically after the first
+.B ^L
+(formfeed).
+A further restriction (for all programs) is that the
+.I integrity
+value must not contain
+.BR @ .
 .PP
 Identifiers are case sensitive.  Keywords are in lower case only.
 The sets of keywords and identifiers can overlap.

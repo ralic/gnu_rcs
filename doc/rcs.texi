@@ -1564,7 +1564,7 @@ admin     ::=  "head"         @{num@} ";"
                "symbols"      @{ sym ":" num @}* ";"
                "locks"        @{ id ":" num @}* ";"
                @{ "strict" ";" @}
-               @{ "integrity " @{string@} ";" @}
+               @{ "integrity " @{intstring@} ";" @}
                @{ "comment"    @{string@} ";" @}
                @{ "expand"     @{string@} ";" @}
 
@@ -1597,12 +1597,40 @@ special   ::=  "$" | "," | "." | ":" | ";" | "@@"
 string    ::=  "@@" @{ @r{any character, with} @@ @r{doubled} @}* "@@"
 
 word      ::=  id | num | string | ":"
+
+intchar   ::=  @r{any character, except} @@
+
+thirdp    ::=  "^L" @{intchar@}*
+
+intstring ::= "@@" @{intchar@}* @{thirdp@}* "@@"
 @end example
 
 @node comma-v particulars
 @section Additional particulars of the file format
 
 @itemize
+@item
+@cindex third-party interop, file format
+In releases prior to 5.8 (2011-08-30), the grammar included the
+production:
+
+@example
+newphrase ::= id word* ";"
+@end example
+
+@noindent
+and used it in the @code{admin}, @code{delta} and @code{deltatext}
+productions.
+This allowed third-party programs to interoperate with RCS
+by storing opaque (to RCS) data in the file.
+
+As of 5.8, in the name of progress (towards more systematic file
+integrity support), the only area reserved for third-party interop is in
+the (string) value of the @code{integrity} field, specifically after the
+first formfeed (@UCS{0C}).
+A further restriction (for all programs) is that the @code{integrity}
+value must not contain @samp{@@}.
+
 @item
 @cindex whitespace, file format
 Whitespace has no significance except in strings.

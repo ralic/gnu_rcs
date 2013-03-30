@@ -639,7 +639,9 @@ full (struct divvy *to, struct fro *f)
 
   if (probe_keyword (g, &TINY (integrity)))
     {
-      maybe_read_atat (g, &repo->integrity);
+      if (maybe_read_atat (g, &repo->integrity)
+          && 1 < repo->integrity->count)
+        BUMMER ("spurious '@' in `%s' value", TINYKS (integrity));
       SEMI (g, integrity);
     }
 

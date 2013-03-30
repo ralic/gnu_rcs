@@ -1,3 +1,12 @@
+2013-03-30  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Fix bug: Define syntax for ‘integrity’ value.
+
+	* t301: New file.
+	* Makefile.am (TESTS): Add t301.
+	* known-failures.in (5.8): Add t301.
+	(5.8.1): New top-level heading.
+
 2012-06-05  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	Release: 5.8.1
