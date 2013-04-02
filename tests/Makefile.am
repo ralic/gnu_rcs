@@ -80,8 +80,6 @@ TESTS = \
  t900 \
  t999
 
-XFAIL_TESTS += t803
-
 EXTRA_DIST = $(TESTS) \
  common common-d common-i common-kn \
  compgate \

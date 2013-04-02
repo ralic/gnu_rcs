@@ -595,7 +595,8 @@ rev_from_symbol (struct cbuf const *id)
     {
       struct symdef const *d = ls->entry;
 
-      if (!strncmp (d->meaningful, id->string, id->size))
+      if ('\0' == d->meaningful[id->size]
+          && !strncmp (d->meaningful, id->string, id->size))
         return d->underlying;
     }
   return NULL;

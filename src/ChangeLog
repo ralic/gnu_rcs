@@ -1,3 +1,11 @@
+2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Fix bug: Also check terminating nul in symbol deref search.
+
+	Regression introduced 2010-04-21, "Add abstraction: fully_numeric".
+
+	* rcsrev.c (rev_from_symbol): ...here.
+
 2013-03-30  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix bug: Define syntax for ‘integrity’ value.

@@ -1,5 +1,11 @@
 2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Fix bug: Also check terminating nul in symbol deref search.
+
+	* Makefile.am (XFAIL_TESTS): Remove t803.
+
+2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v] Add test for sym deref w/ common prefix regression; mark xfail.
 
 	Reported by Bostjan Vilfan.
