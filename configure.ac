@@ -23,7 +23,7 @@ AC_INIT([GNU RCS],
 	[bug-rcs@gnu.org])
 AC_CONFIG_HEADERS([lib/config.h])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([1.12.2 readme-alpha no-define serial-tests])
+AM_INIT_AUTOMAKE([1.12.2 no-define serial-tests])
 AS_CASE([$PACKAGE_VERSION],[*.*.*],[pretest_p=yes],[pretest_p=no])
 
 # syntax terrors

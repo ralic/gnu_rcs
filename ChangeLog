@@ -1,3 +1,10 @@
+2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[dist] Don't bother w/ README-alpha any more.
+
+	* configure.ac (AM_INIT_AUTOMAKE): Remove ‘readme-alpha’.
+	* README-alpha: Delete file.
+
 2013-03-30  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix bug: Define syntax for ‘integrity’ value.
