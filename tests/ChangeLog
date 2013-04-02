@@ -1,3 +1,13 @@
+2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v] Add test for sym deref w/ common prefix regression; mark xfail.
+
+	Reported by Bostjan Vilfan.
+
+	* t803: New file.
+	* Makefile.am (TESTS, XFAIL_TESTS): Add t803.
+	* known-failures.in (5.8, 5.8.1): Add t803.
+
 2013-03-30  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix bug: Define syntax for ‘integrity’ value.
