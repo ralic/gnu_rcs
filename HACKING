@@ -21,16 +21,25 @@ It lives in the repo but is not included in the distribution.
 *** bootstrap
 ***** gnulib-tool must be somewhere on PATH
 ***** do "sh autogen.sh"
-*** public non-‘master’ branches in the repo
-***** ‘a’ -- "anchor", "asis", "already", "argh-just-leave-me-alone"
-This branch is for what was already released.  It will never be rebased.
-Its tip will always have a commit title starting with "Release".
-***** q/TOPIC -- "questionably", "querulously"
-These are experimental, exploring the particular TOPIC.  They are intended
-to be ephemeral, undergoing rebase, amendment, and ultimately removal.
 *** copyright policy
 ***** update every year, unconditionally
 ***** (if (< 2 (- END BEGIN)) RANGE INDIVIDUAL)
+
+* repo branch discipline
+*** no ‘master’ -- do not panic!
+*** archive
+    This branch is for what was already released.  It will never be rebased.
+    Its tip will always have a commit title starting with "Release".
+*** next -- stuff for the next release
+    This branch is work for the next release.  It will never be rebased.
+*** p -- "perhaps", "probably"
+    This branch is where largely-stable changes intended for the next release
+    live.  It's very unlikely to undergo rebase, but not entirely impossible.
+    A rebase MUST be announced to the bug-report address.
+    Hackers probably want to start here.
+*** q-TOPIC -- "questionably", "querulously"
+    These are experimental, exploring the particular TOPIC.  They are intended
+    to be ephemeral, undergoing rebase, amendment, and ultimately removal.
 
 * gnulib utility
 *** why
