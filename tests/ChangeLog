@@ -1,3 +1,9 @@
+2013-04-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v] Update known-failures for 5.8.
+
+	* known-failures.in (5.8): Remove t630.
+
 2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix bug: Also check terminating nul in symbol deref search.
