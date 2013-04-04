@@ -2,6 +2,56 @@ NEWS for GNU RCS (Revision Control System)
 See the end for copying conditions.
 
 
+- 5.8.2 | 2013-04-04
+
+  - Bugs fixed
+
+    - Wrong symbolic name dereference
+
+	RCS 5.8 introduced a bug whereby commands would incorrectly
+	dereference a symbolic name (into a numerical revision number)
+	in the presence of multiple symbolic names that share a common
+	prefix.  See tests/t803.
+
+    - ‘integrity’ value syntax better specified
+
+	The ‘integrity’ value (if present) is a string composed of a
+	system part followed by an optional user part, with formfeed
+	(^L, U+0C) separating the two.  Unlike other string values, the
+	‘integrity’ string (either part) must NOT contain '@' (U+40).
+	If it does, RCS displays a "spurious '@' in `integrity' value"
+	error message and exits failurefully.
+
+	This change restores interop play-space for third-party tools
+	that was stricken w/ the RCS 5.8 top-level grammar freeze.  Left
+	unspecified is how such tools should divvy up the user part.
+
+  - New manual chapter: RCS file format
+
+	This documents the RCS file format grammar and particulars,
+	adapted from rcsfile(5).
+
+  - Manpages refer to info documentation
+
+	They now recommend using "info rcs" for full documentation.
+
+  - Script to trim "junk at end of file" posted
+
+	The "junk at end of file" error occurs for some files due to RCS
+	5.8 being more strict about the syntax it accepts.  You can use
+	‘trimrcs’ by Warren Jones:
+
+	http://lists.gnu.org/archive/html/help-rcs/2013-01/msg00006.html
+
+	to remedy such files while we figure out how best to move such
+	functionality into RCS proper.
+
+  - Maintenance tools updated
+    - automake (GNU Automake) 1.13.1
+    - gnulib-tool (GNU gnulib 2013-03-19 16:08:47) 0.0.7899-34f84
+    - makeinfo (GNU Texinfo) 5.1
+
+
 - 5.8.1 | 2012-06-05
 
   - Bugs fixed
@@ -684,3 +734,9 @@ Copyright information:
    of this document, or of portions of it,
    under the above conditions, provided also that they
    carry prominent notices stating who last changed them.
+
+______________________________________________
+	Local Variables:
+	mode: outline
+	outline-regexp: "\\([ ][ ]\\)*- "
+	End:

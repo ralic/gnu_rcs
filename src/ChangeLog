@@ -1,3 +1,7 @@
+2013-04-04  Thien-Thi Nguyen  <ttn@gnuvola.org>
+
+	Release: 5.8.2
+
 2013-04-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix bug: Also check terminating nul in symbol deref search.
