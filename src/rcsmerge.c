@@ -213,6 +213,9 @@ main (int argc, char **argv)
 /*:help
 [options] file
 Options:
+  -A            Passed to diff3(1).
+  -E            Passed to diff3(1); default if unspecified.
+  -e            Passed to diff3(1); do not warn on conflicts.
   -p[REV]       Write to stdout instead of overwriting the working file.
   -q[REV]       Quiet mode.
   -rREV         (one or two times) specify a revision.

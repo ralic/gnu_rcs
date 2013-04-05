@@ -1,5 +1,13 @@
 2013-04-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[rcsmerge] Fix bug: Include ‘-A’, ‘-E’, ‘-e’ in ‘--help’ output.
+
+	Reported by Honza Horak.
+
+	* rcsmerge.c <help text>: ...here.
+
+2013-04-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Mention ineffectual options more prominently.
 
 	Suggested by Honza Horak.
