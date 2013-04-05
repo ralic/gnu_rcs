@@ -1,5 +1,13 @@
 2013-04-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Fix bug: Document rcsmerge options ‘-A’, ‘-E’, ‘-e’.
+
+	Reported by Honza Horak.
+
+	* doc/rcs.texi (rcsmerge): ...here.
+
+2013-04-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Mention ineffectual options more prominently.
 
 	* rcs.texi (Environment): Add macro ‘ineffectual’.

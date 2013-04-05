@@ -1416,6 +1416,15 @@ The @rcscommand{rcsmerge} command incorporates the changes between two
 revisions of an @repo{} into the corresponding working file.
 
 @table @code
+@item -A
+@itemx -E
+@itemx -e
+Passed to the @rcscommand{diff3} command.
+The default if none are specified is @code{-E}.
+With @code{-e}, suppress warnings on conflict.
+The @code{-A} style generates the most verbose output.
+@xref{Invoking diff3,,,diff,The GNU Diffutils Manual}.
+
 @item -p[@var{rev}]
 Write to stdout instead of overwriting the working file.
 
