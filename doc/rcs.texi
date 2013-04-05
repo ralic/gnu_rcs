@@ -998,6 +998,12 @@ Absent @option{-w@var{login}}, or when @var{login} is omitted
 are set, RCS queries the host for, and uses, your login.
 @end defvr
 
+@macro ineffectual {opts}
+@noindent
+These options have no effect, and are included solely for consistency
+with other comamnds (@pxref{Environment}): \opts\.
+@end macro
+
 @node ci
 @section Invoking @rcscommand{ci}
 
@@ -1305,10 +1311,9 @@ beginning of branch to @var{rev}
 @itemx -V@var{n}
 @itemx -x@var{suff}
 @xref{Misc common options}.
-
-@item -z@var{zone}
-No effect; included for compatibility with other commands.
 @end table
+
+@ineffectual @code{-z@var{zone}}
 
 @node rcsclean
 @section Invoking @rcscommand{rcsclean}
@@ -1386,6 +1391,8 @@ revision on the default branch.
 @xref{Date option}.
 @end table
 
+@ineffectual @code{-T}
+
 @noindent
 Additionally, the following options (and their argument, if any) are
 passed to the underlying @rcscommand{diff} command:
@@ -1437,6 +1444,8 @@ to the latest revision on the default branch.
 @item -z@var{zone}
 @xref{Date option}.
 @end table
+
+@ineffectual @code{-T}
 
 @node rlog
 @section Invoking @rcscommand{rlog}
@@ -1515,11 +1524,9 @@ or by the user if @var{who} is omitted.
 
 @item -z@var{zone}
 @xref{Date option}.
-
-@item -q
-No effect, included for consistency with other commands.
 @end table
 
+@ineffectual @samp{-q}, @samp{-T}
 
 @c ---------------------------------------------------------------------------
 @node File format

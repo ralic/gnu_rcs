@@ -1011,6 +1011,7 @@ Options:
   -sSTATES      Select revisions with state in STATES (comma-separated list).
   -w[WHO]       Select revisions checked in by WHO (comma-separated list),
                 or by the user if WHO is omitted.
+  -T            No effect; included for compatibility with other commands.
   -V            Like --version.
   -VN           Emulate RCS version N.
   -xSUFF        Specify SUFF as a slash-separated list of suffixes

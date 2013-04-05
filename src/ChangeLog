@@ -1,3 +1,13 @@
+2013-04-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Mention ineffectual options more prominently.
+
+	Suggested by Honza Horak.
+
+	* rcsdiff.c <help text>: Add ‘-T’.
+	* rcsmerge.c <help text>: Likewise.
+	* rlog.c <help text>: Likewise.
+
 2013-04-04  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	Release: 5.8.2

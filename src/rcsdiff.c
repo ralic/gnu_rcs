@@ -465,6 +465,7 @@ Options:
   -rREV         (zero, one, or two times) Name a revision.
   -kSUBST       Substitute using mode SUBST (see co(1)).
   -q            Quiet mode.
+  -T            No effect; included for compatibility with other commands.
   -V            Like --version.
   -VN           Emulate RCS version N.
   -xSUFF        Specify SUFF as a slash-separated list of suffixes

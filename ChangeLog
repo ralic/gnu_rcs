@@ -1,3 +1,13 @@
+2013-04-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Mention ineffectual options more prominently.
+
+	* rcs.texi (Environment): Add macro ‘ineffectual’.
+	(rcs): Move ‘-zZONE’ from table to ‘ineffectual’ call.
+	(rcsdiff): Add ‘ineffectual’ call for ‘-T’.
+	(rcsmerge): Likewise.
+	(rlog): Likewise; move ‘-q’ from table to join it.
+
 2013-04-04  Thien-Thi Nguyen  <ttn@gnuvola.org>
 
 	Release: 5.8.2
