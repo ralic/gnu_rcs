@@ -64,7 +64,6 @@ struct delrevpair
 static struct cbuf numrev;
 static char const *headstate;
 static bool chgheadstate, lockhead, unlockcaller, suppress_mail;
-static int exitstatus;
 static struct link *newlocklst, *rmvlocklst;
 static struct link messagelst;
 static struct link statelst;
@@ -74,10 +73,10 @@ static struct delrevpair delrev;
 static struct delta *cuthead, *cuttail, *delstrt;
 
 static void
-cleanup (void)
+cleanup (int *exitstatus)
 {
   if (FLOW (erroneousp))
-    exitstatus = EXIT_FAILURE;
+    *exitstatus = EXIT_FAILURE;
   fro_zclose (&FLOW (from));
   Ozclose (&FLOW (res));
   ORCSclose ();
@@ -1045,6 +1044,7 @@ buildtree (void)
 int
 main (int argc, char **argv)
 {
+  int exitstatus = EXIT_SUCCESS;
   char *a, **newargv, *textfile;
   char const *branchsym, *commsyml;
   bool branchflag, initflag, textflag;
@@ -1289,11 +1289,11 @@ main (int argc, char **argv)
 
   /* Now handle all filenames.  */
   if (FLOW (erroneousp))
-    cleanup ();
+    cleanup (&exitstatus);
   else if (argc < 1)
     PFATAL ("no input file");
   else
-    for (; 0 < argc; cleanup (), ++argv, --argc)
+    for (; 0 < argc; cleanup (&exitstatus), ++argv, --argc)
       {
         struct delta *tip;
         char const *defbr;
