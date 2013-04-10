@@ -1,5 +1,14 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘rmvlocklst’ from global state of rcs(1).
+
+	* rcs.c (struct adminstuff): Add member ‘byelocks’.
+	(rmvlocklst): Delete var.
+	(dolocks): Use ‘dc->byelocks’.
+	(main): Use ‘dc.byelocks’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘newlocklst’ from global state of rcs(1).
 
 	* rcs.c (struct adminstuff): Add member ‘newlocks’.
