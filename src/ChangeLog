@@ -1,5 +1,16 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘exfile’ from global state of ci(1).
+
+	* ci.c (exfile): Delete var.
+	(struct work): Add member ‘ex’.
+	(cleanup): Use ‘work->ex’.
+	(xpandfile): Don't take UNEXFILE; instead, take WORK.
+	(main): Init ‘work.ex’ to NULL;
+	update call to ‘xpandfile’; use ‘work.ex’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘default_state’ from global state of ci(1).
 
 	* ci.c (default_state): Delete var.
