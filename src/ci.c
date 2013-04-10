@@ -599,9 +599,6 @@ first_meaningful_symbolic_name (struct link *ls)
   return ud->u.meaningful;
 }
 
-/* Use a variable instead of simple #define for fast identity compare.  */
-static char const default_state[] = DEFAULTSTATE;
-
 int
 main (int argc, char **argv)
 {
@@ -820,6 +817,8 @@ main (int argc, char **argv)
   else
     for (; 0 < argc; cleanup (&exitstatus, &work), ++argv, --argc)
       {
+        /* Use var instead of simple #define for fast identity compare.  */
+        char const *default_state = DEFAULTSTATE;
         char const *mani_filename, *pv;
         struct fro *from;
         struct stat *repo_stat;
