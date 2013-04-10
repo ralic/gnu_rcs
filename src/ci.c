@@ -55,7 +55,6 @@ static FILE *exfile;
 static struct fro *workptr;
 /* New revision number.  */
 static struct cbuf newdelnum;
-static struct cbuf msg;
 /* Forces check-in.  */
 static bool forceciflag;
 static bool keepflag, keepworkingfile, rcsinitflag;
@@ -530,7 +529,7 @@ xpandfile (struct fro *unexfile, struct delta const *delta,
 static struct cbuf logmsg;
 
 static struct cbuf
-getlogmsg (void)
+getlogmsg (struct cbuf *msg)
 /* Obtain and return a log message.
    If a log message is given with ‘-m’, return that message.
    If this is the initial revision, return a standard log message.
@@ -539,8 +538,8 @@ getlogmsg (void)
    Prompt the first time called for the log message; during all
    later calls ask whether the previous log message can be reused.  */
 {
-  if (msg.size)
-    return msg;
+  if (msg->size)
+    return *msg;
 
   if (keepflag)
     {
@@ -596,6 +595,7 @@ int
 main (int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
+  struct cbuf msg = { .size = 0 };
   char altdate[datesize];
   char olddate[datesize];
   char newdatebuf[datesize + zonelenmax];
@@ -976,7 +976,7 @@ main (int argc, char **argv)
           {
             diagnose ("initial revision: %s", newdelta.num);
             /* Get logmessage.  */
-            newdelta.pretty_log = getlogmsg ();
+            newdelta.pretty_log = getlogmsg (&msg);
             putdftext (&newdelta, workptr, frew, false);
             repo_stat->st_mode = workstat.st_mode;
             repo_stat->st_nlink = 0;
@@ -1058,7 +1058,7 @@ main (int argc, char **argv)
                 diagnose ("new revision: %s; previous revision: %s",
                           newdelta.num, targetdelta->num);
                 SAME_AFTER (from, targetdelta->text);
-                newdelta.pretty_log = getlogmsg ();
+                newdelta.pretty_log = getlogmsg (&msg);
 
                 /* "Rewind" ‘workptr’ before feeding it to diff(1).  */
                 fro_bob (workptr);
