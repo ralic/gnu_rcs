@@ -1,5 +1,13 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘revnum’ from global state of rcs(1).
+
+	* rcs.c (revnum): Delete var.
+	(removerevs, doassoc, setlock, dolocks)
+	(domessages, rcs_setstate): Add auto var ‘numrev’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Move rcs.c ‘main’ auto var ‘deltas’ into adminstuff.
 
 	U ≡ "Take ‘dc’, not ‘tp_deltas’";

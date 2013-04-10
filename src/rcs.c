@@ -67,7 +67,6 @@ struct adminstuff
   struct wlink *deltas;
 };
 
-static struct cbuf numrev;
 static char const *headstate;
 static bool chgheadstate, lockhead, unlockcaller, suppress_mail;
 static struct link *newlocklst, *rmvlocklst;
@@ -554,6 +553,7 @@ removerevs (void)
    (0, if ‘delstrt’ is head), and the revision after the last removed
    revision in ‘cuttail’ (0 if the last is a leaf).  */
 {
+  struct cbuf numrev;
   struct delta *target, *target2, *temp;
   struct wlink *ls;
   int length;
@@ -727,6 +727,7 @@ static bool
 doassoc (void)
 /* Add or delete (if !underlying) association that is stored in ‘assoclst’.  */
 {
+  struct cbuf numrev;
   char const *p;
   bool changed = false;
 
@@ -777,6 +778,7 @@ setlock (struct adminstuff *dc, char const *rev)
 /* Given a revision or branch number, find the corresponding
    delta and lock it for caller.  */
 {
+  struct cbuf numrev;
   struct delta *target;
   int r;
 
@@ -811,6 +813,7 @@ dolocks (struct adminstuff *dc)
    add new locks which are stored in ‘newlocklst’,
    add lock for ‘GROK (branch)’ or ‘REPO (tip)’ if ‘lockhead’ is set.  */
 {
+  struct cbuf numrev;
   struct link const *lockpt;
   struct delta *target, *tip = REPO (tip);
   bool changed = false;
@@ -896,6 +899,7 @@ domessages (struct adminstuff *dc)
   for (struct link *ls = messagelst.next; ls; ls = ls->next)
     {
       struct u_log const *um = ls->entry;
+      struct cbuf numrev;
 
       if (fully_numeric_no_k (&numrev, um->revno)
           && (target = gr_revno (numrev.string, &dc->deltas)))
@@ -915,6 +919,7 @@ rcs_setstate (struct adminstuff *dc,
 /* Given a revision or branch number, find the corresponding delta
    and sets its state to ‘status’.  */
 {
+  struct cbuf numrev;
   struct delta *target;
 
   if (fully_numeric_no_k (&numrev, rev))
