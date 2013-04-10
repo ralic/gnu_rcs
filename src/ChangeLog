@@ -1,5 +1,14 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘targetdelta’ from global state of co(1).
+
+	* co.c (struct jstuff): Add member ‘d’.
+	(targetdelta): Delete var.
+	(preparejoin, buildjoin): Use ‘js->d’.
+	(main): Use ‘jstuff.d’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘neworkptr’ from global state of co(1).
 
 	* co.c (neworkptr): Delete var.
