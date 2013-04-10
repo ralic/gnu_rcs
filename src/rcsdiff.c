@@ -65,8 +65,11 @@ static const s_unique const minus_D =
     .full = "--ifdef"
   };
 
-static struct fro *workptr;
-static struct stat workstat;
+struct work
+{
+  struct stat st;
+  struct fro *fro;
+};
 
 static inline bool
 longopt_maybe_p (const char *arg, const s_unique const *u)
@@ -83,12 +86,12 @@ longopt_maybe_p (const char *arg, const s_unique const *u)
 }
 
 static void
-cleanup (int *exitstatus)
+cleanup (int *exitstatus, struct work *work)
 {
   if (FLOW (erroneousp))
     *exitstatus = DIFF_TROUBLE;
   fro_zclose (&FLOW (from));
-  fro_zclose (&workptr);
+  fro_zclose (&work->fro);
 }
 
 #if DIFF_L
@@ -114,6 +117,7 @@ int
 main (int argc, char **argv)
 {
   int exitstatus = DIFF_SUCCESS;
+  struct work work;
   int revnums;                  /* counter for revision numbers given */
   char const *rev1, *rev2;      /* revision numbers from command line */
   char const *xrev1, *xrev2;    /* expanded revision numbers */
@@ -141,6 +145,7 @@ main (int argc, char **argv)
 
   CHECK_HV ();
   gnurcs_init (&program);
+  memset (&work, 0, sizeof (work));
 
   exitstatus = DIFF_SUCCESS;
 
@@ -309,11 +314,11 @@ main (int argc, char **argv)
 
   /* Now handle all filenames.  */
   if (FLOW (erroneousp))
-    cleanup (&exitstatus);
+    cleanup (&exitstatus, &work);
   else if (argc < 1)
     PFATAL ("no input file");
   else
-    for (; 0 < argc; cleanup (&exitstatus), ++argv, --argc)
+    for (; 0 < argc; cleanup (&exitstatus, &work), ++argv, --argc)
       {
         struct cbuf numericrev;
         struct delta *tip;
@@ -332,7 +337,7 @@ main (int argc, char **argv)
         if (!rev2)
           {
             /* Make sure work file is readable, and get its status.  */
-            if (!(workptr = fro_open (mani_filename, FOPEN_R_WORK, &workstat)))
+            if (!(work.fro = fro_open (mani_filename, FOPEN_R_WORK, &work.st)))
               {
                 syserror_errno (mani_filename);
                 continue;
@@ -347,7 +352,7 @@ main (int argc, char **argv)
         if (revnums == 0 || !*rev1)
           rev1 = defbr ? defbr : tip->num;
 
-        if (!fully_numeric (&numericrev, rev1, workptr))
+        if (!fully_numeric (&numericrev, rev1, work.fro))
           continue;
         if (! (target = delta_from_ref (numericrev.string)))
           continue;
@@ -364,7 +369,7 @@ main (int argc, char **argv)
                                 *rev2 ? rev2 : (defbr
                                                 ? defbr
                                                 : tip->num),
-                                workptr))
+                                work.fro))
               continue;
             if (! (target = delta_from_ref (numericrev.string)))
               continue;
@@ -375,9 +380,9 @@ main (int argc, char **argv)
         else if (target->lockedby
                  && !lexpandarg
                  && kws == kwsub_kv
-                 && WORKMODE (REPO (stat).st_mode, true) == workstat.st_mode)
+                 && WORKMODE (REPO (stat).st_mode, true) == work.st.st_mode)
           lexpandarg = "-kkvl";
-        fro_zclose (&workptr);
+        fro_zclose (&work.fro);
 #if DIFF_L
         if (diff_label2)
           {
@@ -385,7 +390,7 @@ main (int argc, char **argv)
               *diff_label2 = setup_label (target->num, target->date);
             else
               {
-                time2date (workstat.st_mtime, date2);
+                time2date (work.st.st_mtime, date2);
                 *diff_label2 = setup_label (NULL, date2);
               }
           }

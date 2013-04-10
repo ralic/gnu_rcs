@@ -1,5 +1,15 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘workptr’, ‘workstat’ from global state of rcsdiff(1).
+
+	* rcsdiff.c (workptr, workstat): Delete vars.
+	(struct work): New.
+	(cleanup): Take 2nd arg WORK; use ‘work->fro’.
+	(main): Add auto var ‘work’; update calls
+	to ‘cleanup’; use ‘work.fro’ and ‘work.st’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘workptr’ from global state of rcsclean(1).
 
 	* rcsclean.c (workptr): Delete var.
