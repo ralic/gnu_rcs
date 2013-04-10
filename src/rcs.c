@@ -61,6 +61,11 @@ struct delrevpair
   int code;
 };
 
+struct adminstuff
+{
+  int rv;
+};
+
 static struct cbuf numrev;
 static char const *headstate;
 static bool chgheadstate, lockhead, unlockcaller, suppress_mail;
@@ -1044,7 +1049,7 @@ buildtree (void)
 int
 main (int argc, char **argv)
 {
-  int exitstatus = EXIT_SUCCESS;
+  struct adminstuff dc;                 /* dynamic context */
   char *a, **newargv, *textfile;
   char const *branchsym, *commsyml;
   bool branchflag, initflag, textflag;
@@ -1067,6 +1072,8 @@ main (int argc, char **argv)
 
   CHECK_HV ();
   gnurcs_init (&program);
+  memset (&dc, 0, sizeof (dc));
+  dc.rv = EXIT_SUCCESS;
 
   nosetid ();
 
@@ -1289,11 +1296,11 @@ main (int argc, char **argv)
 
   /* Now handle all filenames.  */
   if (FLOW (erroneousp))
-    cleanup (&exitstatus);
+    cleanup (&dc.rv);
   else if (argc < 1)
     PFATAL ("no input file");
   else
-    for (; 0 < argc; cleanup (&exitstatus), ++argv, --argc)
+    for (; 0 < argc; cleanup (&dc.rv), ++argv, --argc)
       {
         struct delta *tip;
         char const *defbr;
@@ -1498,7 +1505,7 @@ main (int argc, char **argv)
 
   tempunlink ();
   gnurcs_goodbye ();
-  return exitstatus;
+  return dc.rv;
 }
 
 /*:help

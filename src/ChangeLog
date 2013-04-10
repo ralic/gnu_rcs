@@ -1,5 +1,13 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Move a rcs.c ‘main’ auto var into a structure.
+
+	* rcs.c (struct adminstuff): New.
+	(main): Replace auto var ‘exitstatus’ with ‘dc’;
+	update calls to ‘cleanup’; use ‘dc.rv’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove {force,lock,mtime}flag from global state of co(1).
 
 	* co.c (struct work): Add member ‘force’.
