@@ -79,11 +79,14 @@ struct adminstuff
   /* For ‘-n’, ‘-N’ handling.  */
   struct link assocs;
   struct link *tp_assoc;
+
+  /* For ‘-m’ handling.  */
+  struct link logs;
+  struct link *tp_log;
 };
 
 static bool lockhead, unlockcaller, suppress_mail;
 static struct link *newlocklst, *rmvlocklst;
-static struct link messagelst;
 static struct delrevpair delrev;
 static struct delta *cuthead, *cuttail, *delstrt;
 
@@ -196,11 +199,15 @@ getaccessor (struct adminstuff *dc, char *opt, enum changeaccess command)
 }
 
 static void
-getmessage (struct link **tp, char *option)
+getmessage (struct adminstuff *dc, char *option)
 {
   struct u_log *um;
   struct cbuf cb;
   char *m;
+  struct link **tp = &dc->tp_log;
+
+  if (! *tp)
+    *tp = &dc->logs;
 
   if (!(m = strchr (option, ':')))
     {
@@ -921,7 +928,7 @@ domessages (struct adminstuff *dc)
   struct delta *target;
   bool changed = false;
 
-  for (struct link *ls = messagelst.next; ls; ls = ls->next)
+  for (struct link *ls = dc->logs.next; ls; ls = ls->next)
     {
       struct u_log const *um = ls->entry;
       struct cbuf numrev;
@@ -1091,7 +1098,6 @@ main (int argc, char **argv)
   struct cbuf branchnum;
   struct link boxlock, *tplock;
   struct link boxrm, *tprm;
-  struct link *tp_log;
   const struct program program =
     {
       .invoke = argv[0],
@@ -1107,7 +1113,6 @@ main (int argc, char **argv)
 
   nosetid ();
 
-  tp_log = &messagelst;
   branchsym = commsyml = textfile = NULL;
   branchflag = strictlock = false;
   commsymlen = 0;
@@ -1237,7 +1242,7 @@ main (int argc, char **argv)
 
         case 'm':
           /* Change log message.  */
-          getmessage (&tp_log, a);
+          getmessage (&dc, a);
           break;
 
         case 'M':
@@ -1484,7 +1489,7 @@ main (int argc, char **argv)
            <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=69193>.  */
         if (1)
           {
-            if (delrev.strt || messagelst.next)
+            if (delrev.strt || dc.logs.next)
               {
                 struct fro *from = FLOW (from);
                 struct editstuff *es = make_editstuff ();
