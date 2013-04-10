@@ -51,8 +51,6 @@ struct daterange
 
 /* A version-specific format string.  */
 static char const *insDelFormat;
-/* The ‘-b’ option.  */
-static bool branchflag;
 /* The ‘-l’ option.  */
 static bool lockflag;
 
@@ -607,7 +605,7 @@ checkrevpair (char const *num1, char const *num2)
 #define KSTRCPY(to,kstr)  strncpy (to, kstr, sizeof kstr)
 
 static bool
-getnumericrev (void)
+getnumericrev (bool branchflag)
 /* Get the numeric name of revisions stored in ‘revlist’; store
    them in ‘Revlst’.  If ‘branchflag’, also add default branch.  */
 {
@@ -727,6 +725,7 @@ int
 main (int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
+  bool branchflag = false;
   FILE *out;
   char *a, **newargv;
   char const *accessListString, *accessFormat;
@@ -905,7 +904,7 @@ main (int argc, char **argv)
             continue;
           }
 
-        if (!getnumericrev ())
+        if (!getnumericrev (branchflag))
           continue;
 
         /* Print RCS filename, working filename and optional

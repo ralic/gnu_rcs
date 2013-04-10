@@ -1,5 +1,13 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘branchflag’ from global state of rlog(1).
+
+	* rlog.c (branchflag): Delete var.
+	(getnumericrev): Take arg BRANCHFLAG.
+	(main): Add auto var ‘branchflag’; update call to ‘getnumericrev’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘workptr’, ‘workstat’ from global state of rcsdiff(1).
 
 	* rcsdiff.c (workptr, workstat): Delete vars.
