@@ -65,6 +65,7 @@ struct adminstuff
 {
   int rv;
   struct wlink *deltas;
+  bool suppress_mail;
 
   /* For ‘-sSTATE’ handling.  */
   char const *headstate;
@@ -88,7 +89,7 @@ struct adminstuff
   struct delta *cuthead, *cuttail, *delstrt;
 };
 
-static bool lockhead, unlockcaller, suppress_mail;
+static bool lockhead, unlockcaller;
 static struct link *newlocklst, *rmvlocklst;
 static struct delrevpair delrev;
 
@@ -443,7 +444,7 @@ doaccess (struct adminstuff *dc)
 }
 
 static bool
-sendmail (char const *Delta, char const *who)
+sendmail (char const *Delta, char const *who, bool suppress_mail)
 /* Mail to ‘who’, informing him that his lock on ‘Delta’ was broken by
    caller.  Ask first whether to go ahead.  Return false on error or if
    user decides not to break the lock.  */
@@ -506,7 +507,7 @@ sendmail (char const *Delta, char const *who)
 }
 
 static bool
-breaklock (struct delta const *delta)
+breaklock (struct delta const *delta, bool suppress_mail)
 /* Find the lock held by caller on ‘delta’, and remove it.
    Send mail if a lock different from the caller's is broken.
    Print an error message if there is no such lock or error.  */
@@ -525,7 +526,7 @@ breaklock (struct delta const *delta)
   rl = tp->next->entry;
   before = rl->login;
   if (!caller_login_p (before)
-      && !sendmail (num, before))
+      && !sendmail (num, before, suppress_mail))
     {
       RERR ("revision %s still locked by %s", num, before);
       return false;
@@ -829,7 +830,8 @@ setlock (struct adminstuff *dc, char const *rev)
             RERR ("can't lock nonexisting revision %s", numrev.string);
           else
             {
-              if ((r = addlock (target, false)) < 0 && breaklock (target))
+              if ((r = addlock (target, false)) < 0
+                  && breaklock (target, dc->suppress_mail))
                 r = addlock (target, true);
               if (0 <= r)
                 {
@@ -872,7 +874,7 @@ dolocks (struct adminstuff *dc)
                   {
                     struct rcslock const *rl = locks->entry;
 
-                    changed |= breaklock (rl->delta);
+                    changed |= breaklock (rl->delta, dc->suppress_mail);
                   }
                   break;
                 case 1:
@@ -903,7 +905,7 @@ dolocks (struct adminstuff *dc)
                 && !NUM_EQ (target->num, numrev.string))
               RERR ("can't unlock nonexisting revision %s", bye);
             else
-              changed |= breaklock (target);
+              changed |= breaklock (target, dc->suppress_mail);
           }
         /* ‘breaklock’ does its own ‘diagnose’.  */
       }
@@ -1253,7 +1255,7 @@ main (int argc, char **argv)
 
         case 'M':
           /* Do not send mail.  */
-          suppress_mail = true;
+          dc.suppress_mail = true;
           break;
 
         case 'o':
