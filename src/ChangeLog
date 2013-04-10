@@ -1,5 +1,16 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove {expand,suffix,version,zone}arg from global state of co(1).
+
+	* co.c (expandarg, suffixarg, versionarg, zonearg): Delete vars.
+	(struct jstuff): Add members ‘expand’, ‘suffix’, ‘version’, ‘zone’.
+	(buildjoin): Use ‘js->expand’,
+	‘js->suffix’, ‘js->version’, ‘js->zone’.
+	(main): Use ‘jstuff.suffix’, ‘jstuff.version’,
+	‘jstuff.zone’, ‘jstuff.expand’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘joinlist’, ‘lastjoin’ from global state of co(1).
 
 	* co.c (joinlist, lastjoin): Delete vars.
