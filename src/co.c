@@ -41,11 +41,10 @@ struct top *top;
 struct work
 {
   struct stat st;
+  bool force;
 };
 
 static char const quietarg[] = "-q";
-
-static bool forceflag;
 
 /* State for -j.  */
 struct jstuff
@@ -64,10 +63,6 @@ struct jstuff
   int lastidx;
   /* Index of last element in `ls'.  */
 };
-
-/* -1 -> unlock, 0 -> do nothing, 1 -> lock.  */
-static int lockflag;
-static bool mtimeflag;
 
 static void
 cleanup (int *exitstatus, FILE **neworkptr)
@@ -95,7 +90,7 @@ rmworkfile (struct work *work)
    really delete it (default: fail); otherwise fail.
    Return true if permission is gotten.  */
 {
-  if (work->st.st_mode & (S_IWUSR | S_IWGRP | S_IWOTH) && !forceflag)
+  if (work->st.st_mode & (S_IWUSR | S_IWGRP | S_IWOTH) && !work->force)
     {
       char const *mani_filename = MANI (filename);
 
@@ -397,9 +392,11 @@ int
 main (int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
-  struct work work;
+  struct work work = { .force = false };
   struct jstuff jstuff;
   FILE *neworkptr = NULL;
+  int lockflag = 0;                 /* -1: unlock, 0: do nothing, 1: lock.  */
+  bool mtimeflag = false;
   char *a, *joinflag, **newargv;
   char const *author, *date, *rev, *state;
   char const *joinname, *newdate, *neworkname;
@@ -450,7 +447,7 @@ main (int argc, char **argv)
           break;
 
         case 'f':
-          forceflag = true;
+          work.force = true;
           goto revno;
 
         case 'l':
