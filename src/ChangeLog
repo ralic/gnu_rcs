@@ -1,5 +1,14 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘lockflag’ from global state of rlog(1).
+
+	* rlog.c (lockflag): Delete var.
+	(extractdelta): Add 2nd arg ‘lockflag’.
+	(exttree): Likewise; update call to ‘extractdelta’, self.
+	(main): Add auto var ‘lockflag’; update call to ‘exttree’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘branchflag’ from global state of rlog(1).
 
 	* rlog.c (branchflag): Delete var.
