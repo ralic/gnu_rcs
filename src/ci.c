@@ -50,7 +50,6 @@
 
 struct top *top;
 
-static bool keepflag;
 /* Old delta to be generated.  */
 static struct delta *targetdelta;
 
@@ -66,6 +65,7 @@ struct bud                              /* new growth */
   struct cbuf num;                      /* wip revision number */
   struct delta d;                       /* to be inserted */
   struct wlink br;                      /* branch to be inserted */
+  bool keep;
 };
 
 static void
@@ -543,7 +543,7 @@ getlogmsg (struct cbuf *msg, const struct bud *bud)
   if (msg->size)
     return *msg;
 
-  if (keepflag)
+  if (bud->keep)
     {
       char datebuf[datesize + zonelenmax];
 
@@ -709,7 +709,7 @@ main (int argc, char **argv)
           goto revno;
 
         case 'k':
-          keepflag = true;
+          bud.keep = true;
           goto revno;
 
         case 'm':
@@ -893,7 +893,7 @@ main (int argc, char **argv)
           }
 
         krev = rev;
-        if (keepflag)
+        if (bud.keep)
           {
             /* Get keyword values from working file.  */
             if (!getoldkeys (work.fro))
@@ -910,7 +910,6 @@ main (int argc, char **argv)
             if (!PREV (state) && !state)
               MWARN ("can't find a state");
           }
-        /* (End processing keepflag.)  */
 
         /* Expand symbolic revision number.  */
         if (!fully_numeric (&bud.num, krev, work.fro))
@@ -932,7 +931,7 @@ main (int argc, char **argv)
         if (author)
           /* Given by ‘-w’.  */
           bud.d.author = author;
-        else if (keepflag && (pv = PREV (author)))
+        else if (bud.keep && (pv = PREV (author)))
             /* Preserve old author if possible.  */
           bud.d.author = pv;
         else
@@ -944,7 +943,7 @@ main (int argc, char **argv)
         if (state)
           /* Given by ‘-s’.  */
           bud.d.state = state;
-        else if (keepflag && (pv = PREV (state)))
+        else if (bud.keep && (pv = PREV (state)))
           /* Preserve old state if possible.  */
           bud.d.state = pv;
 
@@ -956,7 +955,7 @@ main (int argc, char **argv)
         if (*altdate != '\0')
           /* Given by ‘-d’.  */
           bud.d.date = altdate;
-        else if (keepflag && (pv = PREV (date)))
+        else if (bud.keep && (pv = PREV (date)))
           {
             /* Preserve old date if possible.  */
             str2date (pv, olddate);
@@ -978,7 +977,7 @@ main (int argc, char **argv)
         if (lockflag && addlock (&bud.d, true) < 0)
           continue;
 
-        if (keepflag && (pv = PREV (name)))
+        if (bud.keep && (pv = PREV (name)))
           if (addsymbol (bud.d.num, pv, false) < 0)
             continue;
         if (!addsyms (bud.d.num, symbolic_names))
@@ -1158,7 +1157,7 @@ main (int argc, char **argv)
                 workdelta->name =
                   namedrev (symbolic_names
                             ? first_meaningful_symbolic_name (symbolic_names)
-                            : (keepflag && (pv = PREV (name))
+                            : (bud.keep && (pv = PREV (name))
                                ? pv
                                : rev),
                             workdelta);
