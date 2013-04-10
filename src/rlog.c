@@ -58,6 +58,7 @@ struct date_selection
 struct criteria
 {
   struct link *revs;
+  struct link *authors;
 };
 
 /* A version-specific format string.  */
@@ -67,9 +68,6 @@ static char const *insDelFormat;
    On the first pass (option processing), push onto ‘criteria->revs’.
    After grokking, walk ‘criteria->revs’ and push onto ‘Revlst’.  */
 static struct link *Revlst;
-
-/* Login names in author option.  */
-static struct link *authorlist;
 
 /* Lockers in locker option.  */
 static struct link *lockerlist;
@@ -272,7 +270,8 @@ putforest (struct wlink const *branchroot)
 }
 
 static char
-extractdelta (struct delta const *pdelta, bool lockflag)
+extractdelta (struct delta const *pdelta, bool lockflag,
+              struct criteria *criteria)
 /* Return true if ‘pdelta’ matches the selection critera.  */
 {
   struct link const *pstate;
@@ -280,7 +279,7 @@ extractdelta (struct delta const *pdelta, bool lockflag)
   int length;
 
   /* Only certain authors wanted.  */
-  if ((pauthor = authorlist))
+  if ((pauthor = criteria->authors))
     while (STR_DIFF (pauthor->entry, pdelta->author))
       if (!(pauthor = pauthor->next))
         return false;
@@ -309,23 +308,26 @@ extractdelta (struct delta const *pdelta, bool lockflag)
 }
 
 static void
-exttree (struct delta *root, bool lockflag)
+exttree (struct delta *root, bool lockflag,
+         struct criteria *criteria)
 /* Select revisions, starting with ‘root’.  */
 {
   if (!root)
     return;
 
-  root->selector = extractdelta (root, lockflag);
+  root->selector = extractdelta (root, lockflag, criteria);
   root->pretty_log.string = NULL;
-  exttree (root->ilk, lockflag);
+#define RECURSE(x)  exttree (x, lockflag, criteria)
+  RECURSE (root->ilk);
 
   for (struct wlink *ls = root->branches; ls; ls = ls->next)
-    exttree (ls->entry, lockflag);
+    RECURSE (ls->entry);
+#undef RECURSE
 }
 
 static void
-getauthor (char *argv)
-/* Get the author's name from command line and store in ‘authorlist’.  */
+getauthor (char *argv, struct criteria *criteria)
+/* Get the author's name from command line and store in ‘criteria->authors’.  */
 {
   register int c;
   struct link box, *tp;
@@ -334,7 +336,7 @@ getauthor (char *argv)
   while ((c = *++argv) == ',' || c == ' ' || c == '\t' || c == '\n'
          || c == ';')
     continue;
-  box.next = authorlist;
+  box.next = criteria->authors;
   tp = &box;
   if (c == '\0')
     {
@@ -351,7 +353,7 @@ getauthor (char *argv)
       *argv = '\0';
       if (c == '\0')
         {
-          authorlist = box.next;
+          criteria->authors = box.next;
           return;
         }
       while ((c = *++argv) == ',' || c == ' ' || c == '\t' || c == '\n'
@@ -739,7 +741,7 @@ main (int argc, char **argv)
   bool branchflag = false;
   bool lockflag = false;
   struct date_selection datesel = { .in = NULL, .by = NULL };
-  struct criteria criteria = { 0 };
+  struct criteria criteria = { .revs = NULL, .authors = NULL };
   FILE *out;
   char *a, **newargv;
   char const *accessListString, *accessFormat;
@@ -807,7 +809,7 @@ main (int argc, char **argv)
           break;
 
         case 'w':
-          getauthor (a);
+          getauthor (a, &criteria);
           break;
 
         case 'h':
@@ -959,7 +961,7 @@ main (int argc, char **argv)
 
         if (tip && selectflag & descflag)
           {
-            exttree (tip, lockflag);
+            exttree (tip, lockflag, &criteria);
 
             /* Get most recently date of the dates pointed by ‘duelst’.  */
             for (struct link *ls = datesel.by; ls; ls = ls->next)

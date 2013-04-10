@@ -1,5 +1,16 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘authorlist’ from global state of rlog(1).
+
+	* rlog.c (struct criteria): Add member ‘authors’.
+	(extractdelta): Take 3rd arg ‘criteria’; use ‘criteria->authors’.
+	(exttree): Take 3rd arg ‘criteria’; update call to ‘extractdelta’.
+	(getauthor): Take 2nd arg ‘criteria’; use ‘criteria->authors’.
+	(main): Update initialization form of auto var ‘criteria’;
+	update calls to ‘getauthor’, ‘exttree’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘revlist’ from global state of rlog(1).
 
 	* rlog.c (struct criteria): New.
