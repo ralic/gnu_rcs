@@ -63,7 +63,6 @@ static struct delta *targetdelta;
 /* New delta to be inserted.  */
 static struct delta newdelta;
 static struct stat workstat;
-static struct link assoclst;
 
 static void
 cleanup (int *exitstatus)
@@ -441,12 +440,11 @@ addelta (struct wlink **tp_deltas)
 }
 
 static bool
-addsyms (char const *num)
+addsyms (char const *num, struct link *ls)
 {
-  struct link *ls;
   struct u_symdef const *ud;
 
-  for (ls = assoclst.next; ls; ls = ls->next)
+  for (; ls; ls = ls->next)
     {
       ud = ls->entry;
 
@@ -581,10 +579,16 @@ getlogmsg (struct cbuf *msg)
 }
 
 static char const *
-first_meaningful_symbolic_name (void)
+first_meaningful_symbolic_name (struct link *ls)
 {
-  struct u_symdef const *ud = assoclst.next->entry;
+  struct u_symdef const *ud;
 
+  /* Find last link so that, e.g., "-nA -nB -nC" yields "A".
+     See: (search-forward "symbolic_names = prepend")  */
+  while (ls && ls->next)
+    ls = ls->next;
+
+  ud = ls->entry;
   return ud->u.meaningful;
 }
 
@@ -615,7 +619,7 @@ main (int argc, char **argv)
   mode_t newworkmode;           /* mode for working file */
   time_t mtime, wtime;
   struct delta *workdelta;
-  struct link *tp_assoc = &assoclst;
+  struct link *symbolic_names = NULL;
   struct wlink *deltas;                 /* Deltas to be generated.  */
   const struct program program =
     {
@@ -714,7 +718,7 @@ main (int argc, char **argv)
             ud = ZLLOC (1, struct u_symdef);
             ud->override = ('N' == option);
             ud->u.meaningful = a;
-            tp_assoc = extend (tp_assoc, ud, PLEXUS);
+            symbolic_names = prepend (ud, symbolic_names, PLEXUS);
           }
           break;
 
@@ -958,7 +962,7 @@ main (int argc, char **argv)
         if (keepflag && (pv = PREV (name)))
           if (addsymbol (newdelta.num, pv, false) < 0)
             continue;
-        if (!addsyms (newdelta.num))
+        if (!addsyms (newdelta.num, symbolic_names))
           continue;
 
         putadmin ();
@@ -1007,7 +1011,7 @@ main (int argc, char **argv)
                     lockthis = 0;
                   }
                 dolog = false;
-                if (!(changedRCS = lockflag < removedlock || assoclst.next))
+                if (!(changedRCS = lockflag < removedlock || symbolic_names))
                   {
                     workdelta = targetdelta;
                     SAME_AFTER (from, targetdelta->text);
@@ -1036,7 +1040,7 @@ main (int argc, char **argv)
                       workdelta->state = newdelta.state;
                     if (lockthis < removedlock && removelock (workdelta) < 0)
                       continue;
-                    if (!addsyms (workdelta->num))
+                    if (!addsyms (workdelta->num, symbolic_names))
                       continue;
                     if (PROB (dorewrite (true, true)))
                       continue;
@@ -1133,8 +1137,8 @@ main (int argc, char **argv)
                 /* Expand keywords in file.  */
                 BE (inclusive_of_Locker_in_Id_val) = lockthis;
                 workdelta->name =
-                  namedrev (assoclst.next
-                            ? first_meaningful_symbolic_name ()
+                  namedrev (symbolic_names
+                            ? first_meaningful_symbolic_name (symbolic_names)
                             : (keepflag && (pv = PREV (name))
                                ? pv
                                : rev),
