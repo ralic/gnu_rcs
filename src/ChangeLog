@@ -1,5 +1,16 @@
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Remove ‘lockerlist’ from global state of rlog(1).
+
+	* rlog.c (struct criteria): Add member ‘lockers’.
+	(lockerlist): Delete var.
+	(getlocker): Take 2nd arg ‘criteria’; use ‘criteria->lockers’.
+	(trunclocks): Take arg ‘criteria’; use ‘criteria->lockers’.
+	(main): Update initialization form of auto var ‘criteria’;
+	update calls to ‘getlocker’, ‘trunclocks’.
+
+2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Remove ‘authorlist’ from global state of rlog(1).
 
 	* rlog.c (struct criteria): Add member ‘authors’.
