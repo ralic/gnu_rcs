@@ -68,6 +68,7 @@ struct adminstuff
   bool suppress_mail;
   bool lockhead;
   bool unlockcaller;
+  struct link *newlocks;
 
   /* For ‘-sSTATE’ handling.  */
   char const *headstate;
@@ -92,7 +93,7 @@ struct adminstuff
   struct delrevpair delrev;
 };
 
-static struct link *newlocklst, *rmvlocklst;
+static struct link *rmvlocklst;
 
 static void
 cleanup (int *exitstatus)
@@ -381,12 +382,12 @@ scanlogtext (struct adminstuff *dc,
 }
 
 static struct link *
-rmnewlocklst (char const *which)
-/* Remove lock to revision ‘which’ from ‘newlocklst’.  */
+rmnewlocklst (struct adminstuff *dc, char const *which)
+/* Remove lock to revision ‘which’ from ‘dc->newlocks’.  */
 {
   struct link *pt, **pre;
 
-  pre = &newlocklst;
+  pre = &dc->newlocks;
   while ((pt = *pre))
     if (STR_DIFF (pt->entry, which))
       pre = &pt->next;
@@ -854,7 +855,7 @@ static bool
 dolocks (struct adminstuff *dc)
 /* Remove lock for caller or first lock if ‘dc->unlockcaller’ is set;
    remove locks which are stored in ‘rmvlocklst’,
-   add new locks which are stored in ‘newlocklst’,
+   add new locks which are stored in ‘dc->newlocks’,
    add lock for ‘GROK (branch)’ or ‘REPO (tip)’ if ‘dc->lockhead’ is set.  */
 {
   struct cbuf numrev;
@@ -915,8 +916,8 @@ dolocks (struct adminstuff *dc)
         /* ‘breaklock’ does its own ‘diagnose’.  */
       }
 
-  /* Add new locks which stored in newlocklst.  */
-  for (lockpt = newlocklst; lockpt; lockpt = lockpt->next)
+  /* Add new locks which stored in ‘dc->newlocks’.  */
+  for (lockpt = dc->newlocks; lockpt; lockpt = lockpt->next)
     changed |= setlock (dc, lockpt->entry);
 
   if (dc->lockhead)
@@ -1129,7 +1130,7 @@ main (int argc, char **argv)
   branchsym = commsyml = textfile = NULL;
   branchflag = strictlock = false;
   commsymlen = 0;
-  boxlock.next = newlocklst;
+  boxlock.next = dc.newlocks;
   tplock = &boxlock;
   boxrm.next = rmvlocklst;
   tprm = &boxrm;
@@ -1216,8 +1217,8 @@ main (int argc, char **argv)
               break;
             }
           tprm = extend (tprm, a, PLEXUS);
-          newlocklst = boxlock.next;
-          tplock = rmnewlocklst (a);
+          dc.newlocks = boxlock.next;
+          tplock = rmnewlocklst (&dc, a);
           break;
 
         case 'L':
@@ -1335,7 +1336,7 @@ main (int argc, char **argv)
           bad_option (*argv);
         };
     }
-  newlocklst = boxlock.next;
+  dc.newlocks = boxlock.next;
   rmvlocklst = boxrm.next;
   /* (End processing of options.)  */
 
