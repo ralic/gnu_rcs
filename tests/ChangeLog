@@ -1,3 +1,11 @@
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	ident: Recognize Subversion "fixed-width keyword syntax".
+
+	* t391: New file.
+	* Makefile.am (TESTS): Add t391.
+	* known-failures.in (5.7, 5.8, 5.8.1, 5.8.2): Add t391.
+
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[v] Update known-failures for 5.8.2.

@@ -1,3 +1,13 @@
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	ident: Recognize Subversion "fixed-width keyword syntax".
+
+	Suggested by Carlie J. Coats, Jr. and Jiri Moskovcak:
+	<https://bugzilla.redhat.com/show_bug.cgi?id=247998>.
+
+	* ident.c (match): Accept additional colon after the first
+	is found; in that case, also allow hash before final ‘KDELIM’.
+
 2013-04-10  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[int] Remove ‘rmvlocklst’ from global state of rcs(1).
