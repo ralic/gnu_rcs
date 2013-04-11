@@ -48,6 +48,7 @@ EXTRA_DIST =
 
 .c.help:
 	$(top_srcdir)/build-aux/extract-help -o $@ $<
+	@ test -n $@ || { echo ERROR: $@ empty ; exit 1 ; }
 
 clean-local:
 	rm -rf RCS

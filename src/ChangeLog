@@ -1,5 +1,12 @@
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Add sanity check for .help generation.
+
+	* Makefile.am (.c.help): After extraction, if the .help
+	file is empty, display error message and exit failurefully.
+
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	co: Add option ‘-S’ to enable "self-same" mode.
 
 	Suggested by James Olin Oden:
