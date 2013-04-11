@@ -404,6 +404,7 @@ main (int argc, char **argv)
   int changelock;
   int expmode, r, workstatstat;
   bool tostdout, Ttimeflag;
+  bool selfsame = false;
   char finaldate[datesize];
 #if OPEN_O_BINARY
   int stdout_mode = 0;
@@ -505,6 +506,10 @@ main (int argc, char **argv)
                 redefined ('s');
               state = a;
             }
+          break;
+
+        case 'S':
+          selfsame = true;
           break;
 
         case 'T':
@@ -663,7 +668,7 @@ main (int argc, char **argv)
             /* Check reservations.  */
             changelock = lockflag < 0
               ? rmlock (jstuff.d)
-              : lockflag == 0 ? 0 : addlock (jstuff.d, true);
+              : lockflag == 0 ? 0 : addlock_maybe (jstuff.d, selfsame, true);
 
             if (changelock < 0
                 || (changelock && !checkaccesslist ())
@@ -775,6 +780,7 @@ Options:
   -jJOINS       Merge using JOINS, a list of REV:REV pairs;
                 this option is obsolete -- see rcsmerge(1).
   -sSTATE       Select matching state STATE.
+  -S            Enable "self-same" mode.
   -T            Preserve the modification time on the RCS file
                 even if it changes because a lock is added or removed.
   -wWHO         Select matching login WHO.

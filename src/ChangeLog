@@ -1,5 +1,19 @@
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	co: Add option ‘-S’ to enable "self-same" mode.
+
+	Suggested by James Olin Oden:
+	<https://bugzilla.redhat.com/show_bug.cgi?id=107947>.
+
+	* b-excwho.c (addlock_maybe): Rename from ‘addlock’; take additional
+	arg ‘bool selfsame’; if true, don't distinguish who holds a lock.
+	* b-excwho.h (addlock_maybe): Update func decl.
+	(addlock): New macro.
+	* co.c (main): Add handling for ‘-S’; use ‘addlock_maybe’.
+	<help text>: Add ‘-S’ to options.
+
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	ident: Recognize Subversion "fixed-width keyword syntax".
 
 	Suggested by Carlie J. Coats, Jr. and Jiri Moskovcak:

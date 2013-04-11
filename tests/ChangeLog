@@ -1,5 +1,13 @@
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	co: Add option ‘-S’ to enable "self-same" mode.
+
+	* t630: New file.
+	* Makefile.am (TESTS): Add t630.
+	* known-failures.in (5.7, 5.8, 5.8.1, 5.8.2): Add t630.
+
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	ident: Recognize Subversion "fixed-width keyword syntax".
 
 	* t391: New file.

@@ -1,5 +1,11 @@
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	co: Add option ‘-S’ to enable "self-same" mode.
+
+	* doc/rcs.texi (co): Add entry for ‘-S’ in table of options.
+
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	ident: Recognize Subversion "fixed-width keyword syntax".
 
 	* doc/rcs.texi (ident): Add blurb, footnote and link to

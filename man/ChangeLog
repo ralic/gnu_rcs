@@ -1,5 +1,11 @@
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	co: Add option ‘-S’ to enable "self-same" mode.
+
+	* co.1in (OPTIONS): Add entry for ‘-S’.
+
+2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	ident: Recognize Subversion "fixed-width keyword syntax".
 
 	* ident.1in (DESCRIPTION): Add paragraph describing patterns
