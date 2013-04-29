@@ -1,5 +1,11 @@
 2013-04-29  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Use double-hyphen in copyright notice.
+
+	* doc/rcs.texi <copying>: ...here.
+
+2013-04-29  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[doc int] Include ref in macro ‘noVN’.
 
 	* doc/rcs.texi (noVN): Include @pxref in macro.
