@@ -77,9 +77,14 @@ main (int argc, char **argv)
           break;
 
         case 'V':
-          display_version (&program);
+          if (a[0])                     /* don't accept ‘-VN’ */
+            bad_option (a - 2);
+          else
+            display_version (&program);
           gnurcs_goodbye ();
-          return EXIT_SUCCESS;
+          return a[0]
+            ? EXIT_FAILURE
+            : EXIT_SUCCESS;
 
         default:
           bad_option (a - 2);
