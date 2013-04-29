@@ -33,6 +33,7 @@ RCS file
 @macro noVN {command}
 Note that @option{-V@var{n}} is @emph{not} a valid option for
 @rcscommand{\command\}, in contrast to most other RCS commands
+(@pxref{Misc common options}).
 @end macro
 
 @macro UCS {hex}
@@ -1196,7 +1197,7 @@ Normally, if no patterns are found for a file, @rcscommand{ident}
 emits a warning.  This option suppresses the warning.
 
 @item -V
-@xref{Misc common options}.  @noVN{ident}.
+@noVN{ident}
 @end table
 
 In addition to the normal keyword pattern, for Subversion 1.2
@@ -1247,7 +1248,7 @@ Write to stdout instead of overwriting @var{receiving-sibling}.
 respectively.
 
 @item -V
-@xref{Misc common options}.  @noVN{merge}.
+@noVN{merge}
 @end table
 
 @node rcs

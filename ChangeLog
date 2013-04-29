@@ -1,3 +1,10 @@
+2013-04-29  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[doc int] Include ref in macro ‘noVN’.
+
+	* doc/rcs.texi (noVN): Include @pxref in macro.
+	(ident, merge): Update context of ‘noVN’ calls.
+
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	co: Add option ‘-S’ to enable "self-same" mode.
