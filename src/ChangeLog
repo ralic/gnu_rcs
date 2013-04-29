@@ -1,3 +1,10 @@
+2013-04-29  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	ident: Don't accept ‘-V’ with an argument.
+
+	* ident.c (main): If given ‘-V’ with an argument,
+	display error message and exit failurefully.
+
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Add sanity check for .help generation.
