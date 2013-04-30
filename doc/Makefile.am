@@ -20,4 +20,8 @@
 info_TEXINFOS = rcs.texi
 rcs_TEXINFOS = fdl.texi
 
+# Unfortunately, Texinfo macros (info "(texinfo) Macro Details")
+# are not completely well-behaved when it comes to PDF output.
+TEXI2DVI = texi2dvi -E
+
 # Makefile.am ends here

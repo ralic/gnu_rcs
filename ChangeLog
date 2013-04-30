@@ -1,3 +1,9 @@
+2013-04-30  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[doc] Use "texi2dvi -E".
+
+	* doc/Makefile.am (TEXI2DVI): New var.
+
 2013-04-29  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[doc] Use double-hyphen in copyright notice.
