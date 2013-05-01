@@ -53,7 +53,18 @@ check_hv (int argc, char **argv, struct program const *prog)
 
   if (EXACTLY ("--help", argv[1]))
     {
-      printf ("Usage: %s %s%s", prog->name, prog->help, BUGME);
+      char usage[128];
+      int nl;
+
+      snprintf (usage, 128, "%s", prog->help);
+      nl = strchr (usage, '\n') - usage;
+      usage[nl] = '\0';
+
+      printf ("Usage: %s %s\n\n%s\n%s%s",
+              prog->name, usage,
+              prog->desc,
+              prog->help + nl,
+              BUGME);
       exit (EXIT_SUCCESS);
     }
 

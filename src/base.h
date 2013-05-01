@@ -386,6 +386,8 @@ struct program
   char const *invoke;
   /* The name of the program, for --help, --version, etc.  */
   char const *name;
+  /* One-line description, ending with '.' (dot).  */
+  char const *desc;
   /* Text for --help.  */
   char const *help;
   /* What to do when exiting errorfully (see TYAG_* below).  */

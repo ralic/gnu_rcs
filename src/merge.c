@@ -40,6 +40,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "merge",
+      .desc = merge_blurb,
       .help = merge_help,
       .tyag = BOG_DIFF
     };

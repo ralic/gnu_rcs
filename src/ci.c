@@ -635,6 +635,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "ci",
+      .desc = ci_blurb,
       .help = ci_help,
       .tyag = BOG_FULL
     };

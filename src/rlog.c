@@ -755,6 +755,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "rlog",
+      .desc = rlog_blurb,
       .help = rlog_help,
       .tyag = TYAG_IMMEDIATE
     };

@@ -1,3 +1,10 @@
+2013-05-01  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Include one-line description in ‘--help’ output.
+
+	* build-aux/extract-help: Also extract/format
+	first line of PROGRAM.c input file, as ‘PROGRAM_blurb’.
+
 2013-04-30  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[doc] Use "texi2dvi -E".

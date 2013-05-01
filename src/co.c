@@ -414,6 +414,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "co",
+      .desc = co_blurb,
       .help = co_help,
       .tyag = BOG_FULL
     };

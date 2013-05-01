@@ -50,6 +50,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "rcsmerge",
+      .desc = rcsmerge_blurb,
       .help = rcsmerge_help,
       .tyag = BOG_DIFF
     };

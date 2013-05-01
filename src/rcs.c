@@ -1115,6 +1115,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "rcs",
+      .desc = rcs_blurb,
       .help = rcs_help,
       .tyag = BOG_FULL
     };

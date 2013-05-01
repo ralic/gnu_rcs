@@ -118,6 +118,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "rcsclean",
+      .desc = rcsclean_blurb,
       .help = rcsclean_help,
       .tyag = BOG_FULL
     };

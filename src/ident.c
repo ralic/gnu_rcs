@@ -151,6 +151,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "ident",
+      .desc = ident_blurb,
       .help = ident_help,
       .tyag = TYAG_IMMEDIATE
     };

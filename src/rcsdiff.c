@@ -139,6 +139,7 @@ main (int argc, char **argv)
     {
       .invoke = argv[0],
       .name = "rcsdiff",
+      .desc = rcsdiff_blurb,
       .help = rcsdiff_help,
       .tyag = BOG_DIFF
     };
