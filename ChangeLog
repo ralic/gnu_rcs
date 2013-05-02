@@ -1,3 +1,10 @@
+2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[doc] Use ‘@dots{}’ more.
+
+	* doc/rcs.texi (ci, co, ident, merge, rcs, rcsclean)
+	(rcsdiff, rlog): ...here, in ‘@usage’ 2nd arg.
+
 2013-05-01  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Include one-line description in ‘--help’ output.

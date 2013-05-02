@@ -1008,7 +1008,7 @@ with other comamnds (@pxref{Environment}): \opts\.
 @node ci
 @section Invoking @rcscommand{ci}
 
-@usage {ci, file ...}
+@usage {ci, file @dots{}}
 
 @noindent
 The @rcscommand{ci} command adds a revision to the @repo{} reflecting
@@ -1098,7 +1098,7 @@ Use @var{who} as the author.
 @node co
 @section Invoking @rcscommand{co}
 
-@usage {co, file ...}
+@usage {co, file @dots{}}
 
 @noindent
 The @rcscommand{co} command retrieves a revision from the @repo{},
@@ -1184,7 +1184,7 @@ Select matching login @var{who}.
 @node ident
 @section Invoking @rcscommand{ident}
 
-@usage {ident, [file ...]}
+@usage {ident, [file @dots{}]}
 
 @noindent
 If no @var{file} is specified, scan standard input.
@@ -1254,7 +1254,7 @@ respectively.
 @node rcs
 @section Invoking @rcscommand{rcs}
 
-@usage {rcs, file ...}
+@usage {rcs, file @dots{}}
 
 @noindent
 The @rcscommand{rcs} command performs various administrative operations
@@ -1356,7 +1356,7 @@ beginning of branch to @var{rev}
 @node rcsclean
 @section Invoking @rcscommand{rcsclean}
 
-@usage {rcsclean, [file ...]}
+@usage {rcsclean, [file @dots{}]}
 
 @noindent
 The @rcscommand{rcsclean} command removes working files that are not being
@@ -1397,7 +1397,7 @@ it changes because a lock is removed.
 @node rcsdiff
 @section Invoking @rcscommand{rcsdiff}
 
-@usage {rcsdiff, file ...}
+@usage {rcsdiff, file @dots{}}
 
 @noindent
 The @rcscommand{rcsdiff} command runs @rcscommand{diff}
@@ -1497,7 +1497,7 @@ to the latest revision on the default branch.
 @node rlog
 @section Invoking @rcscommand{rlog}
 
-@usage {rlog, file ...}
+@usage {rlog, file @dots{}}
 
 @noindent
 The @rcscommand{rlog} command displays information about @repo{}s.
