@@ -1,5 +1,16 @@
 2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Internalize some RCS commands; make rcs(1) dispatch to them.
+
+	* build-aux/extract-help: If the input does not use ‘CHECK_HV’
+	with a literal string, arrange to #include "b-yacmd.h".
+	* doc/rcs.texi (dispatchusage): New macro.
+	(ci, co, rcsclean, rcsdiff, rcsmerge, rlog): Use ‘@dispatchusage’.
+	(rcs): Likewise.  Also, add two subsections for "modern"
+	and "legacy" usage, and blurb + table for the modern options.
+
+2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[doc] Use ‘@dots{}’ more.
 
 	* doc/rcs.texi (ci, co, ident, merge, rcs, rcsclean)

@@ -32,8 +32,6 @@
 #include "b-feph.h"
 #include "b-fro.h"
 
-struct top *top;
-
 struct u_log
 {
   char const *revno;
@@ -1099,8 +1097,8 @@ buildtree (struct adminstuff *dc)
 
 DECLARE_PROGRAM (rcs, BOG_FULL);
 
-int
-main (int argc, char **argv)
+static int
+rcs_main (const char *cmd, int argc, char **argv)
 {
   struct adminstuff dc;                 /* dynamic context */
   char *a, **newargv, *textfile;
@@ -1114,7 +1112,7 @@ main (int argc, char **argv)
   struct link boxlock, *tplock;
   struct link boxrm, *tprm;
 
-  CHECK_HV ("rcs");
+  CHECK_HV (cmd);
   gnurcs_init (&program);
   memset (&dc, 0, sizeof (dc));
   dc.rv = EXIT_SUCCESS;
@@ -1547,6 +1545,16 @@ main (int argc, char **argv)
   gnurcs_goodbye ();
   return dc.rv;
 }
+
+static const uint8_t rcs_aka[16] =
+{
+  3 /* count */,
+  4,'f','r','o','b',
+  3,'r','c','s',
+  5,'a','d','m','i','n'
+};
+
+YET_ANOTHER_COMMAND (rcs);
 
 /*:help
 [options] file ...

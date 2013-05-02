@@ -1,5 +1,40 @@
 2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Internalize some RCS commands; make rcs(1) dispatch to them.
+
+	U (MAIN, AKA) ≡
+	"(top): Delete var.
+	 (MAIN): Rename from ‘main’; take arg ‘cmd’; pass it to ‘CHECK_HV’.
+	 (AKA): New static uint8_t array.
+	 <top-level>: Use ‘YET_ANOTHER_COMMAND’".
+	* b-yacmd.h: New file.
+	* sub.TEMPLATE: New file.
+	* super.c: New file.
+	* Makefile.am (subs, bin_SCRIPTS): New vars.
+	($(subs)): New target.
+	(libparts_a_SOURCES): Add b-yacmd.h.
+	(executables): Remove ci, co, rcsclean, rcsdiff, rcsmerge, rlog.
+	(BUILT_SOURCES): Add $(subs:=.help), super.help.
+	(rcs_SOURCES): New var.
+	(CLEANFILES): Add $(subs).
+	(EXTRA_DIST): Add sub.TEMPLATE.
+	* b-peer.h (peer_super): Rename var decl from ‘peer_co’.
+	(PEER_SUPER): Rename macro from ‘PEER_CO’; use ‘peer_super’.
+	* b-peer.c (peer_super): Raname from ‘peer_co’; use "rcs".
+	* ci.c: U (ci_main, ci_aka).
+	* co.c: U (co_main, co_aka).
+	(VX): Bump to 3.
+	(buildjoin): Use ‘PEER_SUPER’ and command "co".
+	* rcs.c: U (rcs_main, rcs_aka).
+	* rcsclean.c: U (rcsclean_main, rcsclean_aka).
+	* rcsdiff.c: U (rcsdiff_main, rcsdiff_aka).
+	(rcsdiff_main): Use ‘PEER_SUPER’ and command "co".
+	* rcsmerge.c: U (rcsmerge_main, rcsmerge_aka).
+	(rcsmerge_main): Use ‘PEER_SUPER’ and command "co".
+	* rlog.c: U (rlog_main, rlog_aka).
+
+2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Move ‘program’ to top-level.
 
 	* gnu-h-v.h (CHECK_HV): Take arg ‘cmd’; set

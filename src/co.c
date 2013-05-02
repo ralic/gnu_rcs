@@ -36,8 +36,6 @@
 #include "b-isr.h"
 #include "b-peer.h"
 
-struct top *top;
-
 struct work
 {
   struct stat st;
@@ -304,7 +302,7 @@ preparejoin (register char *j, struct jstuff *js)
 
 /* Elements in the constructed command line prior to this index are
    boilerplate.  From this index on, things are data-dependent.  */
-#define VX  2
+#define VX  3
 
 static bool
 buildjoin (char const *initialfile, struct jstuff *js)
@@ -323,7 +321,8 @@ buildjoin (char const *initialfile, struct jstuff *js)
   rev2 = maketemp (0);
   rev3 = maketemp (3);      /* ‘buildrevision’ may use 1 and 2 */
 
-  cov[1] = PEER_CO ();
+  cov[1] = PEER_SUPER ();
+  cov[2] = "co";
   /* ‘cov[VX]’ setup below.  */
   p = &cov[1 + VX];
   if (js->expand)
@@ -390,8 +389,8 @@ badmerge:
 
 DECLARE_PROGRAM (co, BOG_FULL);
 
-int
-main (int argc, char **argv)
+static int
+co_main (const char *cmd, int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
   struct work work = { .force = false };
@@ -413,7 +412,7 @@ main (int argc, char **argv)
 #endif
   struct wlink *deltas;                 /* Deltas to be generated.  */
 
-  CHECK_HV ("co");
+  CHECK_HV (cmd);
   gnurcs_init (&program);
   memset (&jstuff, 0, sizeof (struct jstuff));
 
@@ -758,6 +757,15 @@ main (int argc, char **argv)
   gnurcs_goodbye ();
   return exitstatus;
 }
+
+static const uint8_t co_aka[13] =
+{
+  2 /* count */,
+  2,'c','o',
+  8,'c','h','e','c','k','o','u','t'
+};
+
+YET_ANOTHER_COMMAND (co);
 
 /*:help
 [options] file ...

@@ -33,8 +33,6 @@
 #include "b-fb.h"
 #include "b-fro.h"
 
-struct top *top;
-
 struct revrange
 {
   char const *beg;
@@ -728,8 +726,8 @@ putrevpairs (char const *b, char const *e, bool sawsep, void *data)
 
 DECLARE_PROGRAM (rlog, TYAG_IMMEDIATE);
 
-int
-main (int argc, char **argv)
+static int
+rlog_main (const char *cmd, int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
   bool branchflag = false;
@@ -754,7 +752,7 @@ main (int argc, char **argv)
   bool shownames;
   int revno;
 
-  CHECK_HV ("rlog");
+  CHECK_HV (cmd);
   gnurcs_init (&program);
 
   descflag = selectflag = shownames = true;
@@ -994,6 +992,15 @@ main (int argc, char **argv)
   gnurcs_goodbye ();
   return exitstatus;
 }
+
+static const uint8_t rlog_aka[10] =
+{
+  2 /* count */,
+  3,'l','o','g',
+  4,'r','l','o','g'
+};
+
+YET_ANOTHER_COMMAND (rlog);
 
 /*:help
 [options] file ...

@@ -48,8 +48,6 @@
 #define ftruncate(fd,length) (-1)
 #endif
 
-struct top *top;
-
 struct reason
 {
   struct cbuf upfront;                  /* from -mMSG */
@@ -602,8 +600,8 @@ first_meaningful_symbolic_name (struct link *ls)
 
 DECLARE_PROGRAM (ci, BOG_FULL);
 
-int
-main (int argc, char **argv)
+static int
+ci_main (const char *cmd, int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
   struct reason reason;
@@ -634,7 +632,7 @@ main (int argc, char **argv)
   struct link *symbolic_names = NULL;
   struct wlink *deltas;                 /* Deltas to be generated.  */
 
-  CHECK_HV ("ci");
+  CHECK_HV (cmd);
   gnurcs_init (&program);
 
   /* This lameness is because constructing a proper initialization form for
@@ -1195,6 +1193,16 @@ main (int argc, char **argv)
   gnurcs_goodbye ();
   return exitstatus;
 }
+
+static const uint8_t ci_aka[19] =
+{
+  3 /* count */,
+  2,'c','i',
+  7,'c','h','e','c','k','i','n',
+  6,'c','o','m','m','i','t'
+};
+
+YET_ANOTHER_COMMAND (ci);
 
 /*:help
 [options] file...

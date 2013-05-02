@@ -30,6 +30,15 @@ RCS file
 @end example
 @end macro
 
+@macro dispatchusage {disp, name, required-args}
+@cindex @rcscommand{\name\} invocation
+@cindex invocation, @rcscommand{\name\}
+@display
+@rcscommand{rcs \disp\} @t{[options] \required-args\}
+(or ``@rcscommand{\name\}'' instead of ``@rcscommand{rcs \disp\}'')
+@end display
+@end macro
+
 @macro noVN {command}
 Note that @option{-V@var{n}} is @emph{not} a valid option for
 @rcscommand{\command\}, in contrast to most other RCS commands
@@ -1008,7 +1017,7 @@ with other comamnds (@pxref{Environment}): \opts\.
 @node ci
 @section Invoking @rcscommand{ci}
 
-@usage {ci, file @dots{}}
+@dispatchusage {ci, ci, file @dots{}}
 
 @noindent
 The @rcscommand{ci} command adds a revision to the @repo{} reflecting
@@ -1098,7 +1107,7 @@ Use @var{who} as the author.
 @node co
 @section Invoking @rcscommand{co}
 
-@usage {co, file @dots{}}
+@dispatchusage {co, co, file @dots{}}
 
 @noindent
 The @rcscommand{co} command retrieves a revision from the @repo{},
@@ -1254,10 +1263,35 @@ respectively.
 @node rcs
 @section Invoking @rcscommand{rcs}
 
-@usage {rcs, file @dots{}}
+The @rcscommand{rcs} command is unique in the set of RCS programs in
+that it has two usages, the modern (for RCS 5.9.0 and later) and the
+legacy.
+
+@subsection modern
+@usage {rcs, command [command-arg @dots{}]}
 
 @noindent
-The @rcscommand{rcs} command performs various administrative operations
+This @rcscommand{rcs} usage dispatches to @var{command},
+passing along @var{command-arg}@dots{} without interpretation.
+
+@table @code
+@item --commands
+Display a list of available commands, including a one-line
+description and its aliases, and exit successfully.
+
+@item --help @var{command}
+Display help for a particular @var{command} and exit successfully.
+For example, to display help for the legacy interface, use:
+@example
+--help rcs
+@end example
+@end table
+
+@subsection legacy
+@dispatchusage {frob, rcs, file @dots{}}
+
+@noindent
+This @rcscommand{rcs} usage performs various administrative operations
 on the @repo{}, depending on the options given.
 
 @table @code
@@ -1356,7 +1390,7 @@ beginning of branch to @var{rev}
 @node rcsclean
 @section Invoking @rcscommand{rcsclean}
 
-@usage {rcsclean, [file @dots{}]}
+@dispatchusage {clean, rcsclean, [file @dots{}]}
 
 @noindent
 The @rcscommand{rcsclean} command removes working files that are not being
@@ -1397,7 +1431,7 @@ it changes because a lock is removed.
 @node rcsdiff
 @section Invoking @rcscommand{rcsdiff}
 
-@usage {rcsdiff, file @dots{}}
+@dispatchusage {diff, rcsdiff, file @dots{}}
 
 @noindent
 The @rcscommand{rcsdiff} command runs @rcscommand{diff}
@@ -1447,7 +1481,7 @@ long options (that start with "--")
 @node rcsmerge
 @section Invoking @rcscommand{rcsmerge}
 
-@usage {rcsmerge, file}
+@dispatchusage {merge, rcsmerge, file}
 
 @noindent
 The @rcscommand{rcsmerge} command incorporates the changes between two
@@ -1497,7 +1531,7 @@ to the latest revision on the default branch.
 @node rlog
 @section Invoking @rcscommand{rlog}
 
-@usage {rlog, file @dots{}}
+@dispatchusage {log, rlog, file @dots{}}
 
 @noindent
 The @rcscommand{rlog} command displays information about @repo{}s.

@@ -21,10 +21,17 @@
 # Hmmm, shouldn't gnulib or automake handle this automagically?
 AM_CPPFLAGS = -I'$(top_srcdir)/lib'
 
+subs = ci co rcsclean rcsdiff rcsmerge rlog
+bin_SCRIPTS = $(subs)
+
+$(subs): sub.TEMPLATE
+	sed 's/SUB/$@/;s/VERSION/$(VERSION)/' $< > $@
+	chmod +x $@
+
 noinst_LIBRARIES = libparts.a
 libparts_a_SOURCES = \
   b-complain.h b-divvy.h b-esds.h b-excwho.h b-fb.h b-feph.h b-fro.h \
-  b-grok.h b-isr.h b-kwxout.h b-merger.h b-peer.h \
+  b-grok.h b-isr.h b-kwxout.h b-merger.h b-peer.h b-yacmd.h \
   base.h gnu-h-v.h maketime.h partime.h \
   b-anchor.c \
   b-complain.c b-divvy.c b-esds.c b-excwho.c b-fb.c b-feph.c b-fro.c \
@@ -34,17 +41,19 @@ libparts_a_SOURCES = \
   rcsgen.c rcskeep.c rcsmap.c rcsrev.c \
   rcstime.c rcsutil.c
 
-executables = ci co ident merge rcs rcsclean rcsdiff rcsmerge rlog
+executables = ident merge rcs
 
 bin_PROGRAMS = $(executables)
 
-BUILT_SOURCES = $(executables:=.help)
+BUILT_SOURCES = $(subs:=.help) $(executables:=.help) super.help
+
+rcs_SOURCES = rcs.c $(subs:=.c) super.c
 
 LDADD = libparts.a -L$(top_builddir)/lib -lgnu
 
-CLEANFILES = $(BUILT_SOURCES)
+CLEANFILES = $(BUILT_SOURCES) $(subs)
 
-EXTRA_DIST =
+EXTRA_DIST = sub.TEMPLATE
 
 .c.help:
 	$(top_srcdir)/build-aux/extract-help -o $@ $<

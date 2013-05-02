@@ -30,14 +30,12 @@
 #include "b-merger.h"
 #include "b-peer.h"
 
-struct top *top;
-
 #define quietarg  "-q"
 
 DECLARE_PROGRAM (rcsmerge, BOG_DIFF);
 
-int
-main (int argc, char **argv)
+static int
+rcsmerge_main (const char *cmd, int argc, char **argv)
 {
   register int i;
   char *a, **newargv;
@@ -49,7 +47,7 @@ main (int argc, char **argv)
   struct fro *workptr;
   struct delta *target;
 
-  CHECK_HV ("rcsmerge");
+  CHECK_HV (cmd);
   gnurcs_init (&program);
 
   edarg = rev[1] = rev[2] = NULL;
@@ -180,7 +178,7 @@ main (int argc, char **argv)
                           if (run (-1,
                                    /* Don't collide with merger.c ‘maketemp’.  */
                                    FNAME (i) = maketemp (i + 2),
-                                   PEER_CO (), quietarg, commarg.string,
+                                   PEER_SUPER (), "co", quietarg, commarg.string,
                                    expandarg, suffixarg, versionarg, zonearg,
                                    repo_filename, NULL))
                             RFATAL ("co failed");
@@ -204,6 +202,15 @@ main (int argc, char **argv)
   gnurcs_goodbye ();
   return exitstatus;
 }
+
+static const uint8_t rcsmerge_aka[16] =
+{
+  2 /* count */,
+  5,'m','e','r','g','e',
+  8,'r','c','s','m','e','r','g','e'
+};
+
+YET_ANOTHER_COMMAND (rcsmerge);
 
 /*:help
 [options] file

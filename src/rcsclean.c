@@ -34,8 +34,6 @@
 #include "b-feph.h"
 #include "b-fro.h"
 
-struct top *top;
-
 static void
 cleanup (int *exitstatus, struct fro **workptr)
 {
@@ -104,8 +102,8 @@ get_directory (char const *dirname, char ***aargv)
 
 DECLARE_PROGRAM (rcsclean, BOG_FULL);
 
-int
-main (int argc, char **argv)
+static int
+rcsclean_main (const char *cmd, int argc, char **argv)
 {
   int exitstatus = EXIT_SUCCESS;
   struct fro *workptr = NULL;
@@ -117,7 +115,7 @@ main (int argc, char **argv)
   struct delta *delta;
   struct stat workstat;
 
-  CHECK_HV ("rcsclean");
+  CHECK_HV (cmd);
   gnurcs_init (&program);
 
   setrid ();
@@ -306,6 +304,15 @@ main (int argc, char **argv)
   gnurcs_goodbye ();
   return exitstatus;
 }
+
+static const uint8_t rcsclean_aka[16] =
+{
+  2 /* count */,
+  5,'c','l','e','a','n',
+  8,'r','c','s','c','l','e','a','n'
+};
+
+YET_ANOTHER_COMMAND (rcsclean);
 
 /*:help
 [options] file ...

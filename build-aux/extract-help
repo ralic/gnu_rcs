@@ -83,4 +83,9 @@ echo 'static char const' $vprefix'help[] = ""'
     | sed '1d;$d;s/"/\\"/g;s/^/"/;s/$/\\n"/'
 echo ';'
 
+# Pull in command support only if needed.
+if ! grep -q 'CHECK_HV (".*")' "$in" ; then
+    echo '#include "b-yacmd.h"'
+fi
+
 # extract-help

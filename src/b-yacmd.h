@@ -1,6 +1,6 @@
-/* b-peer.h --- finding the ‘execv’able name of a peer program
+/* b-yacmd.h --- yet another command
 
-   Copyright (C) 2010-2013 Thien-Thi Nguyen
+   Copyright (C) 2013 Thien-Thi Nguyen
 
    This file is part of GNU RCS.
 
@@ -18,12 +18,23 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-extern struct symdef peer_super;
+typedef int (submain_t) (const char *cmd, int argc, char **argv);
 
-const char *one_beyond_last_dir_sep (const char *name);
-char const *find_peer_prog (struct symdef *prog);
+struct yacmd
+{
+  submain_t *func;
+  const uint8_t *aka;
+  struct program *pr;
+};
 
-/* Idioms.  */
-#define PEER_SUPER()  find_peer_prog (&peer_super)
+#define YA(prog)  ya_ ## prog
 
-/* b-peer.h ends here */
+#define YET_ANOTHER_COMMAND(prog)               \
+  const struct yacmd YA (prog) =                \
+  {                                             \
+    .func = prog ## _main,                      \
+    .aka = prog ## _aka,                        \
+    .pr = &program                              \
+  }
+
+/* b-yacmd.h ends here */
