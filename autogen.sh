@@ -5,11 +5,6 @@
 # NB: You must have gnulib-tool on the PATH.  If you want to
 # force gnulib-tool to "--add-import" (rather than "--update"),
 # remove either lib/ or m4/ before invocation.
-#
-# Tested with:
-# autoconf (GNU Autoconf) 2.68
-# automake (GNU automake) 1.11.1
-# gnulib-tool (GNU gnulib 2010-11-05 13:19:13) 0.0.4410-e3c61
 
 set -ex
 
