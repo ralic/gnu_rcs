@@ -1277,7 +1277,10 @@ passing along @var{command-arg}@dots{} without interpretation.
 @table @code
 @item --commands
 Display a list of available commands, including a one-line
-description and its aliases, and exit successfully.
+description, and exit successfully.
+
+@item --aliases
+Display a list of command aliases and exit successfully.
 
 @item --help @var{command}
 Display help for a particular @var{command} and exit successfully.

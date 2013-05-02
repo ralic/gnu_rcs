@@ -1,5 +1,14 @@
 2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Add "rcs --aliases".
+
+	* super.c (display_commands): Don't display aliases.
+	(display_aliases): New static func.
+	(main): Display aliases if given "--aliases".
+	<help text>: Add ‘--aliases’ to options.
+
+2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Internalize some RCS commands; make rcs(1) dispatch to them.
 
 	U (MAIN, AKA) ≡

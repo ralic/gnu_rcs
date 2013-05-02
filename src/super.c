@@ -128,7 +128,24 @@ recognize (const char *maybe)
 static void
 display_commands (void)
 {
-  printf ("Commands:\n\n");
+  printf ("%-10s  %s\n", "(command)", "(description)");
+  for (size_t i = 0; i < n_avail; i++)
+    {
+      const struct yacmd *y = avail[i];
+      const uint8_t *aka = y->aka;
+      struct tinysym *sym = (struct tinysym *) (++aka);
+      char name[24];
+
+      memcpy (name, sym->bytes, sym->len);
+      name[sym->len] = '\0';
+      printf (" %-10s  %s\n", name, y->pr->desc);
+    }
+}
+
+static void
+display_aliases (void)
+{
+  printf ("%-10s  %s\n", "(command)", "(aliases)");
   for (size_t i = 0; i < n_avail; i++)
     {
       const struct yacmd *y = avail[i];
@@ -138,14 +155,14 @@ display_commands (void)
       for (size_t j = 0; j < count; j++)
         {
           struct tinysym *sym = (struct tinysym *) aka;
-          char name[16];
+          char name[24];
 
           memcpy (name, sym->bytes, sym->len);
           name[sym->len] = '\0';
           switch (j)
             {
             case 0:
-              printf (" %-10s %s\n %10s (aka:", name, y->pr->desc, "");
+              printf (" %-10s ", name);
               break;
             case 1:
               printf (" %s", name);
@@ -155,7 +172,7 @@ display_commands (void)
             }
           aka += 1 + sym->len;
         }
-      printf (")\n\n");
+      printf ("\n");
     }
 }
 
@@ -232,6 +249,11 @@ main (int argc, char **argv)
               display_commands ();
               goto done;
             }
+          if (STR_SAME ("--aliases", argv[1]))
+            {
+              display_aliases ();
+              goto done;
+            }
           /* No luck, sorry.  */
           HUH ("option");
         }
@@ -272,6 +294,7 @@ main (int argc, char **argv)
 [options] command [command-arg ...]
 Options:
   --commands       Display available commands and exit.
+  --aliases        Display command aliases and exit.
   --help COMMAND   Display help for COMMAND.
 
 To display help for the legacy interface, use:

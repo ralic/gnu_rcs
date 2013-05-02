@@ -1,5 +1,12 @@
 2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Add "rcs --aliases".
+
+	* doc/rcs.texi (rcs) <modern>: Update table
+	for entry ‘--commands’; add entry ‘--aliases’.
+
+2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Internalize some RCS commands; make rcs(1) dispatch to them.
 
 	* build-aux/extract-help: If the input does not use ‘CHECK_HV’
