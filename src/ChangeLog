@@ -1,3 +1,21 @@
+2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[int] Move ‘program’ to top-level.
+
+	* gnu-h-v.h (CHECK_HV): Take arg ‘cmd’; set
+	‘program.invoke’ and ‘program.name’ prior to ‘check_hv’ call.
+	(DECLARE_PROGRAM): New macro.
+	* ci.c: Use ‘DECLARE_PROGRAM’.
+	(main): Delete local var ‘program’; update call to ‘CHECK_HV’.
+	* co.c: Likewise.
+	* ident.c: Likewise.
+	* merge.c: Likewise.
+	* rcs.c: Likewise.
+	* rcsclean.c: Likewise.
+	* rcsdiff.c: Likewise.
+	* rcsmerge.c: Likewise.
+	* rlog.c: Likewise.
+
 2013-05-01  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Include one-line description in ‘--help’ output.

@@ -113,6 +113,8 @@ setup_label (char const *num, char const date[datesize])
    boilerplate.  From this index on, things are data-dependent.  */
 #define COMMAND_LINE_VARYING  (3 + !DIFF_L)
 
+DECLARE_PROGRAM (rcsdiff, BOG_DIFF);
+
 int
 main (int argc, char **argv)
 {
@@ -135,16 +137,8 @@ main (int argc, char **argv)
   char *a, *dcp, **newargv;
   bool no_diff_means_no_output;
   register int c;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "rcsdiff",
-      .desc = rcsdiff_blurb,
-      .help = rcsdiff_help,
-      .tyag = BOG_DIFF
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("rcsdiff");
   gnurcs_init (&program);
   memset (&work, 0, sizeof (work));
 

@@ -726,6 +726,8 @@ putrevpairs (char const *b, char const *e, bool sawsep, void *data)
   PUSH (rr, criteria->revs);
 }
 
+DECLARE_PROGRAM (rlog, TYAG_IMMEDIATE);
+
 int
 main (int argc, char **argv)
 {
@@ -751,16 +753,8 @@ main (int argc, char **argv)
   bool pre5;
   bool shownames;
   int revno;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "rlog",
-      .desc = rlog_blurb,
-      .help = rlog_help,
-      .tyag = TYAG_IMMEDIATE
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("rlog");
   gnurcs_init (&program);
 
   descflag = selectflag = shownames = true;

@@ -34,6 +34,8 @@ struct top *top;
 
 #define quietarg  "-q"
 
+DECLARE_PROGRAM (rcsmerge, BOG_DIFF);
+
 int
 main (int argc, char **argv)
 {
@@ -46,16 +48,8 @@ main (int argc, char **argv)
   int status, exitstatus;
   struct fro *workptr;
   struct delta *target;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "rcsmerge",
-      .desc = rcsmerge_blurb,
-      .help = rcsmerge_help,
-      .tyag = BOG_DIFF
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("rcsmerge");
   gnurcs_init (&program);
 
   edarg = rev[1] = rev[2] = NULL;

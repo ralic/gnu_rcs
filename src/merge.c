@@ -28,6 +28,8 @@
 
 struct top *top;
 
+DECLARE_PROGRAM (merge, BOG_DIFF);
+
 int
 main (int argc, char **argv)
 {
@@ -36,16 +38,8 @@ main (int argc, char **argv)
   char const *edarg = NULL;
   int labels, exitstatus;
   bool tostdout = false;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "merge",
-      .desc = merge_blurb,
-      .help = merge_help,
-      .tyag = BOG_DIFF
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("merge");
   gnurcs_init (&program);
 
   labels = 0;

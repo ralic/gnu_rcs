@@ -388,6 +388,8 @@ badmerge:
   return false;
 }
 
+DECLARE_PROGRAM (co, BOG_FULL);
+
 int
 main (int argc, char **argv)
 {
@@ -410,16 +412,8 @@ main (int argc, char **argv)
   int stdout_mode = 0;
 #endif
   struct wlink *deltas;                 /* Deltas to be generated.  */
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "co",
-      .desc = co_blurb,
-      .help = co_help,
-      .tyag = BOG_FULL
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("co");
   gnurcs_init (&program);
   memset (&jstuff, 0, sizeof (struct jstuff));
 

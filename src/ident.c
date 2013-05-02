@@ -141,22 +141,16 @@ scanfile (register FILE *file, char const *name)
   return 0;
 }
 
+DECLARE_PROGRAM (ident, TYAG_IMMEDIATE);
+
 int
 main (int argc, char **argv)
 {
   FILE *fp;
   int status = EXIT_SUCCESS;
   char const *a;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "ident",
-      .desc = ident_blurb,
-      .help = ident_help,
-      .tyag = TYAG_IMMEDIATE
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("ident");
   gnurcs_init (&program);
 
   while ((a = *++argv) && *a == '-')

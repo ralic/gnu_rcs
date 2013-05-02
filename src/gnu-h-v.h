@@ -34,7 +34,22 @@ display_version (struct program const *prog);
 extern void
 check_hv (int argc, char **argv, struct program const *prog);
 
-/* Idiom.  */
-#define CHECK_HV()  check_hv (argc, argv, &program)
+/* Idioms.  */
+
+#define CHECK_HV(cmd)  do                       \
+    {                                           \
+      program.invoke = argv[0];                 \
+      program.name = cmd;                       \
+      check_hv (argc, argv, &program);          \
+    }                                           \
+  while (0)
+
+#define DECLARE_PROGRAM(prog,__tyag)            \
+  static struct program program =               \
+    {                                           \
+      .desc = prog ## _blurb,                   \
+      .help = prog ## _help,                    \
+      .tyag = __tyag                            \
+    }
 
 /* gnu-h-v.h ends here */

@@ -1097,6 +1097,8 @@ buildtree (struct adminstuff *dc)
   return;
 }
 
+DECLARE_PROGRAM (rcs, BOG_FULL);
+
 int
 main (int argc, char **argv)
 {
@@ -1111,16 +1113,8 @@ main (int argc, char **argv)
   struct cbuf branchnum;
   struct link boxlock, *tplock;
   struct link boxrm, *tprm;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "rcs",
-      .desc = rcs_blurb,
-      .help = rcs_help,
-      .tyag = BOG_FULL
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("rcs");
   gnurcs_init (&program);
   memset (&dc, 0, sizeof (dc));
   dc.rv = EXIT_SUCCESS;

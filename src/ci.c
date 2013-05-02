@@ -600,6 +600,8 @@ first_meaningful_symbolic_name (struct link *ls)
   return ud->u.meaningful;
 }
 
+DECLARE_PROGRAM (ci, BOG_FULL);
+
 int
 main (int argc, char **argv)
 {
@@ -631,16 +633,8 @@ main (int argc, char **argv)
   struct delta *workdelta;
   struct link *symbolic_names = NULL;
   struct wlink *deltas;                 /* Deltas to be generated.  */
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "ci",
-      .desc = ci_blurb,
-      .help = ci_help,
-      .tyag = BOG_FULL
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("ci");
   gnurcs_init (&program);
 
   /* This lameness is because constructing a proper initialization form for

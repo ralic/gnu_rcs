@@ -102,6 +102,8 @@ get_directory (char const *dirname, char ***aargv)
   return entries;
 }
 
+DECLARE_PROGRAM (rcsclean, BOG_FULL);
+
 int
 main (int argc, char **argv)
 {
@@ -114,16 +116,8 @@ main (int argc, char **argv)
   struct wlink *deltas;
   struct delta *delta;
   struct stat workstat;
-  const struct program program =
-    {
-      .invoke = argv[0],
-      .name = "rcsclean",
-      .desc = rcsclean_blurb,
-      .help = rcsclean_help,
-      .tyag = BOG_FULL
-    };
 
-  CHECK_HV ();
+  CHECK_HV ("rcsclean");
   gnurcs_init (&program);
 
   setrid ();
