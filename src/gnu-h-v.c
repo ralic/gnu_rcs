@@ -22,6 +22,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "gnu-h-v.h"
+
+int
+nice_getopt (int argc, char **argv, const struct option *longopts)
+{
+  /* Support multiple calls.  */
+  optind = 0;
+  /* Don't display error message.  */
+  opterr = 0;
+  /* Do it!  */
+  return getopt_long
+    (argc, argv,
+     "+",                       /* stop at first non-option */
+     longopts, NULL);
+}
 
 #define COMMAND_VERSION                                         \
   (" (" PACKAGE_NAME ") " PACKAGE_VERSION "\n"                  \
@@ -36,14 +51,25 @@
 
 #define BUGME  ("\nReport bugs to <" PACKAGE_BUGREPORT ">\n")
 
-#define EXACTLY(k, s)  ('\0' == s[sizeof (k) - 1]               \
-                        && !strncmp (k, s, sizeof (k) - 1))
-
 void
 display_version (struct program const *prog)
 {
   printf ("%s%s", prog->name, COMMAND_VERSION);
 }
+
+enum hv_option_values
+  {
+    hv_unrecognized = 0,
+    hv_help,
+    hv_version
+  };
+
+static struct option const ok[] =
+  {
+    NICE_OPT ("help",    hv_help),
+    NICE_OPT ("version", hv_version),
+    NO_MORE_OPTIONS
+  };
 
 void
 check_hv (int argc, char **argv, struct program const *prog)
@@ -51,27 +77,32 @@ check_hv (int argc, char **argv, struct program const *prog)
   if (1 >= argc)
     return;
 
-  if (EXACTLY ("--help", argv[1]))
+  switch (nice_getopt (argc, argv, ok))
     {
-      char usage[128];
-      int nl;
+    case hv_unrecognized:
+      /* Do nothing.  */
+      break;
+    case hv_help:
+      {
+        char usage[128];
+        int nl;
 
-      snprintf (usage, 128, "%s", prog->help);
-      nl = strchr (usage, '\n') - usage;
-      usage[nl] = '\0';
+        snprintf (usage, 128, "%s", prog->help);
+        nl = strchr (usage, '\n') - usage;
+        usage[nl] = '\0';
 
-      printf ("Usage: %s %s\n\n%s\n%s%s",
-              prog->name, usage,
-              prog->desc,
-              prog->help + nl,
-              BUGME);
-      exit (EXIT_SUCCESS);
-    }
-
-  if (EXACTLY ("--version", argv[1]))
-    {
-      display_version (prog);
-      exit (EXIT_SUCCESS);
+        printf ("Usage: %s %s\n\n%s\n%s%s",
+                prog->name, usage,
+                prog->desc,
+                prog->help + nl,
+                BUGME);
+        exit (EXIT_SUCCESS);
+      }
+    case hv_version:
+      {
+        display_version (prog);
+        exit (EXIT_SUCCESS);
+      }
     }
 }
 

@@ -18,6 +18,13 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <getopt.h>
+
+/* Clear ‘optind’ and ‘opterr’ then call ‘getopt_long’, arranging
+   to do not permute ‘argv’.  Return what ‘getopt_long’ returns.  */
+extern int
+nice_getopt (int argc, char **argv, const struct option *longopts);
+
 /* Display the version blurb to stdout, starting with:
    | NAME (GNU RCS) PACKAGE_VERSION
    | ...
@@ -35,6 +42,12 @@ extern void
 check_hv (int argc, char **argv, struct program const *prog);
 
 /* Idioms.  */
+
+#define NICE_OPT(name,value)  \
+  { name, no_argument, NULL, value }
+
+#define NO_MORE_OPTIONS \
+  {NULL, 0, NULL, 0}
 
 #define CHECK_HV(cmd)  do                       \
     {                                           \

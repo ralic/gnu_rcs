@@ -244,13 +244,26 @@ main (int argc, char **argv)
       /* Option processing.  */
       if ('-' == argv[1][0])
         {
-          if (STR_SAME ("--commands", argv[1]))
+          /* "DDC" stands for "dash-dash command".  */
+          enum ddc_option_values
+          {
+            ddc_unrecognized = 0,
+            ddc_commands,
+            ddc_aliases
+          };
+          struct option allddc[] =
             {
+              NICE_OPT ("commands", ddc_commands),
+              NICE_OPT ("aliases",  ddc_aliases),
+              NO_MORE_OPTIONS
+            };
+
+          switch (nice_getopt (argc, argv, allddc))
+            {
+            case ddc_commands:
               display_commands ();
               goto done;
-            }
-          if (STR_SAME ("--aliases", argv[1]))
-            {
+            case ddc_aliases:
               display_aliases ();
               goto done;
             }

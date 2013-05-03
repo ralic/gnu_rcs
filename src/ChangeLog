@@ -1,3 +1,21 @@
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Use ‘getopt_long’.
+
+	* gnu-h-v.h: #include <getopt.h>.
+	(nice_getopt): New func decl.
+	(NICE_OPT): New macro.
+	(NO_MORE_OPTIONS): New #define.
+	* gnu-h-v.c: #include "gnu-h-v.h".
+	(nice_getopt): New func.
+	(EXACTLY): Delete macro.
+	(hv_option_values): New enum.
+	(ok): New static array of ‘struct option’.
+	(check_hv): Use ‘nice_getopt’ and ‘switch’ on its rv.
+	* super.c (main): Replace manual string-comparison for
+	‘--commands’ and ‘--aliases’ recognition with option table,
+	‘nice_getopt’ call, and a ‘switch’ on the rv.
+
 2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Add "rcs --aliases".
