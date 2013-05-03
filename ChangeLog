@@ -1,3 +1,10 @@
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Create .lz and .xz tarballs, not .gz, for "make dist".
+
+	* configure.ac (AM_INIT_AUTOMAKE): Add
+	options ‘no-dist-gzip’, ‘dist-lzip’, ‘dist-xz’.
+
 2013-05-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Add "rcs --aliases".
