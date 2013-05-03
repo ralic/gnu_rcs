@@ -19,6 +19,7 @@ See the following files and directories for more information.
  m4/     - configure script infrastructure, from gnulib
  man/    - manual page entries, plus source
  src/    - source code for programs
+ tests/  - test suite
 
 
 
