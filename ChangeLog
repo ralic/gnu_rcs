@@ -1,5 +1,11 @@
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Use gnulib module ‘mempcpy’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘mempcpy’.
+
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Warn that option ‘-V’ is obsolete.
 
 	* doc/rcs.texi (Misc common options):
