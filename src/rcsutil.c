@@ -430,10 +430,7 @@ setRCSversion (char const *str)
       BE (version) = VERSION (v);
     }
   else
-    {
-      display_version (top->program);   /* TODO:ZONK */
-      exit (EXIT_SUCCESS);
-    }
+    display_version (top->program, DV_EXIT); /* TODO:ZONK */
 }
 
 int

@@ -52,9 +52,11 @@ nice_getopt (int argc, char **argv, const struct option *longopts)
 #define BUGME  ("\nReport bugs to <" PACKAGE_BUGREPORT ">\n")
 
 void
-display_version (struct program const *prog)
+display_version (struct program const *prog, int flags)
 {
   printf ("%s%s", prog->name, COMMAND_VERSION);
+  if (DV_EXIT & flags)
+    exit (EXIT_SUCCESS);
 }
 
 enum hv_option_values
@@ -99,10 +101,7 @@ check_hv (int argc, char **argv, struct program const *prog)
         exit (EXIT_SUCCESS);
       }
     case hv_version:
-      {
-        display_version (prog);
-        exit (EXIT_SUCCESS);
-      }
+      display_version (prog, DV_EXIT);
     }
 }
 

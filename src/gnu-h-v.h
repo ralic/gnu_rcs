@@ -25,12 +25,18 @@
 extern int
 nice_getopt (int argc, char **argv, const struct option *longopts);
 
+#define DV_ONLY   0
+#define DV_EXIT   2
+
 /* Display the version blurb to stdout, starting with:
    | NAME (GNU RCS) PACKAGE_VERSION
    | ...
-   and ending with newline.  NAME is the value of ‘prog->name’.  */
+   and ending with newline.  NAME is the value of ‘prog->name’.
+   FLAGS is the logical-OR of:
+   | DV_EXIT -- finish w/ ‘exit (EXIT_SUCCESS)’
+   The default is 0.  */
 extern void
-display_version (struct program const *prog);
+display_version (struct program const *prog, int flags);
 
 /* If ARGC is less than 2, do nothing.
    If ARGV[1] is "--version", use ‘display_version’ and exit successfully.

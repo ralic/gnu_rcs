@@ -1,5 +1,18 @@
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Add conditional exiting to ‘display_version’.
+
+	* gnu-h-v.c (display_version): Take 2nd arg ‘flags’.
+	If ‘DV_EXIT’, exit successfully.
+	(check_hv): Update call to ‘display_version’.
+	* gnu-h-v.h (DV_ONLY, DV_EXIT): New #define:s.
+	(display_version): Update func decl.
+	* ident.c (main): Update call to ‘display_version’.
+	* merge.c (main): Likewise.
+	* rcsutil.c (setRCSversion): Likewise.
+
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Use ‘getopt_long’.
 
 	* gnu-h-v.h: #include <getopt.h>.

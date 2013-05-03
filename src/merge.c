@@ -75,7 +75,7 @@ main (int argc, char **argv)
           if (a[0])                     /* don't accept ‘-VN’ */
             bad_option (a - 2);
           else
-            display_version (&program);
+            display_version (&program, DV_ONLY);
           gnurcs_goodbye ();
           return a[0]
             ? EXIT_FAILURE

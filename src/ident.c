@@ -164,7 +164,7 @@ main (int argc, char **argv)
         case 'V':
           if (! a[1])                   /* don't accept ‘-VN’ */
             {
-              display_version (&program);
+              display_version (&program, DV_ONLY);
               gnurcs_goodbye ();
               return EXIT_SUCCESS;
             }
