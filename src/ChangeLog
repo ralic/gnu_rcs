@@ -1,5 +1,12 @@
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Bump max command name size to 64.
+
+	* super.c (MAX_COMMAND_SIZE): New #define.
+	(display_commands, display_aliases): Use ‘MAX_COMMAND_SIZE’.
+
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Warn that option ‘-V’ is obsolete.
 
 	U (X) ≡ "Pass X to ‘display_version’".

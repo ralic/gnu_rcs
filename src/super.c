@@ -125,6 +125,11 @@ recognize (const char *maybe)
   return NULL;
 }
 
+/* (length "who-groks-life-the-universe-and-everything")
+   => 42
+   :-D  */
+#define MAX_COMMAND_SIZE  64
+
 static void
 display_commands (void)
 {
@@ -134,7 +139,7 @@ display_commands (void)
       const struct yacmd *y = avail[i];
       const uint8_t *aka = y->aka;
       struct tinysym *sym = (struct tinysym *) (++aka);
-      char name[24];
+      char name[MAX_COMMAND_SIZE];
 
       memcpy (name, sym->bytes, sym->len);
       name[sym->len] = '\0';
@@ -155,7 +160,7 @@ display_aliases (void)
       for (size_t j = 0; j < count; j++)
         {
           struct tinysym *sym = (struct tinysym *) aka;
-          char name[24];
+          char name[MAX_COMMAND_SIZE];
 
           memcpy (name, sym->bytes, sym->len);
           name[sym->len] = '\0';
