@@ -912,6 +912,8 @@ unlock a revision in the @repo{} without triggering a recompilation.
 @item -V
 Behave like @option{--version}, i.e., display command version
 information and exit successfully.
+@strong{NB}: This option is obsolete and its
+@strong{support will be removed} in some future release.
 
 @item -V@var{n}
 @cindex emulation, previous RCS versions

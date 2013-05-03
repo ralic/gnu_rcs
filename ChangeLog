@@ -1,5 +1,12 @@
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Warn that option ‘-V’ is obsolete.
+
+	* doc/rcs.texi (Misc common options):
+	Add blurb about ‘-V’ and its future support.
+
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Create .lz and .xz tarballs, not .gz, for "make dist".
 
 	* configure.ac (AM_INIT_AUTOMAKE): Add

@@ -1229,7 +1229,7 @@ Options:
                 revision's time if the former precedes the latter and there
                 is a new revision; preserve the RCS file's modification
                 time otherwise.
-  -V            Like --version.
+  -V            Obsolete; do not use.
   -VN           Emulate RCS version N.
   -wWHO         Use WHO as the author.
   -xSUFF        Specify SUFF as a slash-separated list of suffixes

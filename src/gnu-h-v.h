@@ -26,6 +26,7 @@ extern int
 nice_getopt (int argc, char **argv, const struct option *longopts);
 
 #define DV_ONLY   0
+#define DV_WARN   1
 #define DV_EXIT   2
 
 /* Display the version blurb to stdout, starting with:
@@ -33,6 +34,9 @@ nice_getopt (int argc, char **argv, const struct option *longopts);
    | ...
    and ending with newline.  NAME is the value of ‘prog->name’.
    FLAGS is the logical-OR of:
+   | DV_ONLY -- don't do anything special
+   | DV_WARN -- warn that this usage is obsolete (for ‘-V’);
+   |            suggest using --version, instead
    | DV_EXIT -- finish w/ ‘exit (EXIT_SUCCESS)’
    The default is 0.  */
 extern void

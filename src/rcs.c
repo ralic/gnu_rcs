@@ -1589,7 +1589,7 @@ Options:
   -sSTATE[:REV]   Set state of REV to STATE.
   -t-TEXT         Set description in RCS file to TEXT.
   -tFILENAME      Set description in RCS file to contents of FILENAME.
-  -V              Like --version.
+  -V              Obsolete; do not use.
   -VN             Emulate RCS version N.
   -xSUFF          Specify SUFF as a slash-separated list of suffixes
                   used to identify RCS file names.

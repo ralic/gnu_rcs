@@ -474,7 +474,7 @@ Options:
   -kSUBST       Substitute using mode SUBST (see co(1)).
   -q            Quiet mode.
   -T            No effect; included for compatibility with other commands.
-  -V            Like --version.
+  -V            Obsolete; do not use.
   -VN           Emulate RCS version N.
   -xSUFF        Specify SUFF as a slash-separated list of suffixes
                 used to identify RCS file names.

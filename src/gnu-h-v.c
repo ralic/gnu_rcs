@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gnu-h-v.h"
+#include "b-complain.h"
 
 int
 nice_getopt (int argc, char **argv, const struct option *longopts)
@@ -54,6 +55,8 @@ nice_getopt (int argc, char **argv, const struct option *longopts)
 void
 display_version (struct program const *prog, int flags)
 {
+  if (DV_WARN & flags)
+    PWARN ("-V is obsolete; instead, use --version");
   printf ("%s%s", prog->name, COMMAND_VERSION);
   if (DV_EXIT & flags)
     exit (EXIT_SUCCESS);

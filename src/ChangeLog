@@ -1,5 +1,29 @@
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Warn that option ‘-V’ is obsolete.
+
+	U (X) ≡ "Pass X to ‘display_version’".
+	V ≡ "Discourage ‘-V’ usage".
+	* gnu-h-v.h (DV_WARN): New #define;
+	update ‘display_version’ comment accordingly.
+	* gnu-h-v.c: #include "b-complain.h".
+	(display_version): If ‘DV_WARN’, emit warning before version info.
+	* ident.c (main): Pass ‘DV_WARN’ to ‘display_version’.
+	* ci.c <help text>: V.
+	* co.c <help text>: V.
+	* ident.c (main): U (DV_WARN)
+	<help text>: V.
+	* merge.c (main): U (DV_WARN).
+	<help text>: V.
+	* rcs.c <help text>: V.
+	* rcsclean.c <help text>: V.
+	* rcsdiff.c <help text>: V.
+	* rcsmerge.c <help text>: V.
+	* rlog.c <help text>: V.
+	* rcsutil.c (setRCSversion): U (DV_WARN | DV_EXIT).
+
+2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Add conditional exiting to ‘display_version’.
 
 	* gnu-h-v.c (display_version): Take 2nd arg ‘flags’.

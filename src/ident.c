@@ -164,7 +164,7 @@ main (int argc, char **argv)
         case 'V':
           if (! a[1])                   /* don't accept ‘-VN’ */
             {
-              display_version (&program, DV_ONLY);
+              display_version (&program, DV_WARN);
               gnurcs_goodbye ();
               return EXIT_SUCCESS;
             }
@@ -206,7 +206,7 @@ main (int argc, char **argv)
 [options] [file ...]
 Options:
   -q            Suppress warnings if no patterns are found.
-  -V            Like --version.
+  -V            Obsolete; do not use.
 
 If no FILE is specified, scan standard input.
 */

@@ -324,7 +324,7 @@ Options:
   -kSUBST       Substitute using mode SUBST (see co(1)).
   -T            Preserve the modification time on the RCS file
                 even if it changes because a lock is removed.
-  -V            Like --version.
+  -V            Obsolete; do not use.
   -VN           Emulate RCS version N.
   -xSUFF        Specify SUFF as a slash-separated list of suffixes
                 used to identify RCS file names.

@@ -75,7 +75,7 @@ main (int argc, char **argv)
           if (a[0])                     /* don't accept ‘-VN’ */
             bad_option (a - 2);
           else
-            display_version (&program, DV_ONLY);
+            display_version (&program, DV_WARN);
           gnurcs_goodbye ();
           return a[0]
             ? EXIT_FAILURE
@@ -116,7 +116,7 @@ Options:
   -q            Quiet mode; suppress conflict warnings.
   -LLABEL       (up to three times) Specify the conflict labels for
                 RECEIVING-SIBLING, PARENT and OTHER-SIBLING, respectively.
-  -V            Like --version.
+  -V            Obsolete; do not use.
 */
 
 /* merge.c ends here */
