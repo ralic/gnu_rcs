@@ -11,7 +11,8 @@ It lives in the repo but is not included in the distribution.
 *** DONE add "self-same" (super-strict, same-user) ‘co -l’ mode
     based on [[rh:107947][redhat #107947]]
     see also [[bug-rcs:2011-09/msg00000.html][bug-rcs thread (2011-09-08)]]
-*** TODO single top-level command
+*** DONE single top-level command
+*** DONE long options (except for "rcs --help COMMAND")
 
 * entropy: [[http://hydra.nixos.org/jobset/gnu/rcs-master][hydra]] ([[http://hydra.nixos.org/project/gnu][gnu]])
 * coding standards
@@ -84,9 +85,9 @@ It lives in the repo but is not included in the distribution.
     #+BEGIN: insert-file :filename ".gnulib-utility"
     ;  _Exit
     ;    alloca-opt
+    ;    at-internal
     ;    chdir
     ;    chdir-long
-    ;    chown
     ;    cloexec
     ;    close
     ;  closedir
@@ -103,6 +104,7 @@ It lives in the repo but is not included in the distribution.
     ;    error
     ;    exitfail
     ;  extensions
+    ;    extern-inline
     ;    fchdir
     ;  fcntl
     ;  fcntl-h
@@ -117,10 +119,13 @@ It lives in the repo but is not included in the distribution.
     ;    frexp-nolibm
     ;    frexpl-nolibm
     ;  fstat
+    ;    fstatat
     ;  getcwd
     ;    getcwd-lgpl
     ;    getdtablesize
     ;  getlogin_r
+    ;  getopt-gnu
+    ;    getopt-posix
     ;    gettext-h
     ;    gettimeofday
     ;  git-version-gen
@@ -133,7 +138,6 @@ It lives in the repo but is not included in the distribution.
     ;    isnanf-nolibm
     ;    isnanl-nolibm
     ;  largefile
-    ;    lchown
     ;    lock
     ;    lstat
     ;    malloc-posix
@@ -141,7 +145,6 @@ It lives in the repo but is not included in the distribution.
     ;    memchr
     ;    mempcpy
     ;    memrchr
-    ;    mkdir
     ;  mkstemp
     ;    msvc-inval
     ;    msvc-nothrow
@@ -152,6 +155,7 @@ It lives in the repo but is not included in the distribution.
     ;  open
     ;    openat
     ;    openat-die
+    ;    openat-h
     ;  opendir
     ;    pathmax
     ;    printf-frexp
@@ -159,11 +163,13 @@ It lives in the repo but is not included in the distribution.
     ;    printf-safe
     ;  progname
     ;    raise
+    ;    readdir
     ;  readlink
     ;    realloc-posix
-    ;    rmdir
+    ;    rewinddir
     ;  same-inode
     ;    save-cwd
+    ;    secure_getenv
     ;  sigaction
     ;  signal
     ;    signal-h
@@ -193,6 +199,7 @@ It lives in the repo but is not included in the distribution.
     ;  strsignal
     ;  sys_stat
     ;    sys_time
+    ;    sys_types
     ;  sys_wait
     ;    tempname
     ;    threadlib
@@ -202,7 +209,6 @@ It lives in the repo but is not included in the distribution.
     ;  tzset
     ;  unistd
     ;  unistd-safer
-    ;    unlink
     ;    vasnprintf
     ;    verify
     ;  waitpid
