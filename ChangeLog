@@ -1,5 +1,11 @@
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Use gnulib module ‘ftruncate’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘ftruncate’.
+
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build] Use gnulib module ‘unlink’.
 
 	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘unlink’.
