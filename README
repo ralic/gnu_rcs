@@ -29,7 +29,7 @@ Prerequisites and compatibility issues
 RCS requires a diff that supports the -n option.
 Get GNU diffutils (version 2.7 or later) if your diff lacks -n.
 
-RCS works best with a diff that supports -a and -L,
+RCS works best with a diff that supports -a and --label,
 and a diff3 that supports -A, -E and -m.
 GNU diffutils supports these options.
 
