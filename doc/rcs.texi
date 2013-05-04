@@ -1288,7 +1288,7 @@ Display a list of command aliases and exit successfully.
 Display help for a particular @var{command} and exit successfully.
 For example, to display help for the legacy interface, use:
 @example
---help rcs
+--help frob
 @end example
 @end table
 

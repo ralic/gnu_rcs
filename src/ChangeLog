@@ -1,5 +1,11 @@
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Suggest "frob" as the legacy interface command name.
+
+	* super.c <help text>: ...here.
+
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Add abstraction: string_from_sym
 
 	* super.c (string_from_sym): New static func.

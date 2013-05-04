@@ -327,7 +327,7 @@ Options:
   --help COMMAND   Display help for COMMAND.
 
 To display help for the legacy interface, use:
-  --help rcs
+  --help frob
 */
 
 /* super.c ends here */
