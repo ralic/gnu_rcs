@@ -1,5 +1,11 @@
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Use gnulib module ‘sys_types’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘sys_types’.
+
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Suggest "frob" as the legacy interface command name.
 
 	* doc/rcs.texi (rcs): ...here.
