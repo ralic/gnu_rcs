@@ -27,7 +27,7 @@
 
 
 # Specification in the form of a command-line invocation:
-#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --conditional-dependencies --no-libtool --macro-prefix=gl --no-vc-files _Exit closedir dirent double-slash-root errno extensions fcntl fcntl-h findprog fstat getcwd getlogin_r getopt-gnu git-version-gen hash-pjw inline largefile mempcpy mkstemp obstack obstack-printf open opendir progname readlink same-inode sigaction signal signal-h snippet/_Noreturn snippet/unused-parameter snprintf sprintf-posix ssize_t stat stdarg stdbool stdint stdio stdlib string strsignal sys_stat sys_types sys_wait time time_r tzset unistd unistd-safer waitpid
+#   gnulib-tool --import --dir=. --lib=libgnu --source-base=lib --m4-base=m4 --doc-base=doc --tests-base=tests --aux-dir=build-aux --conditional-dependencies --no-libtool --macro-prefix=gl --no-vc-files _Exit closedir dirent double-slash-root errno extensions fcntl fcntl-h findprog fstat getcwd getlogin_r getopt-gnu git-version-gen hash-pjw inline largefile mempcpy mkstemp obstack obstack-printf open opendir progname readlink same-inode sigaction signal signal-h snippet/_Noreturn snippet/unused-parameter snprintf sprintf-posix ssize_t stat stdarg stdbool stdint stdio stdlib string strsignal sys_stat sys_types sys_wait time time_r tzset unistd unistd-safer unlink waitpid
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])
@@ -82,6 +82,7 @@ gl_MODULES([
   tzset
   unistd
   unistd-safer
+  unlink
   waitpid
 ])
 gl_AVOID([])
