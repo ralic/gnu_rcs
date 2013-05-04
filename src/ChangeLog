@@ -1,5 +1,12 @@
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Presume ‘SIGCHLD’ defined.
+
+	* b-isr.c (maybe_reset_sigchld) [BAD_WAIT_IF_SIGCHLD_IGNORED]:
+	Don't bother ensuring a #define for ‘SIGCHLD’.
+
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Suggest "frob" as the legacy interface command name.
 
 	* super.c <help text>: ...here.
