@@ -130,6 +130,20 @@ recognize (const char *maybe)
    :-D  */
 #define MAX_COMMAND_SIZE  64
 
+/* FIXME: This should probably be part of the ‘struct cbuf’
+   group of procs, exposed in base.h.  */
+static void
+string_from_sym (char dest[MAX_COMMAND_SIZE],
+                 const struct tinysym *sym)
+{
+  size_t len = (MAX_COMMAND_SIZE > sym->len
+                ? sym->len
+                : MAX_COMMAND_SIZE - 1);
+  char *end = mempcpy (dest, sym->bytes, len);
+
+  *end = '\0';
+}
+
 static void
 display_commands (void)
 {
@@ -138,11 +152,9 @@ display_commands (void)
     {
       const struct yacmd *y = avail[i];
       const uint8_t *aka = y->aka;
-      struct tinysym *sym = (struct tinysym *) (++aka);
       char name[MAX_COMMAND_SIZE];
 
-      memcpy (name, sym->bytes, sym->len);
-      name[sym->len] = '\0';
+      string_from_sym (name, (struct tinysym *) (++aka));
       printf (" %-10s  %s\n", name, y->pr->desc);
     }
 }
@@ -162,8 +174,7 @@ display_aliases (void)
           struct tinysym *sym = (struct tinysym *) aka;
           char name[MAX_COMMAND_SIZE];
 
-          memcpy (name, sym->bytes, sym->len);
-          name[sym->len] = '\0';
+          string_from_sym (name, sym);
           switch (j)
             {
             case 0:

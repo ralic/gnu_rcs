@@ -1,3 +1,10 @@
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[int] Add abstraction: string_from_sym
+
+	* super.c (string_from_sym): New static func.
+	(display_commands, display_aliases): Use it.
+
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[int] Bump max command name size to 64.
