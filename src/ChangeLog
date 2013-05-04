@@ -1,5 +1,12 @@
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build int] Presume availability of ‘ftruncate’.
+
+	* ci.c: Don't check for ‘HAVE_FTRUNCATE’;
+	don't define always-erroneous replacement.
+
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Presume ‘SIGCHLD’ defined.
 
 	* b-isr.c (maybe_reset_sigchld) [BAD_WAIT_IF_SIGCHLD_IGNORED]:

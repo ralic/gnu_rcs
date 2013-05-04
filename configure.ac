@@ -269,7 +269,6 @@ AC_TYPE_UID_T
 AC_FUNC_FORK
 AC_CHECK_FUNCS_ONCE([
   fchmod
-  ftruncate
   getpwuid_r
   psiginfo
 ])
@@ -536,7 +535,6 @@ dnl These can probably be handled by gnulib, no sweat.
 ac_cv_header_utime_h            dnl SVr4, POSIX.1-2001
 ac_cv_header_pwd_h              dnl 4.3BSD, SVr4, POSIX.1-2001
 ac_cv_func_fchmod               dnl 4.4BSD, SVr4, POSIX.1-2001
-ac_cv_func_ftruncate            dnl 4.4BSD, SVr4, POSIX.1-2001
 
 dnl These are things we would like to not worry about.
 dnl Removing checks for them (assuming yes) eases maintenance.

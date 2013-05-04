@@ -1,5 +1,12 @@
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build int] Presume availability of ‘ftruncate’.
+
+	* configure.ac (AC_CHECK_FUNCS_ONCE): Remove ‘ftruncate’.
+	(PRESUMABLY_STANDARD_ENOUGH_BY_NOW): Remove ‘ac_cv_func_ftruncate’.
+
+2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build] Use gnulib module ‘ftruncate’.
 
 	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘ftruncate’.

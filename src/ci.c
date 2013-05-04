@@ -39,15 +39,6 @@
 #include "b-isr.h"
 #include "b-kwxout.h"
 
-/* Work around a common ‘ftruncate’ bug: NFS won't let you truncate a file
-   that you currently lack permissions for, even if you had permissions when
-   you opened it.  Also, POSIX 1003.1b-1993 sec 5.6.7.2 p 128 l 1022 says
-   ftruncate might fail because it's not supported.  */
-#ifndef HAVE_FTRUNCATE
-#undef ftruncate
-#define ftruncate(fd,length) (-1)
-#endif
-
 struct reason
 {
   struct cbuf upfront;                  /* from -mMSG */
