@@ -1,5 +1,13 @@
 2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build int] Decruft: Don't bother w/ AC_TYPE_{MODE,PID}_T.
+
+	These are handled by gnulib module ‘fcntl-h’.
+
+	* configure.ac (AC_TYPE_MODE_T, AC_TYPE_PID_T):	Delete calls.
+
+2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build int] Use ‘build_os’ for sane-mmap(2) check.
 
 	* configure.ac (rcs_cv_sane_mmap): ...here,
