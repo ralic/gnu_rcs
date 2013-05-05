@@ -1,5 +1,13 @@
 2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build int] Decruft: Don't bother w/ AC_TYPE_{OFF,SSIZE}_T.
+
+	These are handled by gnulib module ‘stdio’.
+
+	* configure.ac (AC_TYPE_OFF_T, AC_TYPE_SSIZE_T): Delete calls.
+
+2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build int] Decruft: Don't bother w/ AC_TYPE_{MODE,PID}_T.
 
 	These are handled by gnulib module ‘fcntl-h’.

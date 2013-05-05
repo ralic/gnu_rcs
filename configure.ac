@@ -258,8 +258,6 @@ AC_CHECK_HEADERS_ONCE([
 AS_IF([RCS_YESP([use_mmap])],[AC_CHECK_HEADERS([sys/mman.h])])
 
 # types -- see also: (info "(autoconf) Particular Types")
-AC_TYPE_OFF_T
-AC_TYPE_SSIZE_T
 AC_TYPE_UID_T
 
 # funcs
