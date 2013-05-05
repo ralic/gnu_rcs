@@ -308,7 +308,8 @@ TINYK (integrity);
     return 1;
   if (9 != two->len || '\0' != two->bytes[9])
     return 2;
-]])],[rcs_cv_tinyinit_ok=yes],[rcs_cv_tinyinit_ok=no])
+]])],[res=yes],[res=no])
+  rcs_cv_tinyinit_ok=$res
 ])
 RCS_CBOOL([TINY_INIT_NEEDS_EXPLICIT_NUL],[no],[rcs_cv_tinyinit_ok],
   [Does the compiler forget to include '\0' for tinysym init?])
@@ -377,7 +378,6 @@ m4_pushdef([ZONK],[rm -f conftest-A conftest-B && echo A > conftest-A])dnl
 m4_pushdef([GOOD],[test ! -f conftest-A && test -f conftest-B])dnl
 m4_pushdef([HMMM],[./conftest$EXEEXT && GOOD])dnl
   ZONK
-  res=hopeless
 AC_RUN_IFELSE([AC_LANG_PROGRAM([[
 #include <unistd.h>
 ]],[
@@ -393,7 +393,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
     ZONK ; echo B > conftest-B ; chmod -w conftest-B
     HMMM && AS_VAR_APPEND([res],[,target=ok])
   fi
-])
+],[res=hopeless])
   rcs_cv_rename_mw=$res
 m4_popdef([HMMM])dnl
 m4_popdef([GOOD])dnl
@@ -437,7 +437,7 @@ AS_IF([RCS_ALL([RCS_YESP],[
   ac_cv_header_sys_mman_h
 ])],[
 AC_CACHE_CHECK([that `mmap' is sane],[rcs_cv_sane_mmap],[
-  rcs_cv_sane_mmap=yes
+  res=yes
   # AIX 3.2.0 read-only mmap updates last-modified time of file!
   if uname -a | grep AIX >/dev/null ; then
     echo nonempty > conftest.data
@@ -445,8 +445,9 @@ AC_CACHE_CHECK([that `mmap' is sane],[rcs_cv_sane_mmap],[
     sleep 2
     AC_RUN_IFELSE([SIMPLE_MMAP_PROGRAM])
     aft=`date -r conftest.data`
-    test "$bef" = "$aft" || rcs_cv_sane_mmap=no
+    test "$bef" = "$aft" || res=no
   fi
+  rcs_cv_sane_mmap=$res
 ])
 AS_IF([RCS_YESP([rcs_cv_sane_mmap])],[
 AC_CACHE_CHECK([signal received if referencing nonexistent part of mmapped file],
