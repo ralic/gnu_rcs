@@ -1,5 +1,12 @@
 2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build int] Use ‘build_os’ for sane-mmap(2) check.
+
+	* configure.ac (rcs_cv_sane_mmap): ...here,
+	testing against ‘*-aix* | aix*’ with ‘AS_CASE’.
+
+2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build int] Regularize some ‘AC_RUN_IFELSE’ cache var usage.
 
 	* configure.ac (rcs_cv_tinyinit_ok): Use temp var ‘res’

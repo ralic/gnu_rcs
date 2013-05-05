@@ -439,14 +439,14 @@ AS_IF([RCS_ALL([RCS_YESP],[
 AC_CACHE_CHECK([that `mmap' is sane],[rcs_cv_sane_mmap],[
   res=yes
   # AIX 3.2.0 read-only mmap updates last-modified time of file!
-  if uname -a | grep AIX >/dev/null ; then
+  AS_CASE([$build_os],[*-aix* | aix*],[
     echo nonempty > conftest.data
     bef=`date -r conftest.data`
     sleep 2
     AC_RUN_IFELSE([SIMPLE_MMAP_PROGRAM])
     aft=`date -r conftest.data`
     test "$bef" = "$aft" || res=no
-  fi
+  ])
   rcs_cv_sane_mmap=$res
 ])
 AS_IF([RCS_YESP([rcs_cv_sane_mmap])],[
