@@ -207,6 +207,40 @@ It is used only if you edit the documentation or make ‘maintainer-clean’.
 
 
 
+cross-compilation
+=================
+
+There are several variables set by the configure script that are assigned
+"pessimistic" defaults when cross-compiling (info "(autoconf) Runtime"):
+
+ (variable)                (value)
+  rcs_cv_tinyinit_ok        no
+  rcs_cv_fopen_truncates    no
+  rcs_cv_wac_ok             no
+  rcs_cv_unlink_mw_ok       no
+  rcs_cv_rename_mw          hopeless
+  rcs_cv_sane_mmap          no
+  rcs_cv_mmap_signal        unknown
+  rcs_cv_tolerant_wait      no
+
+To set the "correct" value for a particular VAR, overriding its default, you
+can specify VAR=VALUE on the configure script command-line.  For example:
+
+ ./configure \
+    rcs_cv_tinyinit_ok=yes \
+    rcs_cv_unlink_mw_ok=no
+
+Note that the value of ‘rcs_cv_mmap_signal’ has meaning only if
+‘rcs_cv_sane_mmap’ is ‘yes’.  Valid values are documented only in the
+configure script source, i.e., configure.ac -- don't guess, use the Source!
+
+If you get good results cross-compiling, with or without such variable
+overrides, please consider sharing the good news by posting the configure
+script invocation to the bug-report address with subject "cross-compilation
+success" or similar.
+
+
+
 src/base.h notes
 ================
 

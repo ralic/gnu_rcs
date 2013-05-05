@@ -304,7 +304,7 @@ TINYK (integrity);
     return 1;
   if (9 != two->len || '\0' != two->bytes[9])
     return 2;
-]])],[res=yes],[res=no])
+]])],[res=yes],[res=no],[res=no])
   rcs_cv_tinyinit_ok=$res
 ])
 RCS_CBOOL([TINY_INIT_NEEDS_EXPLICIT_NUL],[no],[rcs_cv_tinyinit_ok],
@@ -317,7 +317,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
 ]],[[
   return ! fopen ("conftest.data", "w+");
 ]])
-],[res=yes],[res=no])
+],[res=yes],[res=no],[res=no])
   test yes = $res && test ! -s conftest.data || res=no
   rcs_cv_fopen_truncates=$res
 ])
@@ -343,7 +343,7 @@ char buf[17000];
           || sizeof (buf) != write (f, buf, sizeof (buf))
           || 0 > close (f));
 ]])
-],[res=yes],[res=no])
+],[res=yes],[res=no],[res=no])
   if test yes = "$res" && test -f conftest.data && test ! -w conftest.data
     then :
     else res=no
@@ -361,7 +361,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
 ]],[
   return 0 > unlink ("conftest.data");
 ])
-],[res=yes],[res=no])
+],[res=yes],[res=no],[res=no])
   test yes = $res && test -f conftest.data && res=no
   rcs_cv_unlink_mw_ok=$res
 ])
@@ -389,7 +389,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
     ZONK ; echo B > conftest-B ; chmod -w conftest-B
     HMMM && AS_VAR_APPEND([res],[,target=ok])
   fi
-],[res=hopeless])
+],[res=hopeless],[res=hopeless])
   rcs_cv_rename_mw=$res
 m4_popdef([HMMM])dnl
 m4_popdef([GOOD])dnl
@@ -435,14 +435,17 @@ AS_IF([RCS_ALL([RCS_YESP],[
 AC_CACHE_CHECK([that `mmap' is sane],[rcs_cv_sane_mmap],[
   res=yes
   # AIX 3.2.0 read-only mmap updates last-modified time of file!
-  AS_CASE([$build_os],[*-aix* | aix*],[
+  AS_CASE([$cross_compiling],[no],[AS_CASE([$build_os],[*-aix* | aix*],[
     echo nonempty > conftest.data
     bef=`date -r conftest.data`
     sleep 2
+    dnl Note that we need not specify ACTION-IF-CROSS-COMPILING
+    dnl for the ‘AC_RUN_IFELSE’ as the surrounding (^2) ‘AS_CASE’
+    dnl skips this block (and jam ‘res=no’) if actually cross-compiling.
     AC_RUN_IFELSE([SIMPLE_MMAP_PROGRAM])
     aft=`date -r conftest.data`
     test "$bef" = "$aft" || res=no
-  ])
+  ])],[res=no])
   rcs_cv_sane_mmap=$res
 ])
 AS_IF([RCS_YESP([rcs_cv_sane_mmap])],[
@@ -454,7 +457,7 @@ AC_CACHE_CHECK([signal received if referencing nonexistent part of mmapped file]
       fc = creat ("conftest.data", 0);
       /* Refer to nonexistent storage, causing a signal.  */
       printf ("%d %c\n", fc, *a);
-])],[res=unknown],[res=$?])
+])],[res=unknown],[res=$?],[res=unknown])
     # If there is no signal, better to disable mmap entirely.
     AS_IF([test unknown = $res],[res=0],
           [test SIGBUS = $res],[:],
@@ -502,7 +505,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
     return 1;
 #endif
 ])dnl
-],[res=yes],[res=no])
+],[res=yes],[res=no],[res=no])
   rcs_cv_tolerant_wait=$res
 ])
 RCS_CBOOL([BAD_WAIT_IF_SIGCHLD_IGNORED],[no],[rcs_cv_tolerant_wait],

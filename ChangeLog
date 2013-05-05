@@ -1,5 +1,17 @@
 2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Add support for cross-compilation.
+
+	Prompted by:
+	<http://lists.gnu.org/archive/html/help-rcs/2013-04/msg00007.html>
+
+	* configure.ac (rcs_cv_tinyinit_ok, rcs_cv_fopen_truncates)
+	(rcs_cv_wac_ok, rcs_cv_unlink_mw_ok, rcs_cv_rename_mw)
+	(rcs_cv_sane_mmap, rcs_cv_mmap_signal, rcs_cv_tolerant_wait):
+	Arrange to use "pessimistic defaults" when cross-compiling.
+
+2013-05-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build int] Decruft: Don't bother w/ AC_TYPE_{OFF,SSIZE}_T.
 
 	These are handled by gnulib module ‘stdio’.
