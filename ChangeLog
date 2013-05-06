@@ -1,5 +1,11 @@
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Document the effects of -V5, -V4, -V3.
+
+	* doc/rcs.texi (Misc common options): ...here, for ‘-VN’.
+
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build] Use gnulib module ‘readdir’.
 
 	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘readdir’.

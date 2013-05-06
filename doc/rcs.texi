@@ -920,6 +920,24 @@ information and exit successfully.
 @cindex RCS version emulation
 @var{n} specifies the RCS (major) version to emulate.
 Valid values for @var{n} are: 3, 4, 5.
+Version 5 is the current version, so @code{-V5} does nothing special.
+
+@cindex behavior prior to version 5
+In versions prior to 5, RCS outputs @samp{\t} (tab, @UCS{09}) between
+the @samp{:} (colon) and the value (for keyword substitution) instead
+of space, uses the @repo{} @code{comment} string to prefix each line
+in the @code{Log} expansion instead of computing it on the fly from
+the input text, writes/reads localtime instead of UTC, and displays
+slightly different output for @rcscommand{rlog}.
+
+@cindex behavior, version 4
+For version 4, the @code{Header} expansion unconditionally includes
+@code{Locker: @var{locker}}, as if the @code{kvl} substitution mode
+were specified (@pxref{Substitution mode option}).
+
+@cindex behavior, version 3
+For version 3, the @code{Header} exapnsion omits the directories from
+the filename and says only @code{Locked} instead of the state.
 
 @item -w@var{login}
 @cindex specifying author
