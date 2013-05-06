@@ -74,7 +74,7 @@ installation directories (.e.g, --prefix).
      all version 2 RCS files have been updated with new versions of ci
      or rcs, you can remake RCS with --enable-compat2=no.
 
-  !!! NB: This option (and 2.x compatability) will be removed in GNU RCS 6.x.
+  !!! NB: This option (and 2.x compatability) will be removed soon.
 
 * Another option is ‘--with-mailer=PROG’.  This specifies that PROG (an
   absolute filename if not findable on PATH) should be used to send mail to
