@@ -120,6 +120,7 @@ It lives in the repo but is not included in the distribution.
     ;    frexpl-nolibm
     ;  fstat
     ;    fstatat
+    ;  ftruncate
     ;  getcwd
     ;    getcwd-lgpl
     ;    getdtablesize
@@ -143,7 +144,7 @@ It lives in the repo but is not included in the distribution.
     ;    malloc-posix
     ;    math
     ;    memchr
-    ;    mempcpy
+    ;  mempcpy
     ;    memrchr
     ;  mkstemp
     ;    msvc-inval
@@ -163,7 +164,7 @@ It lives in the repo but is not included in the distribution.
     ;    printf-safe
     ;  progname
     ;    raise
-    ;    readdir
+    ;  readdir
     ;  readlink
     ;    realloc-posix
     ;    rewinddir
@@ -172,7 +173,7 @@ It lives in the repo but is not included in the distribution.
     ;    secure_getenv
     ;  sigaction
     ;  signal
-    ;    signal-h
+    ;  signal-h
     ;    signbit
     ;    sigprocmask
     ;    size_max
@@ -199,7 +200,7 @@ It lives in the repo but is not included in the distribution.
     ;  strsignal
     ;  sys_stat
     ;    sys_time
-    ;    sys_types
+    ;  sys_types
     ;  sys_wait
     ;    tempname
     ;    threadlib
@@ -209,6 +210,7 @@ It lives in the repo but is not included in the distribution.
     ;  tzset
     ;  unistd
     ;  unistd-safer
+    ;  unlink
     ;    vasnprintf
     ;    verify
     ;  waitpid

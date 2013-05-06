@@ -1,5 +1,9 @@
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Release: 5.9.0
+
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v int] Make t391 self-skip if ‘ident --help’ omits the description.
 
 	The one-line description in ‘ident --help’ output is a

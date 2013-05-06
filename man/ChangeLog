@@ -1,3 +1,7 @@
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Release: 5.9.0
+
 2013-04-11  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	co: Add option ‘-S’ to enable "self-same" mode.

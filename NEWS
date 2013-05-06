@@ -2,6 +2,129 @@ NEWS for GNU RCS (Revision Control System)
 See the end for copying conditions.
 
 
+- 5.9.0 | 2013-05-06
+
+  - distribution now .tar.lz and .tar.xz
+
+	If you have GNU tar, you can use "tar xf" and it will DTRT.
+	If not, you can use "lzip -dc TARBALL | tar xf -" to unpack
+	the .tar.lz, or "xz -dc TARBALL | tar xf -" for the .tar.xz.
+
+  - planned retirement
+
+    - configure option ‘--enable-compat2’
+
+	This option enables reading of files written by RCS 2.x (before
+	RCS was GNU, even), but the file format became obsolete in 1982.
+	Support for it WILL BE REMOVED in a near future GNU RCS release.
+
+    - common option ‘-V’
+
+	This option is obsoleted by ‘--version’ (since 5.8, 2011-08-30).
+	Support for it WILL BE REMOVED in some future GNU RCS release.
+	Its use now produces a warning to stderr.
+
+	Please note that ‘-VN’ (N ∈ {3,4,5}) is a separate issue.
+
+  - bugs fixed
+
+    - ‘rcsmerge --help’ mentions ‘-A’, ‘-E’, ‘-e’
+
+	These options are accepted and internally passed to diff3(1).
+
+    - ‘ident -VN’ and ‘merge -VN’ now signal error
+
+	For these commands, the argument to ‘-V’ has no meaning.
+	Previously, such invocations would display version info,
+	ignoring the arg.  Now they signal a "bad option" error.
+
+  - new features
+
+    - ident(1) recognizes Subversion "fixed-width keyword syntax"
+
+	In addition to the normal keyword pattern, for Subversion 1.2
+	(and later) compatability, ident(1) also recognizes patterns
+	having one of the forms:
+
+	$KEYWORD:: TEXT $
+	;; two colons and space after keyword
+	;; space before ending $
+
+	$KEYWORD:: TEXT#$
+	;; two colons and space after keyword
+	;; hash before ending $
+
+    - new co(1) option ‘-S’ for "self-same" mode
+
+	In this mode, the owner of a lock is unimportant, just that it
+	exists.  Effectively, this prevents you from checking out the
+	same revision twice.
+
+	$ whoami
+	  ttn
+
+	$ co -l -f z
+	  RCS/z,v  -->  z
+	  revision 1.1 (locked)
+	  done
+
+	$ co -S -l -f z
+	  RCS/z,v  -->  z
+	  co: RCS/z,v: Revision 1.1 is already locked by ttn.
+
+    - several RCS commands "internalized" into rcs(1)
+
+	As part of an ongoing effort to modernize the command-line
+	interface of GNU RCS, the previously standalone programs:
+
+	  ci, co, rcs, rcsclean, rcsdiff, rcsmerge, rlog
+
+	can now be invoked as "rcs PROGRAM".  In this case, we call
+	PROGRAM a "command", and also provide some aliases.  E.g., you
+	can type "rcs diff" in addition to "rcs rcsdiff" (and "rcsdiff",
+	of course).  We plan to support standalone (w/o "rcs" prefix)
+	invocation from the shell at least through the 5.x series of
+	releases -- not indefinitely, but for a good while, yet.
+
+	The rcs(1) program itself now supports ‘--commands’ to list all
+	the commands, ‘--aliases’ to list their aliases, as well as
+	‘--help COMAMND’ to show the help for COMMAND.
+
+	Note that programs ident(1) and merge(1) remain standalone.
+
+	Lastly, in the manual, section "Invoking rcs" now describes both
+	"modern" and "legacy" usages.  Also, the internalized commands
+	invocations mentions both "rcs COMMAND" and "PROGRAM" styles.
+
+    - ‘--help’ output includes a one-line description
+
+	E.g., "merge --help" says: "Three-way file merge".
+
+    - most long options can be recognized if partially specified
+
+	With the exception of "rcs --help COMMAND", where "--help" must
+	be spelled out in full, all long options can now be recognized
+	even if partially specified.  For example, "rcs --al" is
+	recognized as "rcs --aliases".
+
+    - updated portability
+
+	Several more Gnulib (http://www.gnu.org/software/gnulib) modules
+	are now in use.
+
+    - new cross-compilation support
+
+	The configure script now assigns "pessimistic defaults" when
+	cross-compiling.  See new section "cross-compilation" in README.
+
+    - effects of ‘-VN’ (N ∈ {3,4,5}) documented
+
+	See (info "(rcs) Misc common options").
+
+  - maintenance tools updated
+    - gnulib-tool (GNU gnulib 2013-05-01 06:14:19) 0.0.7913-5191
+
+
 - 5.8.2 | 2013-04-04
 
   - Bugs fixed

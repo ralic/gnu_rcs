@@ -1,3 +1,7 @@
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Release: 5.9.0
+
 2013-05-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build int] Presume availability of ‘ftruncate’.
