@@ -1,5 +1,11 @@
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Use gnulib module ‘readdir’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘readdir’.
+
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build int] Use ‘AS_IF’ more.
 
 	* configure.ac (rcs_cv_wac_ok, rcs_cv_rename_mw):
