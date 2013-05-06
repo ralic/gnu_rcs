@@ -344,10 +344,10 @@ char buf[17000];
           || 0 > close (f));
 ]])
 ],[res=yes],[res=no],[res=no])
-  if test yes = "$res" && test -f conftest.data && test ! -w conftest.data
-    then :
-    else res=no
-  fi
+  AS_IF([test yes = "$res" \
+         && test -f conftest.data \
+         && test ! -w conftest.data],,
+        [res=no])
   rcs_cv_wac_ok=$res
 ])
 RCS_CBOOL([BAD_CREAT0],[no],[rcs_cv_wac_ok],
@@ -380,7 +380,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
   return 0 > rename ("conftest-A", "conftest-B");
 ])
 ],[
-  if GOOD ; then
+  AS_IF([GOOD],[
     res=ok
     # unwritable source
     ZONK ; chmod -w conftest-A
@@ -388,7 +388,7 @@ AC_RUN_IFELSE([AC_LANG_PROGRAM([[
     # unwritable target
     ZONK ; echo B > conftest-B ; chmod -w conftest-B
     HMMM && AS_VAR_APPEND([res],[,target=ok])
-  fi
+  ])
 ],[res=hopeless],[res=hopeless])
   rcs_cv_rename_mw=$res
 m4_popdef([HMMM])dnl
