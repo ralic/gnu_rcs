@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 . $srcdir/common
+co --help >/dev/null 2>&1 || exit 77
+co --help | grep -F -e ' -S' >/dev/null || exit 77
 split_std_out_err no
 
 ##

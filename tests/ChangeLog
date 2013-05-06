@@ -1,3 +1,11 @@
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v int] Make t630 self-skip if ‘co -S’ is not available.
+
+	* t630: If co(1) does not support ‘--help’, or
+	if ‘--help’ output does not indicate ‘-S’ support, exit 77.
+	* known-failures.in (5.7, 5.8, 5.8.1, 5.8.2): Remove t630.
+
 2013-05-03  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[v] Don't bother testing ‘ident -V’.

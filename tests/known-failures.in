@@ -80,7 +80,6 @@ exit 0
   t313 ; rlog omits trailing newline for midline description
   t391 ; subversion fixed-width keywords (new functionality)
   t608 ; ‘rcs -m:’ barfs on empty log message (made optional in 5.8)
-  t630 ; co -S -l (new functionality)
   t800 ; outdate everything leaves non-empty RCS file (fixed in 5.8)
   t801 ; ‘ci -dYYYY-DOW’ => "invalid date/time format" (fixed in 5.8)
   t802 ; ‘ci -dYYYY-wWW-D’ => "invalid date/time format" (fixed in 5.8)
@@ -91,19 +90,16 @@ exit 0
        ; NB: test fails reliably only for x86-64 -- YMMV!
   t370 ; ‘rlog -dD1<D2’ => debugging output to stderr (fixed in 5.8.1)
   t391 ; subversion fixed-width keywords (new functionality)
-  t630 ; co -S -l (new functionality)
   t803 ; sym deref w/ common prefix (fixed in 5.8.2)
   t810 ; ‘ci -l -d -T’ => RCS file mtime set to epoch (fixed in 5.8.1)
 
 * 5.8.1
   t301 ; ‘integrity’ syntax underspecified (fixed in 5.8.2)
   t391 ; subversion fixed-width keywords (new functionality)
-  t630 ; co -S -l (new functionality)
   t803 ; sym deref w/ common prefix (fixed in 5.8.2)
 
 * 5.8.2
   t391 ; subversion fixed-width keywords (new functionality)
-  t630 ; co -S -l (new functionality)
 
 * end matter
 *** Local variables:
