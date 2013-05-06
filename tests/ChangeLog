@@ -1,5 +1,17 @@
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[v int] Make t391 self-skip if ‘ident --help’ omits the description.
+
+	The one-line description in ‘ident --help’ output is a
+	proxy for the Subversion fixed-width keywords support,
+	which has no easy way to discern w/o running the program.
+
+	* t391: If ‘ident --help’ output does
+	not include a one-line description, exit 77.
+	* known-failures.in (5.7, 5.8, 5.8.1, 5.8.2): Remove t391.
+
+2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v int] Make t630 self-skip if ‘co -S’ is not available.
 
 	* t630: If co(1) does not support ‘--help’, or

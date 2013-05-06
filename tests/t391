@@ -16,6 +16,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 . $srcdir/common
+ident --help >/dev/null 2>&1 || exit 77
+ident --help | grep '^Identify' >/dev/null || exit 77
 split_std_out_err no
 
 expected=$wd/expected
