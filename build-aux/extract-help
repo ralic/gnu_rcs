@@ -84,7 +84,7 @@ echo 'static char const' $vprefix'help[] = ""'
 echo ';'
 
 # Pull in command support only if needed.
-if ! grep -q 'CHECK_HV (".*")' "$in" ; then
+if [ 0 = `grep -c 'CHECK_HV (".*")' "$in"` ] ; then
     echo '#include "b-yacmd.h"'
 fi
 
