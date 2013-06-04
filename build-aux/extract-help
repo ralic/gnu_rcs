@@ -88,4 +88,6 @@ if [ 0 = `grep -c 'CHECK_HV (".*")' "$in"` ] ; then
     echo '#include "b-yacmd.h"'
 fi
 
+exit 0
+
 # extract-help

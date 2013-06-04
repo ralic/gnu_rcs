@@ -1,3 +1,12 @@
+2013-06-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Explcitly "exit 0" in extract-help script.
+
+	Reported by Jörn Clausen:
+	<http://lists.gnu.org/archive/html/bug-rcs/2013-06/msg00000.html>.
+
+	* build-aux/extract-help: ...here.
+
 2013-05-31  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Avoid "grep -q" in extract-help script.
