@@ -6,120 +6,120 @@ See the end for copying conditions.
 
   - distribution now .tar.lz and .tar.xz
 
-	If you have GNU tar, you can use "tar xf" and it will DTRT.
-	If not, you can use "lzip -dc TARBALL | tar xf -" to unpack
-	the .tar.lz, or "xz -dc TARBALL | tar xf -" for the .tar.xz.
+    If you have GNU tar, you can use "tar xf" and it will DTRT.
+    If not, you can use "lzip -dc TARBALL | tar xf -" to unpack
+    the .tar.lz, or "xz -dc TARBALL | tar xf -" for the .tar.xz.
 
   - planned retirement
 
     - configure option ‘--enable-compat2’
 
-	This option enables reading of files written by RCS 2.x (before
-	RCS was GNU, even), but the file format became obsolete in 1982.
-	Support for it WILL BE REMOVED in a near future GNU RCS release.
+      This option enables reading of files written by RCS 2.x (before
+      RCS was GNU, even), but the file format became obsolete in 1982.
+      Support for it WILL BE REMOVED in a near future GNU RCS release.
 
     - common option ‘-V’
 
-	This option is obsoleted by ‘--version’ (since 5.8, 2011-08-30).
-	Support for it WILL BE REMOVED in some future GNU RCS release.
-	Its use now produces a warning to stderr.
+      This option is obsoleted by ‘--version’ (since 5.8, 2011-08-30).
+      Support for it WILL BE REMOVED in some future GNU RCS release.
+      Its use now produces a warning to stderr.
 
-	Please note that ‘-VN’ (N ∈ {3,4,5}) is a separate issue.
+      Please note that ‘-VN’ (N ∈ {3,4,5}) is a separate issue.
 
   - bugs fixed
 
     - ‘rcsmerge --help’ mentions ‘-A’, ‘-E’, ‘-e’
 
-	These options are accepted and internally passed to diff3(1).
+      These options are accepted and internally passed to diff3(1).
 
     - ‘ident -VN’ and ‘merge -VN’ now signal error
 
-	For these commands, the argument to ‘-V’ has no meaning.
-	Previously, such invocations would display version info,
-	ignoring the arg.  Now they signal a "bad option" error.
+      For these commands, the argument to ‘-V’ has no meaning.
+      Previously, such invocations would display version info,
+      ignoring the arg.  Now they signal a "bad option" error.
 
   - new features
 
     - ident(1) recognizes Subversion "fixed-width keyword syntax"
 
-	In addition to the normal keyword pattern, for Subversion 1.2
-	(and later) compatability, ident(1) also recognizes patterns
-	having one of the forms:
+      In addition to the normal keyword pattern, for Subversion 1.2
+      (and later) compatability, ident(1) also recognizes patterns
+      having one of the forms:
 
-	$KEYWORD:: TEXT $
-	;; two colons and space after keyword
-	;; space before ending $
+      $KEYWORD:: TEXT $
+      ;; two colons and space after keyword
+      ;; space before ending $
 
-	$KEYWORD:: TEXT#$
-	;; two colons and space after keyword
-	;; hash before ending $
+      $KEYWORD:: TEXT#$
+      ;; two colons and space after keyword
+      ;; hash before ending $
 
     - new co(1) option ‘-S’ for "self-same" mode
 
-	In this mode, the owner of a lock is unimportant, just that it
-	exists.  Effectively, this prevents you from checking out the
-	same revision twice.
+      In this mode, the owner of a lock is unimportant, just that it
+      exists.  Effectively, this prevents you from checking out the
+      same revision twice.
 
-	$ whoami
-	  ttn
+      $ whoami
+        ttn
 
-	$ co -l -f z
-	  RCS/z,v  -->  z
-	  revision 1.1 (locked)
-	  done
+      $ co -l -f z
+        RCS/z,v  -->  z
+        revision 1.1 (locked)
+        done
 
-	$ co -S -l -f z
-	  RCS/z,v  -->  z
-	  co: RCS/z,v: Revision 1.1 is already locked by ttn.
+      $ co -S -l -f z
+        RCS/z,v  -->  z
+        co: RCS/z,v: Revision 1.1 is already locked by ttn.
 
     - several RCS commands "internalized" into rcs(1)
 
-	As part of an ongoing effort to modernize the command-line
-	interface of GNU RCS, the previously standalone programs:
+      As part of an ongoing effort to modernize the command-line
+      interface of GNU RCS, the previously standalone programs:
 
-	  ci, co, rcs, rcsclean, rcsdiff, rcsmerge, rlog
+        ci, co, rcs, rcsclean, rcsdiff, rcsmerge, rlog
 
-	can now be invoked as "rcs PROGRAM".  In this case, we call
-	PROGRAM a "command", and also provide some aliases.  E.g., you
-	can type "rcs diff" in addition to "rcs rcsdiff" (and "rcsdiff",
-	of course).  We plan to support standalone (w/o "rcs" prefix)
-	invocation from the shell at least through the 5.x series of
-	releases -- not indefinitely, but for a good while, yet.
+      can now be invoked as "rcs PROGRAM".  In this case, we call
+      PROGRAM a "command", and also provide some aliases.  E.g., you
+      can type "rcs diff" in addition to "rcs rcsdiff" (and "rcsdiff",
+      of course).  We plan to support standalone (w/o "rcs" prefix)
+      invocation from the shell at least through the 5.x series of
+      releases -- not indefinitely, but for a good while, yet.
 
-	The rcs(1) program itself now supports ‘--commands’ to list all
-	the commands, ‘--aliases’ to list their aliases, as well as
-	‘--help COMAMND’ to show the help for COMMAND.
+      The rcs(1) program itself now supports ‘--commands’ to list all
+      the commands, ‘--aliases’ to list their aliases, as well as
+      ‘--help COMAMND’ to show the help for COMMAND.
 
-	Note that programs ident(1) and merge(1) remain standalone.
+      Note that programs ident(1) and merge(1) remain standalone.
 
-	Lastly, in the manual, section "Invoking rcs" now describes both
-	"modern" and "legacy" usages.  Also, the internalized commands
-	invocations mentions both "rcs COMMAND" and "PROGRAM" styles.
+      Lastly, in the manual, section "Invoking rcs" now describes both
+      "modern" and "legacy" usages.  Also, the internalized commands
+      invocations mentions both "rcs COMMAND" and "PROGRAM" styles.
 
     - ‘--help’ output includes a one-line description
 
-	E.g., "merge --help" says: "Three-way file merge".
+      E.g., "merge --help" says: "Three-way file merge".
 
     - most long options can be recognized if partially specified
 
-	With the exception of "rcs --help COMMAND", where "--help" must
-	be spelled out in full, all long options can now be recognized
-	even if partially specified.  For example, "rcs --al" is
-	recognized as "rcs --aliases".
+      With the exception of "rcs --help COMMAND", where "--help" must
+      be spelled out in full, all long options can now be recognized
+      even if partially specified.  For example, "rcs --al" is
+      recognized as "rcs --aliases".
 
     - updated portability
 
-	Several more Gnulib (http://www.gnu.org/software/gnulib) modules
-	are now in use.
+      Several more Gnulib (http://www.gnu.org/software/gnulib) modules
+      are now in use.
 
     - new cross-compilation support
 
-	The configure script now assigns "pessimistic defaults" when
-	cross-compiling.  See new section "cross-compilation" in README.
+      The configure script now assigns "pessimistic defaults" when
+      cross-compiling.  See new section "cross-compilation" in README.
 
     - effects of ‘-VN’ (N ∈ {3,4,5}) documented
 
-	See (info "(rcs) Misc common options").
+      See (info "(rcs) Misc common options").
 
   - maintenance tools updated
     - gnulib-tool (GNU gnulib 2013-05-01 06:14:19) 0.0.7913-5191
@@ -131,43 +131,43 @@ See the end for copying conditions.
 
     - Wrong symbolic name dereference
 
-	RCS 5.8 introduced a bug whereby commands would incorrectly
-	dereference a symbolic name (into a numerical revision number)
-	in the presence of multiple symbolic names that share a common
-	prefix.  See tests/t803.
+      RCS 5.8 introduced a bug whereby commands would incorrectly
+      dereference a symbolic name (into a numerical revision number)
+      in the presence of multiple symbolic names that share a common
+      prefix.  See tests/t803.
 
     - ‘integrity’ value syntax better specified
 
-	The ‘integrity’ value (if present) is a string composed of a
-	system part followed by an optional user part, with formfeed
-	(^L, U+0C) separating the two.  Unlike other string values, the
-	‘integrity’ string (either part) must NOT contain '@' (U+40).
-	If it does, RCS displays a "spurious '@' in `integrity' value"
-	error message and exits failurefully.
+      The ‘integrity’ value (if present) is a string composed of a
+      system part followed by an optional user part, with formfeed
+      (^L, U+0C) separating the two.  Unlike other string values, the
+      ‘integrity’ string (either part) must NOT contain '@' (U+40).
+      If it does, RCS displays a "spurious '@' in `integrity' value"
+      error message and exits failurefully.
 
-	This change restores interop play-space for third-party tools
-	that was stricken w/ the RCS 5.8 top-level grammar freeze.  Left
-	unspecified is how such tools should divvy up the user part.
+      This change restores interop play-space for third-party tools
+      that was stricken w/ the RCS 5.8 top-level grammar freeze.  Left
+      unspecified is how such tools should divvy up the user part.
 
   - New manual chapter: RCS file format
 
-	This documents the RCS file format grammar and particulars,
-	adapted from rcsfile(5).
+    This documents the RCS file format grammar and particulars,
+    adapted from rcsfile(5).
 
   - Manpages refer to info documentation
 
-	They now recommend using "info rcs" for full documentation.
+    They now recommend using "info rcs" for full documentation.
 
   - Script to trim "junk at end of file" posted
 
-	The "junk at end of file" error occurs for some files due to RCS
-	5.8 being more strict about the syntax it accepts.  You can use
-	‘trimrcs’ by Warren Jones:
+    The "junk at end of file" error occurs for some files due to RCS
+    5.8 being more strict about the syntax it accepts.  You can use
+    ‘trimrcs’ by Warren Jones:
 
-	http://lists.gnu.org/archive/html/help-rcs/2013-01/msg00006.html
+    http://lists.gnu.org/archive/html/help-rcs/2013-01/msg00006.html
 
-	to remedy such files while we figure out how best to move such
-	functionality into RCS proper.
+    to remedy such files while we figure out how best to move such
+    functionality into RCS proper.
 
   - Maintenance tools updated
     - automake (GNU Automake) 1.13.1
@@ -181,51 +181,51 @@ See the end for copying conditions.
 
     - Debug output removed
 
-	Due to an oversight, release 5.8 rlog included code to write
-	debugging output to stderr for invocations using the ‘-d’ option
-	and a date range (e.g., ‘rlog -d 2010<2012’).
+      Due to an oversight, release 5.8 rlog included code to write
+      debugging output to stderr for invocations using the ‘-d’ option
+      and a date range (e.g., ‘rlog -d 2010<2012’).
 
     - Criteria for avoiding read-only checks refined
 
-	For "make check", some test cases are inhibited if the user
-	running the test is not effectively blocked from writing a
-	purportedly read-only file, such as when "make check" is run by
-	the super user, or for certain (weird) NFS situations.
+      For "make check", some test cases are inhibited if the user
+      running the test is not effectively blocked from writing a
+      purportedly read-only file, such as when "make check" is run by
+      the super user, or for certain (weird) NFS situations.
 
-	Previously, to determine this condition, we considered only the
-	operating system type, a very crude (and incomplete) proxy.
-	Now, we explicitly check with a shell sequence comprising the
-	umask(1) and test(1) commands, plus output-redirection.
+      Previously, to determine this condition, we considered only the
+      operating system type, a very crude (and incomplete) proxy.
+      Now, we explicitly check with a shell sequence comprising the
+      umask(1) and test(1) commands, plus output-redirection.
 
     - Regression in ‘-zLT’ handling
 
-	On a 64-bit x86 system, RCS 5.8 introduced a regression whereby:
+      On a 64-bit x86 system, RCS 5.8 introduced a regression whereby:
 
-	 rlog -zLT -d>2011-05-04
+       rlog -zLT -d>2011-05-04
 
-	would select the correct entry but display its date always with
-	default (01) month and day, i.e., YYYY-01-01.  This is now fixed
-	(see also tests/t320).
+      would select the correct entry but display its date always with
+      default (01) month and day, i.e., YYYY-01-01.  This is now fixed
+      (see also tests/t320).
 
     - Regression in ‘ci -d -T’ handling
 
-	RCS 5.8 introduced a regression whereby:
+      RCS 5.8 introduced a regression whereby:
 
-	  ci -l -d -T FILE
+        ci -l -d -T FILE
 
-	would set the mtime of RCS/FILE,v (the comma-v file) to the
-	epoch.  This is now fixed (see also tests/t810).
+      would set the mtime of RCS/FILE,v (the comma-v file) to the
+      epoch.  This is now fixed (see also tests/t810).
 
   - Use ‘diff --label’ instead of ‘diff -L’
 
-	Previously, RCS used GNU diff's ‘-L’ option.  According to Paul
-	Eggert (a GNU diffutils maintainer):
+    Previously, RCS used GNU diff's ‘-L’ option.  According to Paul
+    Eggert (a GNU diffutils maintainer):
 
-	  That option has been undocumented since diffutils 2.8
-	  (released in March 2002) and the option is intended to
-	  be replaced sometime soon with a different meaning.
+      That option has been undocumented since diffutils 2.8
+      (released in March 2002) and the option is intended to
+      be replaced sometime soon with a different meaning.
 
-	Now, RCS uses ‘diff --label’, thus immune to the planned change.
+    Now, RCS uses ‘diff --label’, thus immune to the planned change.
 
   - Miscellaneous changes
     - Make help extraction noisy (on failure)
@@ -236,38 +236,38 @@ See the end for copying conditions.
 
     - Manpage rcsintro(1) dropped
 
-	This manpage is redundant, and (arguably) should not have been
-	in section 1 in the first place.
+      This manpage is redundant, and (arguably) should not have been
+      in section 1 in the first place.
 
     - Use "Invoking COMMAND" instead of "COMMAND" as node names
 
-	This makes it easier for ‘info --usage COMMAND’ to DTRT, and
-	makes GNU (info "(standards) Manual Structure Details") happy.
+      This makes it easier for ‘info --usage COMMAND’ to DTRT, and
+      makes GNU (info "(standards) Manual Structure Details") happy.
 
     - explicitly UTF-8
 
-	This is to prepare for a (future) GNU Texinfo release that
-	renders @code in a more pretty way when the encoding is UTF-8.
-	If you're reading this (from the future) with such a Texinfo at
-	hand, feel free to regenerate the docs in doc/ prior to install.
+      This is to prepare for a (future) GNU Texinfo release that
+      renders @code in a more pretty way when the encoding is UTF-8.
+      If you're reading this (from the future) with such a Texinfo at
+      hand, feel free to regenerate the docs in doc/ prior to install.
 
     - CVS is not GNU
 
-	Previously, we incorrectly said "GNU CVS", succumbing to a
-	common misunderstanding.  Now we know better.
+      Previously, we incorrectly said "GNU CVS", succumbing to a
+      common misunderstanding.  Now we know better.
 
   - TAGS file no longer distributed
 
-	To create, configure normally and do "make TAGS".
+    To create, configure normally and do "make TAGS".
 
   - New configure script option ‘--enable-coverage’
 
-	Specifying ‘--enable-coverage’ causes ‘_Exit’ to be an alias for
-	‘exit’ and CFLAGS to append ‘--coverage’ if the compiler is GCC.
-	This is needed because the coverage machinery writes the .gcda
-	files only on ‘exit’.
+    Specifying ‘--enable-coverage’ causes ‘_Exit’ to be an alias for
+    ‘exit’ and CFLAGS to append ‘--coverage’ if the compiler is GCC.
+    This is needed because the coverage machinery writes the .gcda
+    files only on ‘exit’.
 
-	This option is for maintainers; most people can ignore it.
+    This option is for maintainers; most people can ignore it.
 
   - Portability improvements
     - Use more gnulib modules
@@ -285,201 +285,201 @@ See the end for copying conditions.
 
   - Change in terminology: from "path" to "file name" (or "file-name")
 
-	However, if "path" intends "search path", we say so explicitly.
+    However, if "path" intends "search path", we say so explicitly.
 
   - Changes to the RCS package
 
     - New documentation in Info format
 
-	On "make install", rcs.info is installed in $(infodir), with
-	title "GNU RCS <VERSION>" in dircategory "Version control".
-	The doc source is texinfo (released under GNU FDL 1.3), so you
-	can easily create output in HTML, PDF, etc.
+      On "make install", rcs.info is installed in $(infodir), with
+      title "GNU RCS <VERSION>" in dircategory "Version control".
+      The doc source is texinfo (released under GNU FDL 1.3), so you
+      can easily create output in HTML, PDF, etc.
 
     - Dropped configure option: --with-diffutils
 
-	To specify non-GNU diffutils programs diff(1) and diff3(1), name
-	them using variables on the configure command-line.  See README.
+      To specify non-GNU diffutils programs diff(1) and diff3(1), name
+      them using variables on the configure command-line.  See README.
 
     - Configuration more strict in some ways, more lax in others.
 
-	Before, part of the configuration was done at compile time.
-	Now, all of it is done by the configure script.  Here are the
-	set of conditions which will cause the configure script to fail
-	(with a "could not find..." message):
+      Before, part of the configuration was done at compile time.
+      Now, all of it is done by the configure script.  Here are the
+      set of conditions which will cause the configure script to fail
+      (with a "could not find..." message):
 
-	 - for --enable-mailer=PROG, ‘PROG’ not absolute;
-	 - for diff(1), value of env var ‘DIFF’ not absolute;
-	 - diff(1) not GNU diffutils compatible;
-	 - for diff3(1), value of env var ‘DIFF3’ not absolute;
-	 - for ed(1), value of env var ‘ED’ not absolute;
-	 - no C99-capable compiler.
+       - for --enable-mailer=PROG, ‘PROG’ not absolute;
+       - for diff(1), value of env var ‘DIFF’ not absolute;
+       - diff(1) not GNU diffutils compatible;
+       - for diff3(1), value of env var ‘DIFF3’ not absolute;
+       - for ed(1), value of env var ‘ED’ not absolute;
+       - no C99-capable compiler.
 
-	Here, "absolute" means "specified as an absolute filename".
-	On the flip side, configuration no longer checks for some
-	situations such as ‘sigaction’ yes, but ‘SA_SIGINFO’ no.
+      Here, "absolute" means "specified as an absolute filename".
+      On the flip side, configuration no longer checks for some
+      situations such as ‘sigaction’ yes, but ‘SA_SIGINFO’ no.
 
-	Most of the portability duties are now handled by gnulib.
+      Most of the portability duties are now handled by gnulib.
 
     - New configure option: --enable-suid[=setreuid]
 
-	This builds RCS with setuid support (the default).  Optional
-	arg ‘setreuid’ means use setreuid(2) instead of seteuid(2).
+      This builds RCS with setuid support (the default).  Optional
+      arg ‘setreuid’ means use setreuid(2) instead of seteuid(2).
 
     - New configure option: --disable-mmap
 
-	This builds RCS without mmap(2), even if available.  See README.
+      This builds RCS without mmap(2), even if available.  See README.
 
     - New configure option: --enable-mailer=PROG
 
-	The feature whereby ci(1) sends mail when breaking a lock is now
-	disabled by default.  To enable, specify ‘--enable-mailer=PROG’
-	to the configure script.  See README.
+      The feature whereby ci(1) sends mail when breaking a lock is now
+      disabled by default.  To enable, specify ‘--enable-mailer=PROG’
+      to the configure script.  See README.
 
     - New configure option: --enable-compat2
 
-	This preponderantly unlikely to be used option allows RCS
-	commands to read RCS files written by RCS 2.  See README.
+      This preponderantly unlikely to be used option allows RCS
+      commands to read RCS files written by RCS 2.  See README.
 
     - You can "make check" prior to "make install".
 
-	Doing "make check" automatically prepends to the ‘PATH’ env var
-	the value of ‘$(abs_top_builddir)/src’, so that the programs
-	co, rcsdiff, and rcsmerge can find their peers (co and merge).
+      Doing "make check" automatically prepends to the ‘PATH’ env var
+      the value of ‘$(abs_top_builddir)/src’, so that the programs
+      co, rcsdiff, and rcsmerge can find their peers (co and merge).
 
-	Likewise, "make installcheck" prepends ‘$(DESTDIR)$(bindir)’.
+      Likewise, "make installcheck" prepends ‘$(DESTDIR)$(bindir)’.
 
-	Previously, you had to "make install" first and then arrange
-	for ‘$(DESTDIR)$(bindir)’ to be on ‘PATH’ "manually".
+      Previously, you had to "make install" first and then arrange
+      for ‘$(DESTDIR)$(bindir)’ to be on ‘PATH’ "manually".
 
-	See tests/README for more info on the test suite.
+      See tests/README for more info on the test suite.
 
   - Bug fixes
 
     - Remove all edit info when removing all revisions.
 
-	Previously, "rcs -o" (outdating) all revisions failed to
-	leave the RCS file in a consistent state; edit info (i.e.,
-	log message + diff(1) output) remained for the deleted revisions.
+      Previously, "rcs -o" (outdating) all revisions failed to
+      leave the RCS file in a consistent state; edit info (i.e.,
+      log message + diff(1) output) remained for the deleted revisions.
 
-	For example, this sequence of commands:
-	  echo foo > foo
-	  ci -q -i -t-desc -mHELLO foo
-	  rcs -q -o1.1: foo
-	  grep '@H' foo,v
-	used to display "@HELLO" to stdout.
+      For example, this sequence of commands:
+        echo foo > foo
+        ci -q -i -t-desc -mHELLO foo
+        rcs -q -o1.1: foo
+        grep '@H' foo,v
+      used to display "@HELLO" to stdout.
 
-	Now, all revisions are completely removed.
+      Now, all revisions are completely removed.
 
     - Code no longer uses mktemp(3).
 
-	Using mktemp(3) is a security risk.  We use mkstemp(3) now.
-	Likewise, rcsfreeze.sh now uses mktemp(1).
+      Using mktemp(3) is a security risk.  We use mkstemp(3) now.
+      Likewise, rcsfreeze.sh now uses mktemp(1).
 
     - Misc manpage tweaks / fixes.
 
-	Document ‘rlog -q’; fix small merge.1 omission; add branch
-	labels in rcsfile.5; say "GNU RCS <VERSION>" in footer.
+      Document ‘rlog -q’; fix small merge.1 omission; add branch
+      labels in rcsfile.5; say "GNU RCS <VERSION>" in footer.
 
   - Other changes
 
     - All commands accept ‘--help’ and ‘--version’.
 
-	The help output includes an email address for bug reports.
-	For continuity, option ‘-V’ is now a synonym for ‘--version’.
+      The help output includes an email address for bug reports.
+      For continuity, option ‘-V’ is now a synonym for ‘--version’.
 
-	Relatedly, commands no longer display usage info if given
-	a bad or malformed option.  You can use ‘--help’ for that.
+      Relatedly, commands no longer display usage info if given
+      a bad or malformed option.  You can use ‘--help’ for that.
 
     - A string of all digits is now valid for author, state.
 
-	This means you can set the author or state to, for example,
-	"000000" or "42".  Previously, these would have caused a
-	"invalid identifier" or "invalid symbol" error.
+      This means you can set the author or state to, for example,
+      "000000" or "42".  Previously, these would have caused a
+      "invalid identifier" or "invalid symbol" error.
 
     - Env var RCS_MEM_LIMIT controls stdio threshold.
 
-	For speed, RCS uses memory-based routines for files up to
-	256 kilobytes, and stream-based (stdio) routines otherwise.
-	You can change this threshold value by setting the environment
-	variable ‘RCS_MEM_LIMIT’ to a non-negative integer, measured in
-	kilobytes.  An empty ‘RCS_MEM_LIMIT’ value is silently ignored.
+      For speed, RCS uses memory-based routines for files up to
+      256 kilobytes, and stream-based (stdio) routines otherwise.
+      You can change this threshold value by setting the environment
+      variable ‘RCS_MEM_LIMIT’ to a non-negative integer, measured in
+      kilobytes.  An empty ‘RCS_MEM_LIMIT’ value is silently ignored.
 
     - RCS can now work with files larger than 2 gigabytes.
 
-	RCS now uses large file offsets (#define _FILE_OFFSET_BITS 64).
+      RCS now uses large file offsets (#define _FILE_OFFSET_BITS 64).
 
     - Pass-through for RCS file ‘commitid SYMBOL’ now builtin.
 
-	Due to GNU CVS (Concurrent Versions System) using a compatible
-	file format as RCS for the RCS file, you can use RCS commands
-	to view and manipulate its contents.  (Note, however, the next
-	NEWS item.)
+      Due to GNU CVS (Concurrent Versions System) using a compatible
+      file format as RCS for the RCS file, you can use RCS commands
+      to view and manipulate its contents.  (Note, however, the next
+      NEWS item.)
 
-	This works well enough except for a small annoyance: CVS adds a
-	per-revision field called the "commitid" with an opaque (to RCS)
-	symbolic value.  Previously, RCS commands would emit a warning
-	"unrecognized phrases" (unless given ‘-q’ on the command-line).
+      This works well enough except for a small annoyance: CVS adds a
+      per-revision field called the "commitid" with an opaque (to RCS)
+      symbolic value.  Previously, RCS commands would emit a warning
+      "unrecognized phrases" (unless given ‘-q’ on the command-line).
 
-	RCS commands now automatically support pass-through handling of
-	‘commitid SYMBOL’ (so ‘-q’ is no longer necessary).
+      RCS commands now automatically support pass-through handling of
+      ‘commitid SYMBOL’ (so ‘-q’ is no longer necessary).
 
     - RCS file top-level grammar frozen.
 
-	The RCS file top-level grammar is now frozen; RCS no longer
-	supports pass-through operation of unrecognized key/data pairs
-	(called "newphrases" in the RCS 5.7 rcsfile(5) manpage).
+      The RCS file top-level grammar is now frozen; RCS no longer
+      supports pass-through operation of unrecognized key/data pairs
+      (called "newphrases" in the RCS 5.7 rcsfile(5) manpage).
 
-	To avoid painting ourselves into a corner, the grammar now
-	includes a new key ‘integrity’ with @-string value, whose
-	sub-grammar is not yet specified.  (We intend to keep checksums
-	and other compacted redundancies in this field, for manipulation
-	by the commands in a future RCS 5.x release.)  For upward
-	compatability, the commands in this release do not change this
-	field, although they silently read and write it (pass-through),
-	if present.
+      To avoid painting ourselves into a corner, the grammar now
+      includes a new key ‘integrity’ with @-string value, whose
+      sub-grammar is not yet specified.  (We intend to keep checksums
+      and other compacted redundancies in this field, for manipulation
+      by the commands in a future RCS 5.x release.)  For upward
+      compatability, the commands in this release do not change this
+      field, although they silently read and write it (pass-through),
+      if present.
 
     - RCS file syntax-validated earlier, completely.
 
-	Previously, RCS file syntax was validated lazily, and trailing
-	garbage was not detected (see bugfix above).  Now, a top-level
-	validation is done on each access.
+      Previously, RCS file syntax was validated lazily, and trailing
+      garbage was not detected (see bugfix above).  Now, a top-level
+      validation is done on each access.
 
     - Possible to specify an empty log message with ci -m, rcs -m.
 
-	The commands "ci -m" and "rcs -m" no longer error on an
-	empty log message.  Their non-interactive behavior is now
-	consistent with the interactive invocation.
+      The commands "ci -m" and "rcs -m" no longer error on an
+      empty log message.  Their non-interactive behavior is now
+      consistent with the interactive invocation.
 
-	was: ci -m file < /dev/null   # use stdin to avoid error
-	now: ci -m file               # works fine, like so
+      was: ci -m file < /dev/null   # use stdin to avoid error
+      now: ci -m file               # works fine, like so
 
-	Note that these commands actually store as the log message
-	the string: "*** empty log message ***".
+      Note that these commands actually store as the log message
+      the string: "*** empty log message ***".
 
     - Date option accepts some more date-only formats
 
-	Date format ‘YYYY-DDD’ specifies a year and a day (1-366),
-	while format ‘YYYY-wWW-D’ specifies a year, an ISO week number
-	(0-53, 0 is a GNU RCS extension), and a day number (1-7, for
-	Monday through Sunday).
+      Date format ‘YYYY-DDD’ specifies a year and a day (1-366),
+      while format ‘YYYY-wWW-D’ specifies a year, an ISO week number
+      (0-53, 0 is a GNU RCS extension), and a day number (1-7, for
+      Monday through Sunday).
 
     - Changes to rcsdiff
 
       - New handling for option: -U N
 
-	This arranges to output N lines of unified-diff context.
-	Relatedly, the list of possible options passed to the underlying
-	diff(1) appears in both "rcsdiff --help" and in the manual.
+        This arranges to output N lines of unified-diff context.
+        Relatedly, the list of possible options passed to the underlying
+        diff(1) appears in both "rcsdiff --help" and in the manual.
 
       - Refined "same-revision don't call diff" optimization
 
-	Normally, if the two revisions specified are the same, we avoid
-	calling the underlying diff(1) on the theory that it will
-	produce no output.  This does not hold generally for ‘-y’
-	(--side-by-side) and ‘-D’ (--ifdef), such as when the revision
-	specified is by different symbolic names, so for those options
-	the optimization is disabled.
+        Normally, if the two revisions specified are the same, we avoid
+        calling the underlying diff(1) on the theory that it will
+        produce no output.  This does not hold generally for ‘-y’
+        (--side-by-side) and ‘-D’ (--ifdef), such as when the revision
+        specified is by different symbolic names, so for those options
+        the optimization is disabled.
 
 
 
