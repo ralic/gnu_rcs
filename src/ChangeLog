@@ -1,3 +1,11 @@
+2013-08-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Add homepage / "gethelp" to ‘--help’ output.
+
+	* gnu-h-v.c (AB, GNU): New macros.
+	(BUGME): Use ‘AB’ for ‘PACKAGE_BUGREPORT’;
+	add ‘GNU’ entries for homepage and general help URLs.
+
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.0

@@ -50,7 +50,14 @@ nice_getopt (int argc, char **argv, const struct option *longopts)
    " to change and redistribute it.\n"                          \
    "There is NO WARRANTY, to the extent permitted by law.\n")
 
-#define BUGME  ("\nReport bugs to <" PACKAGE_BUGREPORT ">\n")
+#define AB(blurb,uri)    blurb ": <" uri ">\n"
+#define GNU(blurb,rest)  AB (blurb, "http://www.gnu.org/" rest)
+
+#define BUGME                                           \
+  ("\n"                                                 \
+   AB ("Report bugs to", PACKAGE_BUGREPORT)             \
+   GNU ("RCS home page", "software/rcs/")               \
+   GNU ("General help using GNU software", "gethelp/"))
 
 void
 display_version (struct program const *prog, int flags)
