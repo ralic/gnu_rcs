@@ -1,3 +1,6 @@
+AUTHORS of GNU RCS                                -*- coding: utf-8 -*-
+
+
 RCS was designed and built by Walter F. Tichy of Purdue University.
 RCS version 3 was released in 1983.
 
@@ -12,9 +15,5 @@ Paul Eggert wrote the changes for RCS versions 5.5 and 5.6 (1991).
 Paul Eggert wrote most of the changes for RCS 5.7 (1995).
 K. Richard Pixley of Cygnus Support contributed several bug fixes.
 
-Thien-Thi Nguyen wrote the changes for RCS versions 5.8
-through 5.8.1, with some help (tiny changes) from:
-  Ian Delaney
-  Karl Berry
-  Oliver Billmann
-  Paul Eggert
+Thien-Thi Nguyen wrote the changes for RCS versions 5.8 onward.
+(See also file THANKS.)
