@@ -1029,10 +1029,9 @@ buildeltatext (struct adminstuff *dc,
 
       *++diffp = prog_diff;
       *++diffp = diff_flags;
-#if OPEN_O_BINARY
-      if (BE (kws) == kwsub_b)
+      if (OPEN_O_BINARY
+          && BE (kws) == kwsub_b)
         *++diffp == "--binary";
-#endif
       *++diffp = "-";
       *++diffp = FLOW (result);
       *++diffp = '\0';

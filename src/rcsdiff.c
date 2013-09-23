@@ -406,10 +406,9 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
         *pp = '\0';
 
         diffp = diffpend;
-#if OPEN_O_BINARY
-        if (kws == kwsub_b)
+        if (OPEN_O_BINARY
+            && kws == kwsub_b)
           *diffp++ = "--binary";
-#endif
         diffp[0] = maketemp (0);
         if (runv (-1, diffp[0], cov))
           {

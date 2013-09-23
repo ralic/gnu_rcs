@@ -1077,10 +1077,9 @@ ci_main (const char *cmd, int argc, char **argv)
                 diffp = diffv;
                 *++diffp = prog_diff;
                 *++diffp = diff_flags;
-#if OPEN_O_BINARY
-                if (kws == kwsub_b)
+                if (OPEN_O_BINARY
+                    && kws == kwsub_b)
                   *++diffp = "--binary";
-#endif
                 *++diffp = newhead ? "-" : expname;
                 *++diffp = newhead ? expname : "-";
                 *++diffp = NULL;

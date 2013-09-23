@@ -1,3 +1,17 @@
+2013-09-23  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[int] Use ‘OPEN_O_BINARY’ as a C value.
+
+	Since base.h takes pains to #define this in all cases, might
+	as well use it in its C-value capacity, instead of only as a
+	CPP value, thus gaining some visibility for the compiler.
+
+	* b-fro.c (fro_open): Convert gating via ‘OPEN_O_BINARY’
+	from ‘#if OPEN_O_BINARY’..‘#endif’ to C value.
+	* ci.c (ci_main): Likewise.
+	* rcs.c (buildeltatext): Likewise.
+	* rcsdiff.c (rcsdiff_main): Likewise.
+
 2013-08-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Add homepage / "gethelp" to ‘--help’ output.

@@ -57,10 +57,9 @@ fro_open (char const *name, char const *type, struct stat *status)
   struct stat st;
   off_t s;
   int fd = fd_safer (open (name, O_RDONLY
-#if OPEN_O_BINARY
-                           | (strchr (type, 'b') ? OPEN_O_BINARY : 0)
-#endif
-                           ));
+                           | (OPEN_O_BINARY && strchr (type, 'b')
+                              ? OPEN_O_BINARY
+                              : 0)));
 
   if (PROB (fd))
     return NULL;
