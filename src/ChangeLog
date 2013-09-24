@@ -1,5 +1,12 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘WOE’ as C value.
+
+	* rcsfnms.c (isSLASH): Convert ‘#if ! WOE’..‘#endif’
+	to ‘if (! WOE) { ... } else { ... }’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘MMAP_SIGNAL’ as C value.
 
 	* b-fro.c (mmap_deallocate): Remove surrounding ‘#if MMAP_SIGNAL’.

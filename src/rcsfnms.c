@@ -489,17 +489,16 @@ getfullRCSname (void)
 bool
 isSLASH (int c)
 {
-#if !WOE
-  return (SLASH == c);
-#else
-  switch (c)
-    {
-    case SLASHes:
-      return true;
-    default:
-      return false;
-    }
-#endif
+  if (! WOE)
+    return (SLASH == c);
+  else
+    switch (c)
+      {
+      case SLASHes:
+        return true;
+      default:
+        return false;
+      }
 }
 
 /* rcsfnms.c ends here */
