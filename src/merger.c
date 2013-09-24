@@ -55,9 +55,6 @@ merge (bool tostdout, char const *edarg, struct symdef three_manifestations[3])
   struct fro *rt;
   char const *a[3], *t;
   int s;
-#if !DIFF3_BIN
-  char const *d[2];
-#endif
 
   for (i = 3; 0 <= --i;)
     a[i] = normalize_arg (FNAME (i));
@@ -65,50 +62,55 @@ merge (bool tostdout, char const *edarg, struct symdef three_manifestations[3])
   if (!edarg)
     edarg = "-E";
 
-#if DIFF3_BIN
-  t = NULL;
-  if (!tostdout)
-    t = maketemp (0);
-  s = run (-1, t, prog_diff3, edarg, "-am",
-           "-L", LABEL (0), "-L", LABEL (1), "-L", LABEL (2),
-           a[0], a[1], a[2], NULL);
-  if (DIFF_TROUBLE == s)
-    BOW_OUT ();
-  if (DIFF_FAILURE == s)
-    PWARN ("conflicts during merge");
-  if (t)
+  if (DIFF3_BIN)
     {
-      if (!(f = fopen_safer (FNAME (0), "w")))
-        fatal_sys (FNAME (0));
-      if (!(rt = fro_open (t, "r", NULL)))
+      t = NULL;
+      if (!tostdout)
+        t = maketemp (0);
+      s = run (-1, t, prog_diff3, edarg, "-am",
+               "-L", LABEL (0), "-L", LABEL (1), "-L", LABEL (2),
+               a[0], a[1], a[2], NULL);
+      if (DIFF_TROUBLE == s)
+        BOW_OUT ();
+      if (DIFF_FAILURE == s)
+        PWARN ("conflicts during merge");
+      if (t)
+        {
+          if (!(f = fopen_safer (FNAME (0), "w")))
+            fatal_sys (FNAME (0));
+          if (!(rt = fro_open (t, "r", NULL)))
+            fatal_sys (t);
+          fro_spew (rt, f);
+          fro_close (rt);
+          Ozclose (&f);
+        }
+    }
+  else
+    {
+      char const *d[2];
+
+      for (i = 0; i < 2; i++)
+        if (DIFF_TROUBLE == run (-1, d[i] = maketemp (i), prog_diff,
+                                 a[i], a[2], NULL))
+          PFATAL ("diff failed");
+      t = maketemp (2);
+      s = run (-1, t,
+               prog_diff3, edarg, d[0], d[1], a[0], a[1], a[2],
+               LABEL (0), LABEL (2), NULL);
+      if (s != DIFF_SUCCESS)
+        {
+          s = DIFF_FAILURE;
+          PWARN ("overlaps or other problems during merge");
+        }
+      if (!(f = fopen_safer (t, "a+")))
         fatal_sys (t);
-      fro_spew (rt, f);
-      fro_close (rt);
+      aputs (tostdout ? "1,$p\n" : "w\n", f);
+      rewind (f);
+      aflush (f);
+      if (run (fileno (f), NULL, ED, "-", a[0], NULL))
+        BOW_OUT ();
       Ozclose (&f);
     }
-#else  /* !DIFF3_BIN */
-  for (i = 0; i < 2; i++)
-    if (DIFF_TROUBLE == run (-1, d[i] = maketemp (i), prog_diff,
-                             a[i], a[2], NULL))
-      PFATAL ("diff failed");
-  t = maketemp (2);
-  s = run (-1, t,
-           prog_diff3, edarg, d[0], d[1], a[0], a[1], a[2],
-           LABEL (0), LABEL (2), NULL);
-  if (s != DIFF_SUCCESS)
-    {
-      s = DIFF_FAILURE;
-      PWARN ("overlaps or other problems during merge");
-    }
-  if (!(f = fopen_safer (t, "a+")))
-    fatal_sys (t);
-  aputs (tostdout ? "1,$p\n" : "w\n", f);
-  rewind (f);
-  aflush (f);
-  if (run (fileno (f), NULL, ED, "-", a[0], NULL))
-    BOW_OUT ();
-  Ozclose (&f);
-#endif  /* !DIFF3_BIN */
 
   tempunlink ();
   return s;

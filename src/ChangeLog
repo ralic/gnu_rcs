@@ -1,5 +1,12 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘DIFF3_BIN’ as C value.
+
+	* merger.c (merge): Convert ‘#if DIFF3_BIN’..‘#endif’
+	to ‘if (DIFF3_BIN) { ... } else { ... }’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘BAD_B_RENAME’ as C value.
 
 	* rcsedit.c (chnamemod): Convert ‘#if BAD_B_RENAME’..‘#endif’
