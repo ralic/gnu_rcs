@@ -1,3 +1,18 @@
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Fix bug: Construct diff command-line correctly for non-POSIX.
+
+	See: <https://savannah.gnu.org/bugs/?40091>.
+	Reported by David Binderman.
+
+	This is a long-standing bug, first appearing in RCS 5.7,
+	released 1995-06-16.  We don't add a test because it affects
+	non-POSIX systems, which are not easily available to the
+	maintainers.
+
+	* rcs.c (buildeltatext): Change ‘==’ to ‘=’
+	in the case of appending "--binary" to the command line.
+
 2013-09-23  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[int] Use ‘OPEN_O_BINARY’ as a C value.
