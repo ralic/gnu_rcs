@@ -1,5 +1,14 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘BAD_A_RENAME’, ‘bad_NFS_rename’ as C values.
+
+	* rcsedit.c (chnamemod): Convert ‘#if COND’..‘#endif’
+	to ‘if (COND) { ... }’ where COND includes ‘BAD_A_RENAME’
+	and/or ‘bad_NFS_rename’.  In one instance, merge COND
+	with that of the sub-‘if’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Fix bug: Construct diff command-line correctly for non-POSIX.
 
 	See: <https://savannah.gnu.org/bugs/?40091>.

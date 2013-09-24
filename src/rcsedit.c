@@ -911,25 +911,27 @@ chnamemod (FILE ** fromp, char const *from, char const *to,
 {
   mode_t mode_while_renaming = mode;
   int fchmod_set_mode = 0;
-
-#if BAD_A_RENAME || bad_NFS_rename
   struct stat st;
-  if (bad_NFS_rename || (BAD_A_RENAME && set_mode <= 0))
-    {
-      if (PROB (fstat (fileno (*fromp), &st)))
-        return -1;
-      if (BAD_A_RENAME && set_mode <= 0)
-        mode = st.st_mode;
-    }
-#endif  /* BAD_A_RENAME || bad_NFS_rename */
 
-#if BAD_A_RENAME
-  /* There's a short window of inconsistency
-     during which the lock file is writable.  */
-  mode_while_renaming = mode | S_IWUSR;
-  if (mode != mode_while_renaming)
-    set_mode = 1;
-#endif  /* BAD_A_RENAME */
+  if (BAD_A_RENAME || bad_NFS_rename)
+    {
+      if (bad_NFS_rename || (BAD_A_RENAME && set_mode <= 0))
+        {
+          if (PROB (fstat (fileno (*fromp), &st)))
+            return -1;
+          if (BAD_A_RENAME && set_mode <= 0)
+            mode = st.st_mode;
+        }
+    }
+
+  if (BAD_A_RENAME)
+    {
+      /* There's a short window of inconsistency
+         during which the lock file is writable.  */
+      mode_while_renaming = mode | S_IWUSR;
+      if (mode != mode_while_renaming)
+        set_mode = 1;
+    }
 
   if (0 < set_mode
       && !PROB (change_mode (fileno (*fromp), mode_while_renaming)))
@@ -953,26 +955,25 @@ chnamemod (FILE ** fromp, char const *from, char const *to,
   if (PROB (rename (from, to)) && !nfs_NOENT_p ())
     return -1;
 
-#if bad_NFS_rename
-  {
-    /* Check whether the rename falsely reported success.
-       A race condition can occur between the rename and the stat.  */
-    struct stat tostat;
+  if (bad_NFS_rename)
+    {
+      /* Check whether the rename falsely reported success.
+         A race condition can occur between the rename and the stat.  */
+      struct stat tostat;
 
-    if (PROB (stat (to, &tostat)))
-      return -1;
-    if (!SAME_INODE (st, tostat))
-      {
-        errno = EIO;
+      if (PROB (stat (to, &tostat)))
         return -1;
-      }
-  }
-#endif  /* bad_NFS_rename */
+      if (!SAME_INODE (st, tostat))
+        {
+          errno = EIO;
+          return -1;
+        }
+    }
 
-#if BAD_A_RENAME
-  if (0 < set_mode && PROB (chmod (to, mode)))
+  if (BAD_A_RENAME
+      && 0 < set_mode
+      && PROB (chmod (to, mode)))
     return -1;
-#endif
 
   return 0;
 }
