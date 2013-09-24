@@ -1,5 +1,15 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘BAD_CREATE0’ as C value.
+
+	* rcs.c (rcs_main): Convert ‘#if BAD_CREATE0’..‘#endif’
+	to ‘if (BAD_CREATE0) { ... } else { ... }’.
+	* rcsgen.c (putadmin): Likewise.
+	* rcsedit.c (dorewrite, donerewrite): Likewise,
+	merging into sub-‘if’ in some instances.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘WOE’ as C value.
 
 	* rcsfnms.c (isSLASH): Convert ‘#if ! WOE’..‘#endif’

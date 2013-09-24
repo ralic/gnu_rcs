@@ -1521,13 +1521,15 @@ rcs_main (const char *cmd, int argc, char **argv)
             /* Adjust things for donerewrite's sake.  */
             if (PROB (stat (MANI (filename), repo_stat)))
               {
-#if BAD_CREAT0
-                mode_t m = umask (0);
-                umask (m);
-                repo_stat->st_mode = (S_IRUSR | S_IRGRP | S_IROTH) & ~m;
-#else
-                changed = -1;
-#endif
+                if (BAD_CREAT0)
+                  {
+                    mode_t m = umask (0);
+
+                    umask (m);
+                    repo_stat->st_mode = (S_IRUSR | S_IRGRP | S_IROTH) & ~m;
+                  }
+                else
+                  changed = -1;
               }
             repo_stat->st_nlink = 0;
             keepRCStime = false;

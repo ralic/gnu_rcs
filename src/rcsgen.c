@@ -383,15 +383,18 @@ putadmin (void)
 
   if (!(fout = FLOW (rewr)))
     {
-#if BAD_CREAT0
-      ORCSclose ();
-      fout = fopen_safer (makedirtemp (false), FOPEN_WB);
-#else  /* !BAD_CREAT0 */
-      int fo = REPO (fd_lock);
+      if (BAD_CREAT0)
+        {
+          ORCSclose ();
+          fout = fopen_safer (makedirtemp (false), FOPEN_WB);
+        }
+      else
+        {
+          int fo = REPO (fd_lock);
 
-      REPO (fd_lock) = -1;
-      fout = fdopen (fo, FOPEN_WB);
-#endif  /* !BAD_CREAT0 */
+          REPO (fd_lock) = -1;
+          fout = fdopen (fo, FOPEN_WB);
+        }
 
       if (!(FLOW (rewr) = fout))
         fatal_sys (REPO (filename));

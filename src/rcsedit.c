@@ -1108,20 +1108,18 @@ dorewrite (bool lockflag, int changed)
         }
       else
         {
-#if BAD_CREAT0
           int nr = !!FLOW (rewr), ne = 0;
-#endif
+
           ORCSclose ();
           seteid ();
           IGNOREINTS ();
-#if BAD_CREAT0
-          if (nr)
+          if (BAD_CREAT0
+              && nr)
             {
               nr = un_link (newRCSname);
               ne = errno;
               keepdirtemp (newRCSname);
             }
-#endif
           r = un_link (lockname);
           e = errno;
           keepdirtemp (lockname);
@@ -1129,13 +1127,12 @@ dorewrite (bool lockflag, int changed)
           setrid ();
           if (PROB (r))
             syserror (e, lockname);
-#if BAD_CREAT0
-          if (nr != 0)                  /* avoid ‘PROB’; ‘nr’ may be >0 */
+          if (BAD_CREAT0
+              && nr != 0)               /* avoid ‘PROB’; ‘nr’ may be >0 */
             {
               syserror (ne, newRCSname);
               r = -1;
             }
-#endif
         }
       }
   return r;
@@ -1149,9 +1146,7 @@ donerewrite (int changed, time_t newRCStime)
    Return 0 on success, -1 on failure.  */
 {
   int r = 0, e = 0;
-#if BAD_CREAT0
   int lr, le;
-#endif
 
   if (changed && !FLOW (erroneousp))
     {
@@ -1176,11 +1171,12 @@ donerewrite (int changed, time_t newRCStime)
       frew = FLOW (rewr);
       e = errno;
       keepdirtemp (newRCSname);
-#if BAD_CREAT0
-      lr = un_link (lockname);
-      le = errno;
-      keepdirtemp (lockname);
-#endif
+      if (BAD_CREAT0)
+        {
+          lr = un_link (lockname);
+          le = errno;
+          keepdirtemp (lockname);
+        }
       RESTOREINTS ();
       setrid ();
       if (PROB (r))
@@ -1188,13 +1184,12 @@ donerewrite (int changed, time_t newRCStime)
           syserror (e, repo_filename);
           PERR ("saved in %s", newRCSname);
         }
-#if BAD_CREAT0
-      if (PROB (lr))
+      if (BAD_CREAT0
+          && PROB (lr))
         {
           syserror (le, lockname);
           r = -1;
         }
-#endif
     }
   return r;
 }
