@@ -1,3 +1,13 @@
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build int] Look for ed(1) unconditionally.
+
+	This reverts 2011-06-10, "Don't look for ed(1) if diff3(1)
+	is sane enough" for the sake of an upcoming change.
+
+	* configure.ac (ED): Set shell var and do
+	‘RCS_ABSOLUTE_PROGRAM’ regardless of diff3(1) sanity.
+
 2013-06-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Explcitly "exit 0" in extract-help script.
