@@ -40,9 +40,8 @@
 void
 maybe_reset_sigchld (void)
 {
-#if BAD_WAIT_IF_SIGCHLD_IGNORED
-  signal (SIGCHLD, SIG_DFL);
-#endif  /* BAD_WAIT_IF_SIGCHLD_IGNORED */
+  if (BAD_WAIT_IF_SIGCHLD_IGNORED)
+    signal (SIGCHLD, SIG_DFL);
 }
 
 /* Avoid calling ‘sprintf’ etc., in case they're not reentrant.  */

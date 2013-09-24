@@ -1,5 +1,13 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘BAD_WAIT_IF_SIGCHLD_IGNORED’ as C value.
+
+	* b-isr.c (maybe_reset_sigchld): Convert
+	‘#if BAD_WAIT_IF_SIGCHLD_IGNORED’..‘#endif’ to
+	‘if (BAD_WAIT_IF_SIGCHLD_IGNORED) { ... }’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘BAD_A_RENAME’, ‘bad_NFS_rename’ as C values.
 
 	* rcsedit.c (chnamemod): Convert ‘#if COND’..‘#endif’
