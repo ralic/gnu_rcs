@@ -1,5 +1,12 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘BAD_B_RENAME’ as C value.
+
+	* rcsedit.c (chnamemod): Convert ‘#if BAD_B_RENAME’..‘#endif’
+	to ‘if (BAD_B_RENAME) { ... }’ and merge into the the sub-‘if’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘BAD_WAIT_IF_SIGCHLD_IGNORED’ as C value.
 
 	* b-isr.c (maybe_reset_sigchld): Convert

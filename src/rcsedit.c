@@ -945,12 +945,12 @@ chnamemod (FILE ** fromp, char const *from, char const *to,
   if (PROB (setmtime (from, mtime)))
     return -1;
 
-#if BAD_B_RENAME
-  /* There's a short window of inconsistency
-     during which ‘to’ does not exist.  */
-  if (PROB (un_link (to)) && errno != ENOENT)
+  if (BAD_B_RENAME
+      /* There's a short window of inconsistency
+         during which ‘to’ does not exist.  */
+      && PROB (un_link (to))
+      && errno != ENOENT)
     return -1;
-#endif  /* BAD_B_RENAME */
 
   if (PROB (rename (from, to)) && !nfs_NOENT_p ())
     return -1;
