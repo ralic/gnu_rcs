@@ -92,7 +92,6 @@ cleanup (int *exitstatus, struct work *work)
   fro_zclose (&work->fro);
 }
 
-#if DIFF_L
 static char const *
 setup_label (char const *num, char const date[datesize])
 {
@@ -105,7 +104,6 @@ setup_label (char const *num, char const date[datesize])
     accf (PLEXUS, "\t%s", num);
   return finish_string (PLEXUS, &len);
 }
-#endif
 
 /* Elements in the constructed command line prior to this index are
    boilerplate.  From this index on, things are data-dependent.  */
@@ -122,11 +120,9 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
   char const *rev1, *rev2;      /* revision numbers from command line */
   char const *xrev1, *xrev2;    /* expanded revision numbers */
   char const *expandarg, *lexpandarg, *suffixarg, *versionarg, *zonearg;
-#if DIFF_L
   int file_labels;
   char const **diff_label1, **diff_label2;
   char date2[datesize];
-#endif
   char const *cov[7 + COMMAND_LINE_VARYING];
   char const **diffv, **diffp, **diffpend;      /* argv for subsidiary diff */
   char const **pp, *diffvstr = NULL;
@@ -144,9 +140,7 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
 
   revnums = 0;
   rev1 = rev2 = xrev2 = NULL;
-#if DIFF_L
   file_labels = 0;
-#endif
   expandarg = suffixarg = versionarg = zonearg = NULL;
   no_diff_means_no_output = true;
   BE (pe) = X_DEFAULT;
@@ -195,10 +189,10 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
           case 'L':
           case 'U':
           case 'W':
-#if DIFF_L
-            if (c == 'L' && ++file_labels == 2)
+            if (DIFF_L
+                && c == 'L'
+                && ++file_labels == 2)
               PFATAL ("too many -L options");
-#endif
             *dcp++ = c;
             if (*a)
               do
@@ -288,23 +282,23 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
       diffvstr = finish_string (PLEXUS, &len);
     }
 
-#if DIFF_L
-  diff_label1 = diff_label2 = NULL;
-  if (file_labels < 2)
+  if (DIFF_L)
     {
-      if (!file_labels)
-        diff_label1 = diffp++;
-      diff_label2 = diffp++;
+      diff_label1 = diff_label2 = NULL;
+      if (file_labels < 2)
+        {
+          if (!file_labels)
+            diff_label1 = diffp++;
+          diff_label2 = diffp++;
+        }
     }
-#endif
   diffpend = diffp;
 
   cov[1] = PEER_SUPER ();
   cov[2] = "co";
   cov[3] = "-q";
-#if !DIFF_L
-  cov[COMMAND_LINE_VARYING - 1] = "-M";
-#endif
+  if (! DIFF_L)
+    cov[COMMAND_LINE_VARYING - 1] = "-M";
 
   /* Now handle all filenames.  */
   if (FLOW (erroneousp))
@@ -351,10 +345,9 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
         if (! (target = delta_from_ref (numericrev.string)))
           continue;
         xrev1 = target->num;
-#if DIFF_L
-        if (diff_label1)
+        if (DIFF_L
+            && diff_label1)
           *diff_label1 = setup_label (target->num, target->date);
-#endif
 
         lexpandarg = expandarg;
         if (revnums == 2)
@@ -377,8 +370,8 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
                  && WORKMODE (REPO (stat).st_mode, true) == work.st.st_mode)
           lexpandarg = "-kkvl";
         fro_zclose (&work.fro);
-#if DIFF_L
-        if (diff_label2)
+        if (DIFF_L
+            && diff_label2)
           {
             if (revnums == 2)
               *diff_label2 = setup_label (target->num, target->date);
@@ -388,7 +381,6 @@ rcsdiff_main (const char *cmd, int argc, char **argv)
                 *diff_label2 = setup_label (NULL, date2);
               }
           }
-#endif
 
         commarg = minus_p (xrev1, rev1);
 

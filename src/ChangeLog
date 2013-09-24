@@ -1,5 +1,13 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘DIFF_L’ as C value.
+
+	* rcsdiff.c (setup_label): Remove surrounding ‘#if DIFF_L’.
+	(rcsdiff_main): Convert ‘#if DIFF_L’..‘#endif’ to
+	‘if (DIFF_L) { ... }’ and in some cases merge into sub-‘if’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘BAD_CREATE0’ as C value.
 
 	* rcs.c (rcs_main): Convert ‘#if BAD_CREATE0’..‘#endif’
