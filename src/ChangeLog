@@ -1,5 +1,13 @@
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use ‘MMAP_SIGNAL’ as C value.
+
+	* b-fro.c (mmap_deallocate): Remove surrounding ‘#if MMAP_SIGNAL’.
+	(fro_open): Convert ‘#if MMAP_SIGNAL’..‘#endif’
+	to ‘if (MMAP_SIGNAL) { ... } else { ... }’.
+
+2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘DIFF3_BIN’ as C value.
 
 	* merger.c (merge): Convert ‘#if DIFF3_BIN’..‘#endif’

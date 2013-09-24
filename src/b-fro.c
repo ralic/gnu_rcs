@@ -39,14 +39,12 @@
 #include "b-fro.h"
 #include "b-isr.h"
 
-#if MMAP_SIGNAL
 static void
 mmap_deallocate (struct fro *f)
 {
   if (PROB (munmap (f->base, f->lim - f->base)))
     fatal_sys ("munmap");
 }
-#endif  /* MMAP_SIGNAL */
 
 struct fro *
 fro_open (char const *name, char const *type, struct stat *status)
@@ -89,28 +87,32 @@ fro_open (char const *name, char const *type, struct stat *status)
   switch (f->rm)
     {
     case RM_MMAP:
-#if MMAP_SIGNAL
-      if (s != status->st_size)
-        PFATAL ("%s: too large", name);
-      f->stream = NULL;
-      f->deallocate = NULL;
-      ISR_DO (CATCHMMAPINTS);
-      f->base = mmap (NULL, s, PROT_READ, MAP_SHARED, fd, 0);
-      if (f->base == MAP_FAILED)
-        fatal_sys (name);
-      /* On many hosts, the superuser can mmap an NFS file
-         it can't read.  So access the first page now, and
-         print a nice message if a bus error occurs.  */
-      if (has_NFS)
-        access_page (ISR_SCRATCH, name, f->base);
-      f->deallocate = mmap_deallocate;
-      f->ptr = f->base;
-      f->lim = f->base + s;
-      fro_trundling (true, f);
-      break;
-#else
-      /* fall through */
-#endif
+      if (MMAP_SIGNAL)
+        {
+          if (s != status->st_size)
+            PFATAL ("%s: too large", name);
+          f->stream = NULL;
+          f->deallocate = NULL;
+          ISR_DO (CATCHMMAPINTS);
+          f->base = mmap (NULL, s, PROT_READ, MAP_SHARED, fd, 0);
+          if (f->base == MAP_FAILED)
+            fatal_sys (name);
+          /* On many hosts, the superuser can mmap an NFS file
+             it can't read.  So access the first page now, and
+             print a nice message if a bus error occurs.  */
+          if (has_NFS)
+            access_page (ISR_SCRATCH, name, f->base);
+          f->deallocate = mmap_deallocate;
+          f->ptr = f->base;
+          f->lim = f->base + s;
+          fro_trundling (true, f);
+          break;
+        }
+      else
+        {
+          /* fall through */
+          ;
+        }
 
     case RM_MEM:
       /* Read it into main memory all at once; this is
