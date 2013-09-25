@@ -1,3 +1,10 @@
+2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Fix bug: Avoid backslash in backticks.
+
+	* build-aux/extract-help (vprefix): ...here.
+	Suggested by Paul Eggert.
+
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build int] Look for ed(1) unconditionally.

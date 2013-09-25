@@ -67,7 +67,10 @@ else
         echo >&2 "ERROR: Cannot read input file: $in"
         exit 1
     fi
-    vprefix=`echo $in | sed 's/\.c$/_/;s|.*/||'`
+    # Do this in two steps to avoid backslash in backticks (unportable)
+    # in the sed script: vprefix=`echo $in | sed 's/\.c$/_/;s|.*/||'`
+    stempat='.*/\([^/]*\)\.c$'
+    vprefix=`expr "/$in" : "$stempat"`_
 fi
 
 test -z "$out" || exec 1>"$out"
