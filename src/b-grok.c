@@ -437,9 +437,6 @@ must_colon_revno (struct grok *g, char const *role)
 static void
 must_semi (struct grok *g, char const *clause)
 {
-  size_t was;
-
-  was = g->lno;
   skip_whitespace (g);
   if (';' != g->c)
     BUMMER ("missing semicolon after `%s'", clause);

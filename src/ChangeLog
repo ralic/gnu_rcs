@@ -1,5 +1,12 @@
 2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Decruft: Delete some "set but not used" local vars.
+
+	* b-grok.c (must_semi): Delete var ‘was’.
+	* rcsrev.c (fully_numeric): Delete var ‘have_branch’.
+
+2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build] Fix bug: Avoid ‘$<’ in makefile actions.
 
 	* Makefile.am ($(subs)): Use ‘$(srcdir)/sub.TEMPLATE’ directly.

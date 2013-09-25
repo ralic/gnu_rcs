@@ -637,7 +637,6 @@ fully_numeric (struct cbuf *ans, char const *source, struct fro *fp)
 {
   register char const *sp, *bp = NULL;
   int dots;
-  bool have_branch = false;
   char *ugh = NULL;
 
 #define ACCF(...)  accf (SINGLE, __VA_ARGS__)
@@ -705,7 +704,6 @@ fully_numeric (struct cbuf *ans, char const *source, struct fro *fp)
               goto sorry;
             }
           ACCS (expanded);
-          have_branch = true;
         }
       else
         {
