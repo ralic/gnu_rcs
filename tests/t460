@@ -72,7 +72,7 @@ xfail_revno ()
     # $2 -- revision number
     date=$1
     revno=$2
-    tip_varname=`echo tip$revno | sed 's/\.//g'`
+    tip_varname=`echo tip$revno | sed 's/[.]//g'`
     eval tip='$'$tip_varname
     eval tipdate='$d'$tip_varname
     xfail $date $revno "Revision $tip has date $tipdate."

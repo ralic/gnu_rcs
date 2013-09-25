@@ -1,3 +1,12 @@
+2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v] Fix bug: Avoid backslash in backticks.
+
+	* t440 (xfail_revno): Use "[.]" in sed script instead of "\.".
+	* t450 (xfail_revno): Likewise.
+	* t460 (xfail_revno): Likewise.
+	* t605 <top-level>: Likewise.
+
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.0

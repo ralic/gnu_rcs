@@ -69,7 +69,7 @@ xfail_revno ()
     # $2 -- revision number
     state=$1
     revno=$2
-    tip_varname=`echo tip$revno | sed 's/\.//g'`
+    tip_varname=`echo tip$revno | sed 's/[.]//g'`
     eval tip='$'$tip_varname
     eval tipstate='$s'$tip_varname
     xfail $state $revno "Revision $tip has state $tipstate."
