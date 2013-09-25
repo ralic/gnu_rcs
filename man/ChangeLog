@@ -1,3 +1,10 @@
+2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Fix bug: Avoid ‘$<’ in makefile actions.
+
+	* Makefile.am (REL): Use ‘$(top_srcdir)/configure’ directly.
+	Suggested by Paul Eggert.
+
 2013-05-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.0

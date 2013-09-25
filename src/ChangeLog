@@ -1,3 +1,10 @@
+2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Fix bug: Avoid ‘$<’ in makefile actions.
+
+	* Makefile.am ($(subs)): Use ‘$(srcdir)/sub.TEMPLATE’ directly.
+	Reported by Paul Eggert.
+
 2013-09-24  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[int] Use ‘DIFF_L’ as C value.

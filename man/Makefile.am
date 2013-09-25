@@ -53,7 +53,8 @@ $(dist_man_MANS) $(dist_noinst_MANS): REL $(bits)
 
 REL: $(top_srcdir)/configure
 	@{ echo '.ds Rv $(PACKAGE_VERSION)' ;		\
-	   date -u +'.ds Dt %Y-%m-%d' -r $< ; } > $@t ;	\
+	   date -u +'.ds Dt %Y-%m-%d'			\
+	        -r $(top_srcdir)/configure ; } > $@t ;	\
 	if [ -f $@ ] && cmp -s $@t $@ ;			\
 	  then rm -f $@t ;				\
 	  else mv $@t $@ ; echo Created $@ ;		\

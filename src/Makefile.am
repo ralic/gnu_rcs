@@ -25,7 +25,7 @@ subs = ci co rcsclean rcsdiff rcsmerge rlog
 bin_SCRIPTS = $(subs)
 
 $(subs): sub.TEMPLATE
-	sed 's/SUB/$@/;s/VERSION/$(VERSION)/' $< > $@
+	sed 's/SUB/$@/;s/VERSION/$(VERSION)/' $(srcdir)/sub.TEMPLATE > $@
 	chmod +x $@
 
 noinst_LIBRARIES = libparts.a
