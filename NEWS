@@ -2,6 +2,47 @@ NEWS for GNU RCS (Revision Control System)
 See the end for copying conditions.
 
 
+- 5.9.1 | 2013-10-04
+
+  - bugfixes
+
+    - specify ‘diff --binary’ consistently for non-POSIX systems
+
+      On non-POSIX systems, in some cases, ‘rcs frob’ used to omit
+      ‘--binary’ from the command-line to the underlying diff(1).
+      Now, that is done in all cases.
+
+    - portability fixes
+
+      - avoid ‘grep -q’
+
+        GNU grep understands ‘grep -q’ but some others do not.
+
+         (info "(autoconf) Limitations of Usual Tools")
+
+      - avoid ‘$<’ in makefile
+
+        GNU make understands ‘$<’ but some others do not.
+
+         (info "(autoconf) $< in Ordinary Make Rules")
+
+      - avoid backslash in backticks
+
+        The /bin/sh scripts used in "make" and "make check" now avoid
+        using a backslash in backticks, which can cause problems for
+        Solaris 9 /bin/sh (and maybe other /bin/sh implementations).
+
+  - ‘PROGRAM --help’ shows home page / "gethelp" info
+
+    This is for compliance w/ the GNU coding standards.
+
+     (info "(standards) --help")
+
+  - maintenance tools updated
+    - automake (GNU automake) 1.13.4
+    - gnulib-tool (GNU gnulib 2013-10-03 04:59:38) 0.0.8036-28df8
+
+
 - 5.9.0 | 2013-05-06
 
   - distribution now .tar.lz and .tar.xz

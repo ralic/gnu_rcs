@@ -1,3 +1,7 @@
+2013-10-04  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Release: 5.9.1
+
 2013-09-25  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[v] Fix bug: Avoid backslash in backticks.
