@@ -84,7 +84,7 @@ See the end for copying conditions.
     - ident(1) recognizes Subversion "fixed-width keyword syntax"
 
       In addition to the normal keyword pattern, for Subversion 1.2
-      (and later) compatability, ident(1) also recognizes patterns
+      (and later) compatibility, ident(1) also recognizes patterns
       having one of the forms:
 
       $KEYWORD:: TEXT $
@@ -476,7 +476,7 @@ See the end for copying conditions.
       sub-grammar is not yet specified.  (We intend to keep checksums
       and other compacted redundancies in this field, for manipulation
       by the commands in a future RCS 5.x release.)  For upward
-      compatability, the commands in this release do not change this
+      compatibility, the commands in this release do not change this
       field, although they silently read and write it (pass-through),
       if present.
 

@@ -451,7 +451,7 @@ struct behavior
 
   bool version_set;
   int version;
-  /* The "effective RCS version", for backward compatability,
+  /* The "effective RCS version", for backward compatibility,
      normalized via ‘VERSION’ (i.e., current 0, previous -1, etc).
      ‘version_set’ true means the effective version was set from the
      command-line option ‘-V’.  Additional ‘-V’ results in a warning.

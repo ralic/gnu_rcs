@@ -298,7 +298,7 @@ main (int argc, char **argv)
           dispatch (&exitval, sub, cmd, argc - 1, argv + 1);
         }
 
-      /* Maybe support backward compatability w/ obsolescent usage (ugh).
+      /* Maybe support backward compatibility w/ obsolescent usage (ugh).
          This is "maybe" because it's just a heuristic (double-ugh).
          On the positive side, we do this only after trying to recognize
          the command (the common case), so the impact is reduced.

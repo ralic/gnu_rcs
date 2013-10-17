@@ -110,7 +110,7 @@ morejunk
 
 ##
 #   * The "two join specifications" tests are contrived
-#     primarily to ensure backward compatability.
+#     primarily to ensure backward compatibility.
 #     The expected output is verbatim from RCS 5.7.
 ##
 

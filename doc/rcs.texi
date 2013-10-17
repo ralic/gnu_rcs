@@ -318,9 +318,9 @@ may modify @var{revno} (that is, do a checkin operation to deposit the
 next higher revision, or a higher revision number on the same branch as
 @var{revno}).
 
-@cindex compatability, RCS 2.x
+@cindex compatibility, RCS 2.x
 @cindex @samp{configure --enable-compat2}
-@strong{Compatability Note}:
+@strong{Compatibility Note}:
 @repo{}s made with RCS 2.x may also contain @dfn{suffix
 information}.  If you run into such a file (unlikely, as that file
 format became obsolete in 1982), you will need to rebuild RCS with
@@ -1230,7 +1230,7 @@ emits a warning.  This option suppresses the warning.
 @end table
 
 In addition to the normal keyword pattern, for Subversion 1.2
-(and later) compatability@footnote{The @dfn{fixed-length keyword syntax}
+(and later) compatibility@footnote{The @dfn{fixed-length keyword syntax}
 is described in detail in
 @uref{http://svnbook.red-bean.com/en/1.5/svn-book.html#svn.advanced.props.special.keywords,
 ,Version Control with Subversion}, chapter ``Advanced Topics'', section
@@ -1646,7 +1646,7 @@ Overall, the format is free--format text.
 In most environments RCS uses the ISO 8859/1 encoding: visible graphic
 characters are (octal) codes 041--176 and 240--377, and whitespace
 characters are codes 010--015 and 040.
-@TODO{} Discuss or point to encoding compatability issues.
+@TODO{} Discuss or point to encoding compatibility issues.
 
 @menu
 * comma-v grammar::
