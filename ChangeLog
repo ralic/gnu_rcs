@@ -1,5 +1,13 @@
 2013-10-20  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	Fix bug: Bump extract-help version number.
+
+	Omission from previous releases.
+
+	* build-aux/extract-help (version): Bump to "1.4".
+
+2013-10-20  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Relax RCS_MEM_LIMIT default; fall back if unspecified.
 
 	* doc/rcs.texi (Environment): Update ‘RCS_MEM_LIMIT’ description;
