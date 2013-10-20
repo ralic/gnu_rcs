@@ -1,5 +1,12 @@
 2013-10-20  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[C int] Prefer bit-shift to multiplication.
+
+	* b-fro.c (fro_open): ...here, when
+	comparing the comma-v size to the memory limit.
+
+2013-10-20  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	Relax RCS_MEM_LIMIT default; fall back if unspecified.
 
 	* base.h (MEMORY_UNLIMITED): New #define.

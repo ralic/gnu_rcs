@@ -80,7 +80,7 @@ fro_open (char const *name, char const *type, struct stat *status)
 
   /* Determine the read method.  */
   f->rm = (unlimited
-           || status->st_size < 1024 * BE (mem_limit))
+           || (status->st_size >> 10) < BE (mem_limit))
     ? (MMAP_SIGNAL && status->st_size
        ? RM_MMAP
        : RM_MEM)
