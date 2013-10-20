@@ -58,6 +58,7 @@ fro_open (char const *name, char const *type, struct stat *status)
                            | (OPEN_O_BINARY && strchr (type, 'b')
                               ? OPEN_O_BINARY
                               : 0)));
+  bool unlimited = MEMORY_UNLIMITED == BE (mem_limit);
 
   if (PROB (fd))
     return NULL;
@@ -78,12 +79,25 @@ fro_open (char const *name, char const *type, struct stat *status)
   f->end = s;
 
   /* Determine the read method.  */
-  f->rm = status->st_size < 1024 * BE (mem_limit)
+  f->rm = (unlimited
+           || status->st_size < 1024 * BE (mem_limit))
     ? (MMAP_SIGNAL && status->st_size
        ? RM_MMAP
        : RM_MEM)
     : RM_STDIO;
 
+#define STUBBORNLY_RETRY_MAYBE(METHOD)  do      \
+    {                                           \
+      if (unlimited)                            \
+        {                                       \
+          f->rm = METHOD;                       \
+          goto retry;                           \
+        }                                       \
+      fatal_sys (name);                         \
+    }                                           \
+  while (0)
+
+ retry:
   switch (f->rm)
     {
     case RM_MMAP:
@@ -96,7 +110,7 @@ fro_open (char const *name, char const *type, struct stat *status)
           ISR_DO (CATCHMMAPINTS);
           f->base = mmap (NULL, s, PROT_READ, MAP_SHARED, fd, 0);
           if (f->base == MAP_FAILED)
-            fatal_sys (name);
+            STUBBORNLY_RETRY_MAYBE (RM_MEM);
           /* On many hosts, the superuser can mmap an NFS file
              it can't read.  So access the first page now, and
              print a nice message if a bus error occurs.  */
@@ -132,7 +146,7 @@ fro_open (char const *name, char const *type, struct stat *status)
           do
             {
               if (PROB (r = read (fd, bufptr, bufsiz)))
-                fatal_sys (name);
+                STUBBORNLY_RETRY_MAYBE (RM_STDIO);
 
               if (!r)
                 {
@@ -148,7 +162,7 @@ fro_open (char const *name, char const *type, struct stat *status)
             }
           while (bufsiz);
           if (PROB (lseek (fd, 0, SEEK_SET)))
-            fatal_sys (name);
+            STUBBORNLY_RETRY_MAYBE (RM_STDIO);
         }
       f->ptr = f->base;
       f->lim = f->base + s;
@@ -163,6 +177,8 @@ fro_open (char const *name, char const *type, struct stat *status)
 
   f->fd = fd;
   return f;
+
+#undef STUBBORNLY_RETRY_MAYBE
 }
 
 void

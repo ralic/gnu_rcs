@@ -1,3 +1,10 @@
+2013-10-20  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Relax RCS_MEM_LIMIT default; fall back if unspecified.
+
+	* doc/rcs.texi (Environment): Update ‘RCS_MEM_LIMIT’ description;
+	add a willful ignorance hint and speculation on its removal.
+
 2013-10-17  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix typo: Spell "compatib..." correctly!

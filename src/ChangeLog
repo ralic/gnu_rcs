@@ -1,3 +1,15 @@
+2013-10-20  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Relax RCS_MEM_LIMIT default; fall back if unspecified.
+
+	* base.h (MEMORY_UNLIMITED): New #define.
+	* rcsutil.c (gnurcs_init): If unspecified,
+	default ‘BE (mem_limit)’ to ‘MEMORY_UNLIMITED’.
+	* b-fro.c (fro_open): Notice ‘MEMORY_UNLIMITED’ mem limit;
+	in that case, don't check file size, and on ‘RM_MMAP’ or
+	‘RM_MEM’ failure, retry w/ the "next" method: ‘RM_MEM’ or
+	‘RM_STDIO’, respectively.
+
 2013-10-17  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix typo: Spell "compatib..." correctly!

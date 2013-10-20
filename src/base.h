@@ -522,6 +522,7 @@ struct behavior
      (if mmap(2)), or operate on a copy of it in core (if no mmap(2)).
      Otherwise, use standard i/o routines as the fallback.
      Set by env var ‘RCS_MEM_LIMIT’.
+     See also ‘MEMORY_UNLIMITED’.
      -- gnurcs_init  */
 
   struct sff *sff;
@@ -860,6 +861,8 @@ int getRCSINIT (int argc, char **argv, char ***newargv);
 #define SFFI_NEWDIR   BAD_CREAT0
 
 /* Idioms.  */
+
+#define MEMORY_UNLIMITED  -1
 
 #define BOG_DIFF   (TYAG_TEMPUNLINK | TYAG_DIFF)
 #define BOG_ZONK   (TYAG_DIRTMPUNLINK | TYAG_TEMPUNLINK)

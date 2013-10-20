@@ -103,7 +103,7 @@ gnurcs_init (struct program const *program)
          ? 0
          : lim)
       /* Default value.  */
-      : 256;
+      : MEMORY_UNLIMITED;
   }
 }
 
