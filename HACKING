@@ -4,16 +4,6 @@ This file is both a guide for newcomers and a todo list for oldstayers.
 It lives in the repo but is not included in the distribution.
 
 * next
-*** DONE extend ident(1) to recognize svn "fixed-width keyword syntax"
-    based on [[rh:247998][redhat #247998]]
-    see also [[bug-rcs:2011-09/msg00000.html][bug-rcs thread (2011-09-08)]]
-    see also [[http://svnbook.red-bean.com/en/1.5/svn-book.html#svn.advanced.props.special.keywords][svn book -- special keywords]]
-*** DONE add "self-same" (super-strict, same-user) ‘co -l’ mode
-    based on [[rh:107947][redhat #107947]]
-    see also [[bug-rcs:2011-09/msg00000.html][bug-rcs thread (2011-09-08)]]
-*** DONE single top-level command
-*** DONE long options (except for "rcs --help COMMAND")
-
 * entropy: [[http://hydra.nixos.org/jobset/gnu/rcs-master][hydra]] ([[http://hydra.nixos.org/project/gnu][gnu]])
 * coding standards
 *** indent -gnu -nut (sounds enticing, no?)
