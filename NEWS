@@ -2,6 +2,46 @@ NEWS for GNU RCS (Revision Control System)
 See the end for copying conditions.
 
 
+- 5.9.2 | 2013-11-28
+
+  - bugfixes
+
+    - avoid possibly failing command in backticks
+
+      Some versions of Solaris /bin/sh would cause the extract-help
+      build script to exit failurefully when the grep command in the
+      backticks failed (in the presence of "set -e").  Sigh.
+
+    - handle low-memory situations like RCS 5.7 (mostly)
+
+      For reading comma-v files, RCS 5.7 tries mmap(2), in-core
+      snarfing, and stdio access, falling back to slower methods
+      on failure of the faster method.  RCS 5.8 maintained the order,
+      but did not fall back; on failure, it gave up immediately.
+      This change was originally viewed as a feature, but lately it
+      seemed more like a bug.
+
+      Now, RCS 5.7 behavior is for the most part restored.  The
+      exception is when env var ‘RCS_MEM_LIMIT’ is set; in that case,
+      failure of a fast method does not fall back to the slower one.
+
+  - default for env var ‘RCS_MEM_LIMIT’ relaxed
+
+    This used to be 256 kilobytes, a reasonable value a long time
+    ago, but ridiculously low nowadays.  Now, it is "unlimited",
+    which is more in line w/ the GNU philosophy, anyway:
+
+     (info "(standards) Semantics")
+
+    Since the env var is mostly intended for testing RCS, you can
+    normally leave it unset.  (Probably it will be removed in a
+    future release.)
+
+  - maintenance tools updated
+    - automake (GNU automake) 1.14
+    - gnulib-tool (GNU gnulib 2013-11-28 08:46:06) 0.1.21-37f8a
+
+
 - 5.9.1 | 2013-10-04
 
   - bugfixes

@@ -28,7 +28,7 @@
 # formatted as a C string definition, with proper #include prefixed.
 ##
 
-version='1.4'
+version='1.5'
 
 set -e
 

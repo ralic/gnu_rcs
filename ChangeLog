@@ -1,3 +1,9 @@
+2013-11-28  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Release: 5.9.2
+
+	* build-aux/extract-help (version): Bump to "1.5".
+
 2013-10-21  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Fix bug: Avoid possibly failing commands in backticks.
