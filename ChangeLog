@@ -1,3 +1,18 @@
+2014-08-02  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Add diff(1)/diff3(1) support for cross-compiling.
+
+	Prompted by:
+	<http://lists.gnu.org/archive/html/help-rcs/2013-06/msg00000.html>
+
+	* configure.ac (RCS_SET_MAYBE): New AC_DEFUN.
+	(rcs_cv_sane_DIFF, rcs_cv_status_diff_success)
+	(rcs_cv_status_diff_failure, rcs_cv_status_diff_trouble)
+	(rcs_cv_options_diff, rcs_cv_options_diff_l):
+	When cross-compiling, if ‘DIFF’ is set, assign optimistic values
+	to these vars, thereby arranging to effectively skip their tests.
+	(rcs_cv_sane_diff3): Likewise for ‘DIFF3’.
+
 2013-11-28  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.2

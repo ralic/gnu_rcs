@@ -28,6 +28,12 @@ AS_CASE([$PACKAGE_VERSION],[*.*.*],[pretest_p=yes],[pretest_p=no])
 
 # syntax terrors
 
+AC_DEFUN([RCS_SET_MAYBE],[dnl
+dnl $1 -- shell variable name
+dnl $2 -- value assigned to $1 if not already set
+AS_VAR_SET_IF([$1],[:],[$1=$2])
+])dnl
+
 AC_DEFUN([RCS_YESP],[test yes = "$[]$1"])dnl $1 -- shell variable name
 
 AC_DEFUN([RCS_NORM],[m4_split(m4_normalize($1))])dnl
@@ -132,7 +138,18 @@ AC_ARG_VAR([DIFF],[the name of a program that works like diff(1)
   (default is to search the PATH for: ]DIFF_MAYBE[)])
 
 sane_diff=no
-AS_IF([test "$DIFF"],[RCS_CHECK_DIFF([rcs_cv_sane_DIFF],[$DIFF])])
+# If env var ‘DIFF’ is set and this is a cross-compile,
+# don't bother checking it; assume user knows they are doing.
+AS_IF([test "$DIFF"],
+[AS_CASE([$cross_compiling],[yes],[
+  sane_diff=yes
+  RCS_SET_MAYBE([rcs_cv_sane_DIFF],[yes])
+  RCS_SET_MAYBE([rcs_cv_status_diff_success],[0])
+  RCS_SET_MAYBE([rcs_cv_status_diff_failure],[1])
+  RCS_SET_MAYBE([rcs_cv_status_diff_trouble],[2])
+  RCS_SET_MAYBE([rcs_cv_options_diff],['-an'])
+  RCS_SET_MAYBE([rcs_cv_options_diff_l],[yes])
+],[RCS_CHECK_DIFF([rcs_cv_sane_DIFF],[$DIFF])])])
 m4_foreach([prog],RCS_NORM([DIFF_MAYBE]),[
 RCS_CHECK_DIFF([rcs_cv_sane_]prog,prog)
 ])
@@ -193,6 +210,10 @@ RCS_CBOOL([DIFF_L],[yes],[rcs_cv_options_diff_l],
   [Does diff(1) understand `--label'?])
 
 # Set DIFF3 to the name of the diff3 program.
+# If env var ‘DIFF3’ is set and this is a cross-compile,
+# don't bother checking it; assume user knows they are doing.
+AS_IF([test "$DIFF3" && RCS_YESP([$cross_compiling])],
+      [rcs_cv_sane_diff3=yes])
 AC_DEFUN([DIFF3_MAYBE],[gdiff3 diff3])
 AC_ARG_VAR([DIFF3],[the name of a program that works like diff3(1)
   from GNU diffutils, used to compare three files line by line

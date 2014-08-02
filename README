@@ -234,6 +234,23 @@ Note that the value of ‘rcs_cv_mmap_signal’ has meaning only if
 ‘rcs_cv_sane_mmap’ is ‘yes’.  Valid values are documented only in the
 configure script source, i.e., configure.ac -- don't guess, use the Source!
 
+You will most likely also need to specify GNU diffutils programs diff(1)
+and diff3(1) using vars ‘DIFF’ and ‘DIFF3’, respectively.  The values should
+be absolute filenames *on the target system*.  If those are specified, the
+configure script skips the related tests and assumes the following defaults:
+
+ (variable)                   (value)
+  rcs_cv_sane_DIFF             yes
+  rcs_cv_status_diff_success   0
+  rcs_cv_status_diff_failure   1
+  rcs_cv_status_diff_trouble   2
+  rcs_cv_options_diff          -an
+  rcs_cv_options_diff_l        yes
+  rcs_cv_sane_diff3            yes
+
+Values are optimistic, unlike for the vars described at the beginning of
+this section, but anyway can be overridden in the usual manner.
+
 If you get good results cross-compiling, with or without such variable
 overrides, please consider sharing the good news by posting the configure
 script invocation to the bug-report address with subject "cross-compilation
