@@ -128,7 +128,7 @@ catchsigaction (int signo, siginfo_t *info, RCS_UNUSED void *uc)
       /* If this signal was planned, don't complain about it.  */
       if (!(from_mmap && ISR (access_name)))
         {
-          const char *nRCS = "\nRCS";
+          char *nRCS = "\nRCS";
 
           if (from_mmap && info && info->si_errno)
             {
@@ -163,7 +163,7 @@ catchsigaction (int signo, siginfo_t *info, RCS_UNUSED void *uc)
 #endif
 
 static void
-setup_catchsig (size_t count, int const set[count])
+setup_catchsig (size_t count, int const set[/*count*/])
 {
   sigset_t blocked;
 

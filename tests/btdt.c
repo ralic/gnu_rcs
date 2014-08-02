@@ -158,7 +158,7 @@ struct yeah yeah[] =
 #define NYEAH  (sizeof (yeah) / sizeof (struct yeah))
 
 int
-main (int argc, char *argv[argc])
+main (int argc, char *argv[/*argc*/])
 {
   char const *me = "btdt";
 

@@ -1,3 +1,10 @@
+2014-08-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Port to Solaris 10, which uses GCC 3.4.3.
+	* Makefile.am (TESTS_ENVIRONMENT): Use $(SHELL), not sh.
+	* btdt.c (main):
+	Comment out size of array parameter, as GCC 3.4.3 doesn't allow it.
+
 2013-11-28  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.2

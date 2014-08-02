@@ -1,3 +1,13 @@
+2014-08-02  Paul Eggert  <eggert@cs.ucla.edu>
+
+	Port to Solaris 10, which uses GCC 3.4.3.
+	Array problem reported by Nelson H. F. Beebe.
+	* b-feph.c (reap):
+	* b-isr.c (setup_catchsig):
+	Comment out size of array parameter, as GCC 3.4.3 doesn't allow it.
+	* b-isr.c (catchsigaction): Use 'char *' (not 'const char *')
+	for a local variable, to pacify Solaris 10 psiginfo.
+
 2013-11-28  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.2
