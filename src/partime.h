@@ -1,6 +1,6 @@
 /* Parse a string, returning a ‘struct partime’ that describes it.
 
-   Copyright (C) 2010-2013 Thien-Thi Nguyen
+   Copyright (C) 2010-2014 Thien-Thi Nguyen
    Copyright (C) 1993, 1994, 1995 Paul Eggert
 
    This file is part of GNU RCS.

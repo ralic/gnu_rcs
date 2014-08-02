@@ -1,6 +1,6 @@
 /* RCS map of character types
 
-   Copyright (C) 2010-2013 Thien-Thi Nguyen
+   Copyright (C) 2010-2014 Thien-Thi Nguyen
    Copyright (C) 1990, 1991, 1995 Paul Eggert
    Copyright (C) 1982, 1988, 1989 Walter Tichy
 

@@ -1,6 +1,6 @@
 /* b-yacmd.h --- yet another command
 
-   Copyright (C) 2013 Thien-Thi Nguyen
+   Copyright (C) 2013, 2014 Thien-Thi Nguyen
 
    This file is part of GNU RCS.
 

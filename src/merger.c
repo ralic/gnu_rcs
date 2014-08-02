@@ -1,6 +1,6 @@
 /* three-way file merge internals
 
-   Copyright (C) 2010-2013 Thien-Thi Nguyen
+   Copyright (C) 2010-2014 Thien-Thi Nguyen
    Copyright (C) 1991, 1992, 1993, 1994, 1995 Paul Eggert
 
    This file is part of GNU RCS.

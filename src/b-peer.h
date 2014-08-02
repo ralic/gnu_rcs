@@ -1,6 +1,6 @@
 /* b-peer.h --- finding the ‘execv’able name of a peer program
 
-   Copyright (C) 2010-2013 Thien-Thi Nguyen
+   Copyright (C) 2010-2014 Thien-Thi Nguyen
 
    This file is part of GNU RCS.
 
