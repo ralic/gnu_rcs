@@ -1,5 +1,13 @@
 2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[C] Convert ‘**argv’ to ‘*argv[ARSZ_FN_PARM (argc)]’.
+
+	* ident.c (main)
+	* merge.c (main)
+	* super.c (main): ...here.
+
+2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[C] Use ‘ARSZ_FN_PARM’.
 
 	* b-feph.c (reap)
