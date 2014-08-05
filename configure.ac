@@ -280,6 +280,24 @@ AS_IF([RCS_YESP([use_mmap])],[AC_CHECK_HEADERS([sys/mman.h])])
 # types -- see also: (info "(autoconf) Particular Types")
 AC_TYPE_UID_T
 
+# checks for compiler characteristics
+
+AC_CACHE_CHECK([if compiler handles array-size in func param],
+[rcs_cv_arsz_func_parm],[
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]],[[
+/* GCC 3.4.3 on Solaris 10 cannot handle this
+   (C99 § 6.7.5.3 "Function declarators (including prototypes)").  */
+int
+last (int count, int all[static count])
+{
+  return all[count - 1];
+}
+]])],[res=yes],[res=no])
+  rcs_cv_arsz_func_parm=$res
+])
+RCS_CBOOL([ARSZ_FN_PARM_OK],[yes],[rcs_cv_arsz_func_parm],
+  [Can the compiler handle non-literal array-size in a func param?])
+
 # funcs
 
 AC_FUNC_FORK

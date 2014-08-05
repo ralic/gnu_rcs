@@ -1,3 +1,12 @@
+2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Check if compiler handles ‘static’ in array-size func parm.
+
+	* configure.ac <checks for compiler characteristics>: New section.
+	(rcs_cv_arsz_func_parm): New var to record check for
+	proper compilation of ‘static’ in array-size func parm.
+	(ARSZ_FN_PARM_OK): New RCS_CBOOL.
+
 2014-08-02  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Add diff(1)/diff3(1) support for cross-compiling.
