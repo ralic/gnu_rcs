@@ -1,3 +1,9 @@
+2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[C int] Add ‘ARSZ_FN_PARM’.
+
+	* base.h (ARSZ_FN_PARM): New macro, using ‘ARSZ_FN_PARM_OK’.
+
 2014-08-02  Paul Eggert  <eggert@cs.ucla.edu>
 
 	Port to Solaris 10, which uses GCC 3.4.3.
