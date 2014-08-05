@@ -1,5 +1,12 @@
 2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[C] Use ‘ARSZ_FN_PARM’.
+
+	* b-feph.c (reap)
+	* b-isr.c (setup_catchsig): ...here, for array arg.
+
+2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[C int] Add ‘ARSZ_FN_PARM’.
 
 	* base.h (ARSZ_FN_PARM): New macro, using ‘ARSZ_FN_PARM_OK’.

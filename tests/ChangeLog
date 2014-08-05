@@ -1,3 +1,9 @@
+2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[C] Use ‘ARSZ_FN_PARM’.
+
+	* btdt.c (main): ...here, for array arg.
+
 2014-08-02  Paul Eggert  <eggert@cs.ucla.edu>
 
 	Port to Solaris 10, which uses GCC 3.4.3.
