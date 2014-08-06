@@ -1,3 +1,12 @@
+2014-08-06  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Make ‘static’ check more likely to trigger lossage.
+
+	Suggested by Paul Eggert:
+	<http://lists.gnu.org/archive/html/bug-gnulib/2014-08/msg00014.html>
+
+	* configure.ac (rcs_cv_arsz_func_parm): Add C func ‘last1’.
+
 2014-08-05  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Check if compiler handles ‘static’ in array-size func parm.

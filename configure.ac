@@ -285,10 +285,15 @@ AC_TYPE_UID_T
 AC_CACHE_CHECK([if compiler handles array-size in func param],
 [rcs_cv_arsz_func_parm],[
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]],[[
-/* GCC 3.4.3 on Solaris 10 cannot handle this
+/* GCC 3.4.3 on Solaris 10 sometimes cannot handle this
    (C99 § 6.7.5.3 "Function declarators (including prototypes)").  */
 int
 last (int count, int all[static count])
+{
+  return all[count - 1];
+}
+int
+last1 (int count, int all[static count])
 {
   return all[count - 1];
 }
