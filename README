@@ -136,6 +136,7 @@ corresponding strings in the notes below before configuring.
   GCC 2.5.8 Intel x86 - CFLAGS
   HP-UX 8.07 and 9.*  - MMAP_SIGNAL
   Solaris 2.4         - MMAP_SIGNAL
+  GCC 3.4.3           - Solaris 10
   SCO Unix V.3.2      - bad_NFS_rename
   Ultrix              - HAVE_SETEUID
 
@@ -157,6 +158,11 @@ Do not configure with ‘--prefix=/’ or ‘--prefix=/usr’ in AIX.
 An AIX boot shell script (/etc/rc.boot4 in AIX 3.2) invokes ‘merge’,
 meaning /etc/merge, and fails if RCS merge is installed in /bin or /usr/bin.
 IBM says that installing new programs into /usr/bin is a customer error (!).
+
+The configure script tries to detect a GCC 3.4.3 bug (w/ optimization ‘-O2’
+on Solaris 10), whereby ‘static VAR’ in the array-size context of a function
+parameter causes a compilation error.  This is saved to cached variable
+‘rcs_cv_arsz_func_parm’ (yes => buggy compiler, no => compiler ok).
 
 
 
