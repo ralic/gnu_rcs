@@ -144,7 +144,7 @@ scanfile (register FILE *file, char const *name)
 DECLARE_PROGRAM (ident, TYAG_IMMEDIATE);
 
 int
-main (int argc, char **argv)
+main (int argc, char *argv[ARSZ_FN_PARM (argc)])
 {
   FILE *fp;
   int status = EXIT_SUCCESS;

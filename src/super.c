@@ -226,7 +226,7 @@ huh (const char *what, const char *argv1)
 DECLARE_PROGRAM (super, TYAG_IMMEDIATE);
 
 int
-main (int argc, char **argv)
+main (int argc, char *argv[ARSZ_FN_PARM (argc)])
 {
   const char *cmd;
   submain_t *sub;
