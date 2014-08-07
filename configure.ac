@@ -284,7 +284,7 @@ AC_TYPE_UID_T
 
 AC_CACHE_CHECK([if compiler handles array-size in func param],
 [rcs_cv_arsz_func_parm],[
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]],[[
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 /* GCC 3.4.3 on Solaris 10 sometimes cannot handle this
    (C99 § 6.7.5.3 "Function declarators (including prototypes)").  */
 int
@@ -297,6 +297,9 @@ last1 (int count, int all[static count])
 {
   return all[count - 1];
 }
+]],[[
+int v[5] = { 1, 4, 9, 16, 25 };
+return last (5, v) - last1 (5, v);
 ]])],[res=yes],[res=no])
   rcs_cv_arsz_func_parm=$res
 ])

@@ -1,3 +1,11 @@
+2014-08-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Fix bug: Formulate ‘static’ check correctly.
+
+	* configure.ac (rcs_cv_arsz_func_parm): Move func defs
+	from ‘AC_LANG_PROGRAM’ BODY to PROLOGUE; add BODY.
+	Reported by Paul Eggert -- same thread.
+
 2014-08-06  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Make ‘static’ check more likely to trigger lossage.
