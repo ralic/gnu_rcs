@@ -162,15 +162,6 @@ main (int argc, char *argv[ARSZ_FN_PARM (argc)])
 {
   char const *me = "btdt";
 
-  if (2 > argc || STR_SAME ("--help", argv[1]))
-    {
-      printf ("Usage: %s COMPONENT [ARG...]\n", me);
-      for (size_t i = 0; i < NYEAH; i++)
-        printf ("- %-10s %s\n", yeah[i].component, yeah[i].usage);
-      printf ("\n(Read the source for details.)\n");
-      return EXIT_SUCCESS;
-    }
-
   if (STR_SAME ("--version", argv[1]))
     {
       printf ("btdt (%s) %s\n", PACKAGE_NAME, PACKAGE_VERSION);
@@ -178,7 +169,16 @@ main (int argc, char *argv[ARSZ_FN_PARM (argc)])
       printf ("License GPLv3+; GNU GPL version 3 or later"
               " <http://gnu.org/licenses/gpl.html>\n\n");
       argv[1] = "--help";
-      return main (argc, argv);
+      /* fall through */
+    }
+
+  if (2 > argc || STR_SAME ("--help", argv[1]))
+    {
+      printf ("Usage: %s COMPONENT [ARG...]\n", me);
+      for (size_t i = 0; i < NYEAH; i++)
+        printf ("- %-10s %s\n", yeah[i].component, yeah[i].usage);
+      printf ("\n(Read the source for details.)\n");
+      return EXIT_SUCCESS;
     }
 
   for (size_t i = 0; i < NYEAH; i++)
