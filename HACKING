@@ -219,6 +219,22 @@ It lives in the repo but is not included in the distribution.
 
     #+END:
 
+*** what it means
+    (save-excursion
+      (search-backward (concat "#" "+BEGIN:"))
+      (forward-line 1)
+      (cl-loop
+       with explicit = 0
+       with count = 0
+       do (incf count)
+       when (looking-at " +;  [^ ]")
+       do (incf explicit)
+       do (forward-line 1)
+       until (looking-at " +#")
+       finally return (format "%2.0f%% (%d / %d)"
+                              (* 100 (/ (float explicit) count))
+                              explicit count)))
+
 * possible future changes (see [[file:doc/rcs.texi::@node.*missing][manual]] for the more feasible ones)
 
 *** Bring back sccstorcs.
