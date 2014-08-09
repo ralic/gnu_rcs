@@ -1,3 +1,10 @@
+2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Use gnulib module ‘vararrays’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘vararrays’.
+	* configure.ac (rcs_cv_arsz_func_parm, ARSZ_FN_PARM_OK): Delete.
+
 2014-08-07  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Fix bug: Formulate ‘static’ check correctly.

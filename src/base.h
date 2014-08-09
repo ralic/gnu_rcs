@@ -44,10 +44,10 @@
 
 /* GCC attributes  */
 
-#if ARSZ_FN_PARM_OK
-#define ARSZ_FN_PARM(x)  static x
-#else
+#if __STDC_NO_VLA__
 #define ARSZ_FN_PARM(x)
+#else
+#define ARSZ_FN_PARM(x)  static x
 #endif
 
 #define RCS_UNUSED  _GL_UNUSED
