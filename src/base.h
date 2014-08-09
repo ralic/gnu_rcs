@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "vla.h"
 
 #ifdef HAVE_LIMITS_H
 #include <limits.h>
@@ -43,12 +44,6 @@
 #define exiting  _Noreturn
 
 /* GCC attributes  */
-
-#if __STDC_NO_VLA__
-#define ARSZ_FN_PARM(x)
-#else
-#define ARSZ_FN_PARM(x)  static x
-#endif
 
 #define RCS_UNUSED  _GL_UNUSED
 

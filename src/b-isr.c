@@ -163,7 +163,7 @@ catchsigaction (int signo, siginfo_t *info, RCS_UNUSED void *uc)
 #endif
 
 static void
-setup_catchsig (size_t count, int const set[ARSZ_FN_PARM (count)])
+setup_catchsig (size_t count, int const set[VLA_ELEMS (count)])
 {
   sigset_t blocked;
 

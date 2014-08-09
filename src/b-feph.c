@@ -168,7 +168,7 @@ keepdirtemp (char const *name)
 }
 
 static void
-reap (size_t count, struct sff all[ARSZ_FN_PARM (count)],
+reap (size_t count, struct sff all[VLA_ELEMS (count)],
       int (*cut) (char const *filename))
 {
   enum maker m;

@@ -1,3 +1,10 @@
+2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build] Use gnulib module ‘vla’.
+
+	* btdt.c (getoldkeys_do_it, grok_do_it, xorlf_do_it)
+	(main_t, main): Use ‘VLA_ELEMS’.
+
 2014-08-08  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[slog] Avoid recursing on ‘main’.

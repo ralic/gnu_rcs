@@ -1,5 +1,17 @@
 2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[build] Use gnulib module ‘vla’.
+
+	* base.h: #include "vla.h".
+	(ARSZ_FN_PARM): Delete macro.
+	* b-feph.c (reap): Use ‘VLA_ELEMS’.
+	* b-isr.c (setup_catchsig): Likewise.
+	* ident.c (main): Likewise.
+	* merge.c (main): Likewise.
+	* super.c (main): Likewise.
+
+2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[build] Use gnulib module ‘vararrays’.
 
 	* base.h (ARSZ_FN_PARM): Use ‘__STDC_NO_VLA__’.

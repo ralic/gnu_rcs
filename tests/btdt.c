@@ -60,7 +60,7 @@ getoldkeys_spew (char const *what, char *s)
 }
 
 int
-getoldkeys_do_it (int argc, char *argv[argc])
+getoldkeys_do_it (int argc, char *argv[VLA_ELEMS (argc)])
 {
   if (2 > argc)
     bad_args (argv[0]);
@@ -87,7 +87,7 @@ char const grok_usage[] =
   MORE "  edits-order";
 
 int
-grok_do_it (int argc, char *argv[argc])
+grok_do_it (int argc, char *argv[VLA_ELEMS (argc)])
 {
   int i;
   struct fro *f;
@@ -126,7 +126,7 @@ char const xorlf_usage[] =
   "";
 
 int
-xorlf_do_it (int argc, char *argv[argc] RCS_UNUSED)
+xorlf_do_it (int argc, char *argv[VLA_ELEMS (argc)] RCS_UNUSED)
 {
   int c;
 
@@ -136,7 +136,7 @@ xorlf_do_it (int argc, char *argv[argc] RCS_UNUSED)
 }
 
 
-typedef int (main_t) (int argc, char *argv[argc]);
+typedef int (main_t) (int argc, char *argv[VLA_ELEMS (argc)]);
 
 struct yeah
 {
@@ -158,7 +158,7 @@ struct yeah yeah[] =
 #define NYEAH  (sizeof (yeah) / sizeof (struct yeah))
 
 int
-main (int argc, char *argv[ARSZ_FN_PARM (argc)])
+main (int argc, char *argv[VLA_ELEMS (argc)])
 {
   char const *me = "btdt";
 

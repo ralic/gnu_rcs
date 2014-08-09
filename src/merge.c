@@ -31,7 +31,7 @@ struct top *top;
 DECLARE_PROGRAM (merge, BOG_DIFF);
 
 int
-main (int argc, char *argv[ARSZ_FN_PARM (argc)])
+main (int argc, char *argv[VLA_ELEMS (argc)])
 {
   register char const *a;
   struct symdef three_manifestations[3];
