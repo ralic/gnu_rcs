@@ -89,19 +89,25 @@ exit 0
        ; NB: test fails reliably only for x86-64 -- YMMV!
   t370 ; ‘rlog -dD1<D2’ => debugging output to stderr (fixed in 5.8.1)
   t803 ; sym deref w/ common prefix (fixed in 5.8.2)
+  t804 ; revert on unchanged on a branch (fixed in 5.9.3)
   t810 ; ‘ci -l -d -T’ => RCS file mtime set to epoch (fixed in 5.8.1)
 
 * 5.8.1
   t301 ; ‘integrity’ syntax underspecified (fixed in 5.8.2)
   t803 ; sym deref w/ common prefix (fixed in 5.8.2)
+  t804 ; revert on unchanged on a branch (fixed in 5.9.3)
 
 * 5.8.2
+  t804 ; revert on unchanged on a branch (fixed in 5.9.3)
 
 * 5.9.0
+  t804 ; revert on unchanged on a branch (fixed in 5.9.3)
 
 * 5.9.1
+  t804 ; revert on unchanged on a branch (fixed in 5.9.3)
 
 * 5.9.2
+  t804 ; revert on unchanged on a branch (fixed in 5.9.3)
 
 * end matter
 *** Local variables:

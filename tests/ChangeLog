@@ -1,3 +1,14 @@
+2014-08-16  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v] Add test for ci/co without change on branch.
+
+	Reported by Bostjan Vilfan.
+
+	* t804: New file.
+	* Makefile.am (TESTS, XFAIL_TESTS): Add t804.
+	* known-failures.in (5.8, 5.8.1, 5.8.2)
+	(5.9.0, 5.9.1, 5.9.2): Add t804.
+
 2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Use gnulib module ‘vla’.
