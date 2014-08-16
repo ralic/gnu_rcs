@@ -1,5 +1,11 @@
 2014-08-16  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[v] Confirm test for ci/co without change on branch now passes.
+
+	* Makefile.am (XFAIL_TESTS): Remove t804.
+
+2014-08-16  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v] Add test for ci/co without change on branch.
 
 	Reported by Bostjan Vilfan.
