@@ -266,6 +266,13 @@ prune (struct delta *wrong, struct delta *bp)
   if (0 >= same)
     return;
 
+  /* If ‘wrong’ is the ‘bp’ successor, simply forget it.  */
+  if (wrong == bp->ilk)
+    {
+       bp->ilk = NULL;
+       return;
+    }
+
   /* If ‘wrong’ is the only revision on a branch, delete that branch.  */
   box.next = bp->branches;
   for (tp = &box; tp->next; tp = tp->next)

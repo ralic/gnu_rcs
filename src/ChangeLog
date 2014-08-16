@@ -1,3 +1,13 @@
+2014-08-16  Hannes Küttner  <hannes.kuettner@meinberg.de>  (tiny change)
+
+	Fix bug: Don't ignore ‘bp->ilk’ when pruning.
+
+	Continuation of 2010-11-14, "Fix bug:
+	For unchanged checkin, invalidate ‘newdelta’".
+	Regression introduced 2010-05-24, "Rewrite parsing".
+
+	* ci.c (prune): Handle case where ‘wrong’ is ‘bp’ successor.
+
 2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Use gnulib module ‘vla’.
