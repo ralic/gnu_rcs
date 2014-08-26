@@ -1,3 +1,9 @@
+2014-08-26  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Fix typo: Spell "expansion" correctly.
+
+	* doc/rcs.texi (Misc common options): ...here.
+
 2014-08-09  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build] Use gnulib module ‘vla’.

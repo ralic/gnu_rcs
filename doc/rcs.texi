@@ -936,7 +936,7 @@ For version 4, the @code{Header} expansion unconditionally includes
 were specified (@pxref{Substitution mode option}).
 
 @cindex behavior, version 3
-For version 3, the @code{Header} exapnsion omits the directories from
+For version 3, the @code{Header} expansion omits the directories from
 the filename and says only @code{Locked} instead of the state.
 
 @item -w@var{login}
