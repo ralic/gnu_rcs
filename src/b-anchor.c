@@ -57,9 +57,6 @@ TINYK (log);
 TINYK (next);
 TINYK (state);
 TINYK (strict);
-#if COMPAT2
-TINYK (suffix);
-#endif
 TINYK (symbols);
 TINYK (text);
 

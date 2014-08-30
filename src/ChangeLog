@@ -1,3 +1,11 @@
+2014-08-30  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Drop compatibility w/ RCS 2.x file format.
+
+	* base.h [COMPAT2] (tiny_suffix): Delete decl.
+	* b-anchor.c [COMPAT2] (tiny_suffix): Delete.
+	* b-grok.c (full) [COMPAT2]: Drop ‘suffix’ probe/handling.
+
 2014-08-16  Hannes Küttner  <hannes.kuettner@meinberg.de>  (tiny change)
 
 	Fix bug: Don't ignore ‘bp->ilk’ when pruning.

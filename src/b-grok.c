@@ -572,22 +572,6 @@ full (struct divvy *to, struct fro *f)
       SEMI (g, branch);
     }
 
-#if COMPAT2
-  /* Read and ignore suffix.  Only in release 2 format.  */
-  if (probe_keyword (g, &TINY (suffix)))
-    {
-      struct atat ignore, *really = &ignore;
-
-      if (maybe_read_atat (g, &really))
-        brush_off (to, really);
-      else
-        /* Don't bother brushing off the snippet (thus avoiding a
-           compiler warning due to passing ‘brush_off’ a ‘const’ arg).  */
-        maybe_read_snippet (g);
-      SEMI (g, suffix);
-    }
-#endif  /* COMPAT2 */
-
   SYNCH (g, access);
   for (PREP (access); maybe_read_snippet (g); count++)
     HANG (XREP (g).string);

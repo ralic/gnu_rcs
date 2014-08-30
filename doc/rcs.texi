@@ -318,16 +318,6 @@ may modify @var{revno} (that is, do a checkin operation to deposit the
 next higher revision, or a higher revision number on the same branch as
 @var{revno}).
 
-@cindex compatibility, RCS 2.x
-@cindex @samp{configure --enable-compat2}
-@strong{Compatibility Note}:
-@repo{}s made with RCS 2.x may also contain @dfn{suffix
-information}.  If you run into such a file (unlikely, as that file
-format became obsolete in 1982), you will need to rebuild RCS with
-@samp{configure --enable-compat2} to be able to read it.  Note that RCS
-commands never write out suffix information, even with @samp{configure
---enable-compat2}.
-
 @subsection Fundamental operations
 
 @cindex checkin

@@ -81,15 +81,6 @@ AC_ARG_ENABLE([coverage],
    to include --coverage in CFLAGS and to use exit(3) instead of _Exit(3);
    this option is intended for maintainers])],,[enable_coverage=no])
 
-AC_ARG_ENABLE([compat2],
- [AS_HELP_STRING([--enable-compat2],[enable reading of RCS 2.x
-   files (really ancient, prior to GNU RCS).  If you enable this,
-   consider hiring ttn to migrate your files to a format more
-   suited to this millenium!  (The file format output by RCS 2.x
-   became obsolete in 1982.)])],,[enable_compat2=no])
-RCS_CBOOL([COMPAT2],[yes],[enable_compat2],
-  [Support reading RCS 2.x files?])
-
 AC_ARG_WITH([mailer],
  [AS_HELP_STRING([--with-mailer=PROG],[use PROG to send mail
    when a lock is broken (default: don't send mail)])],,[with_mailer=no])

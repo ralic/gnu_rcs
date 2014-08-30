@@ -1,3 +1,11 @@
+2014-08-30  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Drop compatibility w/ RCS 2.x file format.
+
+	* doc/rcs.texi (Concepts): Drop compatibility note.
+	* configure.ac (compat2): Delete this AC_ARG_ENABLE.
+	(COMPAT2): Delete this RCS_CBOOL.
+
 2014-08-26  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Fix typo: Spell "expansion" correctly.
