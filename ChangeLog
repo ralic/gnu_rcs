@@ -1,3 +1,9 @@
+2014-08-31  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build int] Use gnulib module to declare non-NULL args.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘snippet/arg-nonnull’.
+
 2014-08-30  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Drop compatibility w/ RCS 2.x file format.

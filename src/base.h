@@ -45,6 +45,9 @@
 
 /* GCC attributes  */
 
+#define ARG_NONNULL(which)  _GL_ARG_NONNULL (which)
+#define ALL_NONNULL         _GL_ARG_NONNULL ()
+
 #define RCS_UNUSED  _GL_UNUSED
 
 #if __GNUC__ >= 3 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)

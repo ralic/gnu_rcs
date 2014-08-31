@@ -1,3 +1,10 @@
+2014-08-31  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build int] Use gnulib module to declare non-NULL args.
+
+	* base.h (ARG_NONNULL): New macro.
+	(ALL_NONNULL): New #define.
+
 2014-08-30  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Drop compatibility w/ RCS 2.x file format.
