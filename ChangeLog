@@ -1,3 +1,9 @@
+2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[build int] Use gnulib module ‘close’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘close’.
+
 2014-08-31  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build int] Use gnulib module to declare non-NULL args.
