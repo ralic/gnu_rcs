@@ -23,46 +23,14 @@
 #include <stdbool.h>
 #include <obstack.h>
 #include <stdlib.h>
+#include "xalloc.h"
 #include "b-complain.h"
 #include "b-divvy.h"
 
 struct divvy *plexus;
 struct divvy *single;
 
-static void
-oom (void)
-{
-  PFATAL ("out of memory");
-}
-
-void *
-okalloc (void * p)
-{
-  if (!p)
-    oom ();
-  return p;
-}
-
-static void *
-allocate (size_t size, bool clearp)
-{
-  void *p = (clearp
-             ? calloc (1, size)
-             : malloc (size));
-
-  if (!p)
-    oom ();
-  return p;
-}
-
-#define TMALLOC(type)  allocate (sizeof (type), false)
-#define TCALLOC(type)  allocate (sizeof (type), true)
-
-static void *
-xmalloc (size_t size)
-{
-  return allocate (size, false);
-}
+#define TMALLOC(type)  xmalloc (sizeof (type))
 
 #define obstack_chunk_alloc xmalloc
 #define obstack_chunk_free free
@@ -70,11 +38,11 @@ xmalloc (size_t size)
 struct divvy *
 make_space (char const name[])
 {
-  struct divvy *divvy = TCALLOC (struct divvy);
+  struct divvy *divvy = TMALLOC (struct divvy);
 
   divvy->name = name;
-  divvy->space = TCALLOC (struct obstack);
-  obstack_alloc_failed_handler = oom;
+  divvy->space = TMALLOC (struct obstack);
+  obstack_alloc_failed_handler = xalloc_die;
   obstack_init (divvy->space);
 
   /* Set alignment to avoid segfault (on some hosts).

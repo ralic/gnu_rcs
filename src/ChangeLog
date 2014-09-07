@@ -1,5 +1,20 @@
 2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use gnulib module ‘xalloc’.
+
+	* b-divvy.c: #include "xalloc.h".
+	(oom, okalloc, allocate): Delete funcs.
+	(TMALLOC): Use ‘xmalloc’.
+	(TCALLOC): Delete macro.
+	(xmalloc): Delete func.
+	(make_space): Use ‘TMALLOC’; specify ‘xalloc_die’ instead of ‘oom’.
+	* b-divvy.h (okalloc): Delete func decl.
+	* rcsedit.c: #include "xalloc.h".
+	(insertline): Don't use ‘okalloc’, ‘malloc’, ‘realloc’;
+	instead, use ‘xmlloc’, ‘xrealloc’ directly.
+
+2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use gnulib module ‘exitfail’.
 
 	* b-complain.h: #include "exitfail.h".

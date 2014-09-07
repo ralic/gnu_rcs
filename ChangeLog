@@ -1,5 +1,11 @@
 2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Use gnulib module ‘xalloc’.
+
+	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘xalloc’.
+
+2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use gnulib module ‘exitfail’.
 
 	* m4/gnulib-cache.m4 (gl_MODULES): Add ‘exitfail’.

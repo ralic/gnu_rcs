@@ -38,6 +38,7 @@
 #include <ctype.h>
 #include "same-inode.h"
 #include "unistd-safer.h"
+#include "xalloc.h"
 #include "b-complain.h"
 #include "b-divvy.h"
 #include "b-esds.h"
@@ -158,11 +159,11 @@ insertline (struct editstuff *es, unsigned long n, char *l)
   if (es->lim - es->gapsize < n)
     EDIT_SCRIPT_OVERFLOW ();
   if (!es->gapsize)
-    es->line = okalloc
+    es->line =
       (!es->lim
-       ? malloc (SIZEOF_NLINES (es->lim = es->gapsize = 1024))
+       ? xmalloc (SIZEOF_NLINES (es->lim = es->gapsize = 1024))
        : (es->gap = es->gapsize = es->lim,
-          realloc (es->line, SIZEOF_NLINES (es->lim <<= 1))));
+          xrealloc (es->line, SIZEOF_NLINES (es->lim <<= 1))));
   if (n < es->gap)
     movelines (es->line + n + es->gapsize,
                es->line + n,
