@@ -1,3 +1,16 @@
+2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[int] Use gnulib module ‘exitfail’.
+
+	* b-complain.h: #include "exitfail.h".
+	* ci.c (cleanup): Use ‘exit_failure’.
+	* co.c (cleanup): Likewise.
+	* ident.c (scanfile, main): Likewise.
+	* rcs.c (cleanup): Likewise.
+	* rcsclean.c (cleanup): Likewise.
+	* rcsutil.c (thank_you_and_goodnight): Likewise.
+	* rlog.c (cleanup): Likewise.
+
 2014-08-31  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[build int] Use gnulib module to declare non-NULL args.

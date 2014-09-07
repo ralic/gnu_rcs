@@ -130,7 +130,7 @@ scanfile (register FILE *file, char const *name)
   if (ferror (file) || PROB (fclose (file)))
     {
       syserror_errno (name);
-      /* The following is equivalent to ‘exit (EXIT_FAILURE)’, but we
+      /* The following is equivalent to ‘exit (exit_failure)’, but we
          invoke ‘BOW_OUT’ to keep lint, as well as the DOS and OS/2 ports
          happy.  [Is this still relevant? --ttn]  */
       fflush (stdout);
@@ -173,7 +173,7 @@ main (int argc, char *argv[VLA_ELEMS (argc)])
         default:
           bad_option (a - 1);
           gnurcs_goodbye ();
-          return EXIT_FAILURE;
+          return exit_failure;
           break;
         }
 
@@ -185,7 +185,7 @@ main (int argc, char *argv[VLA_ELEMS (argc)])
         if (!(fp = fopen (a, FOPEN_RB)))
           {
             syserror_errno (a);
-            status = EXIT_FAILURE;
+            status = exit_failure;
           }
         else if (PROB (scanfile (fp, a))
                  || (argv[1] && putchar ('\n') == EOF))
@@ -196,7 +196,7 @@ main (int argc, char *argv[VLA_ELEMS (argc)])
   if (ferror (stdout) || PROB (fclose (stdout)))
     {
       syserror_errno ("standard output");
-      status = EXIT_FAILURE;
+      status = exit_failure;
     }
   gnurcs_goodbye ();
   return status;

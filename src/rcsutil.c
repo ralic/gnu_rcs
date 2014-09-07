@@ -68,7 +68,7 @@ thank_you_and_goodnight (int const how)
     tempunlink ();
   _Exit ((how & TYAG_DIFF)
          ? DIFF_FAILURE
-         : EXIT_FAILURE);
+         : exit_failure);
 }
 
 void

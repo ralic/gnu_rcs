@@ -18,6 +18,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/* Usually, complaints precede a failureful exit.  */
+#include "exitfail.h"
+
 extern void unbuffer_standard_error (void);
 extern void vcomplain (char const *fmt, va_list args);
 extern void complain (char const *fmt, ...)

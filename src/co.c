@@ -68,7 +68,7 @@ cleanup (int *exitstatus, FILE **neworkptr)
   FILE *mstdout = MANI (standard_output);
 
   if (FLOW (erroneousp))
-    *exitstatus = EXIT_FAILURE;
+    *exitstatus = exit_failure;
   fro_zclose (&FLOW (from));
   ORCSclose ();
   if (FLOW (from)

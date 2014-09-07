@@ -68,7 +68,7 @@ static void
 cleanup (int *exitstatus)
 {
   if (FLOW (erroneousp))
-    *exitstatus = EXIT_FAILURE;
+    *exitstatus = exit_failure;
   fro_zclose (&FLOW (from));
 }
 

@@ -66,7 +66,7 @@ static void
 cleanup (int *exitstatus, struct work *work)
 {
   if (FLOW (erroneousp))
-    *exitstatus = EXIT_FAILURE;
+    *exitstatus = exit_failure;
   fro_zclose (&FLOW (from));
   fro_zclose (&work->fro);
   Ozclose (&work->ex);
