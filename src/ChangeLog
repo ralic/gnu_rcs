@@ -1,5 +1,23 @@
 2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[int] Inline ‘struct obstack’ object in ‘struct divvy’.
+
+	* b-divvy.h: #include <obstack.h>.
+	(struct divvy): Make member ‘space’ into ‘struct obstack’.
+	* b-divvy.c: Don't #include <obstack.h>.
+	(make_space): Don't dynamically allocate ‘divvy->space’;
+	update ref to ‘divvy->space’ for ‘obstack_init’,
+	‘obstack_alignment_mask’ and ‘obstack_next_free’.
+	(alloc, intern, brush_off, forget, accf, accumulate_byte)
+	(accumulate_range, finish_string, pointer_array):
+	Update divvy ‘space’ refs accordingly.
+	(close_space): Likewise; also don't bother ‘free’ing ‘divvy->space’.
+	* b-grok.c: Don't #include <obstack.h>.
+	(ignoble, start_atat, finish_atat, maybe_read_atat):
+	Update divvy ‘space’ refs accordingly.
+
+2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use gnulib module ‘xalloc’.
 
 	* b-divvy.c: #include "xalloc.h".

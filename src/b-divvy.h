@@ -18,10 +18,12 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <obstack.h>
+
 struct divvy
 {
   char const *name;
-  struct obstack *space;
+  struct obstack space;
   void *first;
   size_t count;
 };

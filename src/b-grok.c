@@ -23,7 +23,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
-#include <obstack.h>
 #include "hash-pjw.h"
 #include "b-complain.h"
 #include "b-divvy.h"
@@ -101,7 +100,7 @@ ignoble (struct grok *g, char const *fmt, ...)
   va_list args;
   struct cbuf msg;
   struct divvy *scratch = g->systolic;
-  struct obstack *o = scratch->space;
+  struct obstack *o = &scratch->space;
 
   /* First, discard work-in-progress cruft.  */
   obstack_free (o, obstack_finish (o));
@@ -290,7 +289,7 @@ must_read_snippet (struct grok *g, char const *role)
 static void
 start_atat (struct divvy *to, bool blankp)
 {
-  struct obstack *o = to->space;
+  struct obstack *o = &to->space;
 
   /* We used to check and ensure ‘off_t’ (8-byte) alignment here,
      but that is now done in ‘make_space’ directly.  */
@@ -303,7 +302,7 @@ static struct atat *
 finish_atat (struct divvy *to)
 {
   struct atat *rv;
-  struct obstack *o = to->space;
+  struct obstack *o = &to->space;
   size_t hsize = obstack_object_size (o) - sizeof (struct atat);
 
   rv = obstack_finish (o);
@@ -364,7 +363,7 @@ maybe_read_atat (struct grok *g, struct atat **res)
         }
       MORE (g);
       hole = (needexp ? MASK_OFFMSB : 0) | POS (SDELIM == g->c ? -1 : -2);
-      obstack_grow (g->systolic->space, &hole, sizeof (hole));
+      obstack_grow (&g->systolic->space, &hole, sizeof (hole));
     }
   if ((atat = finish_atat (g->systolic)))
     {
@@ -403,8 +402,9 @@ maybe_read_atat (struct grok *g, struct atat **res)
          (Unfortunately, attempts to save to ‘g->to’ directly resulted in a
          segfault traced to ‘gmtime_r’ corrupting the hash table!  Weird!)  */
       start_atat (g->to, false);
-      *res = obstack_copy (g->to->space, atat, (sizeof (struct atat)
-                                                + count * sizeof (off_t)));
+      *res = obstack_copy (&g->to->space,
+                           atat, (sizeof (struct atat)
+                                  + count * sizeof (off_t)));
     }
 
   CEND ();
