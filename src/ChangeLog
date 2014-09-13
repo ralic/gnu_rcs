@@ -1,3 +1,13 @@
+2014-09-13  Achim Gratz  <Achim.Gratz@Stromeko.DE>  (tiny change)
+
+	Fix bug: Ensure stdio/fd sync around diff(1) invocation.
+
+	Regression introduced 2010-10-12, "Simplify
+	stream/fd sync; avoid ‘fflush’ on input".
+
+	* ci.c (ci_main): Don't bother doing ‘fro_bob’
+	prior to running diff(1); instead, do it afterwards.
+
 2014-09-07  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[int] Inline ‘struct obstack’ object in ‘struct divvy’.

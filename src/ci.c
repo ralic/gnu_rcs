@@ -1076,8 +1076,7 @@ ci_main (const char *cmd, int argc, char **argv)
                 SAME_AFTER (from, bud.target->text);
                 bud.d.pretty_log = getlogmsg (&reason, &bud);
 
-                /* "Rewind" ‘work.fro’ before feeding it to diff(1).  */
-                fro_bob (work.fro);
+		/* Make sure diff(1) reads from the beginning.  */
                 if (PROB (lseek (wfd, 0, SEEK_SET)))
                   Ierror ();
 
@@ -1092,6 +1091,12 @@ ci_main (const char *cmd, int argc, char **argv)
                 *++diffp = NULL;
                 if (DIFF_TROUBLE == runv (wfd, diffname, diffv))
                   RFATAL ("diff failed");
+
+                /* "Rewind" ‘work.fro’ only after feeding it to
+		   diff(1).  This is needed to keep the stream
+		   buffer state in sync with the fd. */
+                fro_bob (work.fro);
+
                 if (newhead)
                   {
                     fro_bob (work.fro);
