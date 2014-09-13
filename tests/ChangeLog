@@ -1,3 +1,17 @@
+2014-09-13  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v] Add test for stdio/fd desync regression.
+
+	We don't also update known-failures.in and include the test
+	in ‘XFAIL_TESTS’, as per normal regression protocol, because
+	the regression manifests only under Cygwin, and the testing
+	machinery doesn't handle platform-specificity at this time.
+	Suggested by Achim Gratz, originally as "t820":
+	<http://lists.gnu.org/archive/html/bug-rcs/2014-06/msg00000.html>.
+
+	* t805: New file.
+	* Makefile.am (TESTS): Add t805.
+
 2014-08-16  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[v] Confirm test for ci/co without change on branch now passes.
