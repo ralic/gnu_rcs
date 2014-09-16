@@ -1,5 +1,13 @@
 2014-09-16  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[v] Add platform-specific t805 to known-failures.
+
+	* known-failures.in (the code part of the file):
+	...here, by augmenting the output based on 2-tuple:
+	configure-substituted var ‘host_os’ and REL.
+
+2014-09-16  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v] Fix bug: Require exact REL match in known-failures.
 
 	* known-failures.in (the code part of the file): Include

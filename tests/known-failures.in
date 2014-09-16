@@ -54,7 +54,28 @@ if [ x"$1" = x ] ; then
     exit 1
 fi
 
-echo `sed '/^\* '$1'$/,/^$/!d;/^\*/d;s/;.*//' $0`
+# This bletcherous hack implements a platform-specific
+#
+#   t805 ; stdio/fd position desync (fixed in 5.9.3)
+#
+# since the current data structure (simple list) does not admit
+# preconditions or filters.  Ugly and possibly buggy in itself!
+more=
+case '@host_os@' in
+    cygwin | darwin)
+        case $1 in
+            5.8 | 5.8.* | 5.9.[012])
+                more=t805
+                ;;
+            *)
+                ;;
+        esac
+        ;;
+    *)
+        ;;
+esac
+
+echo `sed '/^\* '$1'$/,/^$/!d;/^\*/d;s/;.*//' $0` $more
 exit 0
 
 * maintenance instructions (org-mode)
