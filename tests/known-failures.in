@@ -54,7 +54,7 @@ if [ x"$1" = x ] ; then
     exit 1
 fi
 
-echo `sed '/^\* '$1'/,/^$/!d;/^\*/d;s/;.*//' $0`
+echo `sed '/^\* '$1'$/,/^$/!d;/^\*/d;s/;.*//' $0`
 exit 0
 
 * maintenance instructions (org-mode)

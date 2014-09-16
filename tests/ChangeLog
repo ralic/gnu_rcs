@@ -1,3 +1,10 @@
+2014-09-16  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v] Fix bug: Require exact REL match in known-failures.
+
+	* known-failures.in (the code part of the file): Include
+	‘$’ in sed script to avoid, e.g., "5.8" selecting "5.8.1".
+
 2014-09-13  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[v] Add test for stdio/fd desync regression.
