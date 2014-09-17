@@ -1,3 +1,7 @@
+2014-09-17  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	Release: 5.9.3
+
 2014-09-13  Achim Gratz  <Achim.Gratz@Stromeko.DE>  (tiny change)
 
 	Fix bug: Ensure stdio/fd sync around diff(1) invocation.

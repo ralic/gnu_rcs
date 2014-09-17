@@ -2,6 +2,59 @@ NEWS for GNU RCS (Revision Control System)
 See the end for copying conditions.
 
 
+- 5.9.3 | 2014-09-17
+
+  - compatibility w/ RCS 2.x file format dropped
+
+    This was presaged w/ RCS 5.9.0 (released 2013-05-06), below.
+    Effectively, the configure script no longer supports option
+    ‘--enable-compat2’, and RCS programs will fail, reporting a
+    syntax error, if given a comma-v file in 2.x format.
+
+  - bug fixes
+
+    - crash on co/ci without changes on a branch
+
+      RCS 5.8 (released 2011-08-30) introduced a bug whereby a ci
+      without changes (i.e., reversion) on a branch would crash,
+      leaving a temporary files and corrupted comma-v file as well.
+      This regression is now fixed.  See tests/t804, and also:
+      http://lists.gnu.org/archive/html/bug-rcs/2014-01/msg00000.html
+
+    - file corruption using stdio under Cygwin, Darwin
+
+      RCS 5.8 (released 2011-08-30) introduced a bug when using stdio
+      (e.g., with env var ‘RCS_MEM_LIMIT’ set to "0") under Cygwin
+      whereby ci with a sufficiently large working file would silently
+      write a truncated comma-v file.  See tests/t805, and also:
+      http://lists.gnu.org/archive/html/bug-rcs/2014-06/msg00000.html
+
+      (Although the bug was initially discovered under Cygwin, the
+      Hydra project reported the same problem for Darwin.)
+
+  - portability fixes
+
+    - don't recurse on ‘main’
+
+      This is for the sake of Cygwin "make check".  See:
+      http://lists.gnu.org/archive/html/bug-rcs/2014-08/msg00015.html
+
+    - avoid C99 VLA elems in func decl, sometimes
+
+      This is for the sake of Solaris 10 + GCC 3.4.3.  See:
+      http://lists.gnu.org/archive/html/bug-rcs/2014-08/msg00002.html
+
+  - new diff/diff3 cross-compilation support
+
+    The configure script now assigns "optimistic defaults" to some
+    diff/diff3-related vars when cross-compiling and invoked with
+    vars ‘DIFF’ and ‘DIFF3’.  See README.
+
+  - maintenance tools updated
+    - automake (GNU automake) 1.14.1
+    - gnulib-tool (GNU gnulib 2014-09-16 19:26:48) 0.1.222-aa0c2
+
+
 - 5.9.2 | 2013-11-28
 
   - bugfixes
