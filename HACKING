@@ -80,12 +80,13 @@ It lives in the repo but is not included in the distribution.
 *** what (updated every so often and on release)
     #+BEGIN: insert-file :filename ".gnulib-utility"
     ;  _Exit
+    ;    absolute-header
     ;    alloca-opt
     ;    at-internal
     ;    chdir
     ;    chdir-long
     ;    cloexec
-    ;    close
+    ;  close
     ;  closedir
     ;    concat-filename
     ;    d-ino
@@ -98,7 +99,7 @@ It lives in the repo but is not included in the distribution.
     ;    dup2
     ;  errno
     ;    error
-    ;    exitfail
+    ;  exitfail
     ;  extensions
     ;    extern-inline
     ;    fchdir
@@ -174,7 +175,7 @@ It lives in the repo but is not included in the distribution.
     ;    sigprocmask
     ;    size_max
     ;  snippet/_Noreturn
-    ;    snippet/arg-nonnull
+    ;  snippet/arg-nonnull
     ;    snippet/c++defs
     ;  snippet/unused-parameter
     ;    snippet/warn-on-use
@@ -207,11 +208,13 @@ It lives in the repo but is not included in the distribution.
     ;  unistd
     ;  unistd-safer
     ;  unlink
+    ;  vararrays
     ;    vasnprintf
     ;    verify
+    ;  vla
     ;  waitpid
     ;    wchar
-    ;    xalloc
+    ;  xalloc
     ;    xalloc-die
     ;    xalloc-oversized
     ;    xconcat-filename
