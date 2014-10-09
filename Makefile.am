@@ -23,8 +23,6 @@ EXTRA_DIST = build-aux/extract-help m4/gnulib-cache.m4
 
 dist-hook:
 	echo $(VERSION) > $(distdir)/build-aux/.version
-	case $(PACKAGE_VERSION) in (*.*.*) \
-	  cp -p $(srcdir)/HACKING $(distdir) ;; esac || true
 
 ACLOCAL_AMFLAGS = -I m4
 

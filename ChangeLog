@@ -1,3 +1,14 @@
+2014-10-09  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[dist] Don't distribute HACKING.
+
+	Omission from 2013-04-02, "Don't bother w/ README-alpha any more".
+	This was vestigial support for the "X.Y.Z → alpha" versioning
+	scheme.  Starting w/ 5.8.2, we use MAJOR.MINOR.PATCH.
+
+	* Makefile.am (dist-hook) Don't check
+	$(PACKAGE_VERSION) or distribute HACKING.
+
 2014-09-17  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.3
