@@ -1,3 +1,12 @@
+2014-11-07  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v slog] Fix bug: Use printf(1), not yes(1) and head(1).
+
+	This is more portable.  Reported by Christian Wagner:
+	<http://lists.gnu.org/archive/html/bug-rcs/2014-11/msg00000.html>.
+
+	* t805 <check in 2nd revision>: ...here.
+
 2014-09-17  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.3

@@ -55,7 +55,7 @@ do
         || problem "incorrect initial size: $size (expected 4)"
     # Check in second revision (1.2), size $n bytes.
     # Note, adding "-f" to the ci command prevents the bug.
-    yes | head -${n}c > $w
+    printf "%${n}s" '' > $w
     ci -m"blafasel" -l $w
     cp -f $w $w.$n
     cp -f $v $v.$n
