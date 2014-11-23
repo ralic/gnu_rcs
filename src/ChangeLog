@@ -1,3 +1,9 @@
+2014-11-23  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[C int] Drop redundant ‘const’ declarations.
+
+	* partime.c (month_names, weekday_names, zone_names): ...here.
+
 2014-09-17  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.3
