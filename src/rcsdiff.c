@@ -50,13 +50,13 @@ struct unique
 };
 typedef struct unique s_unique;
 
-static const s_unique const minus_y =
+static const s_unique minus_y =
   {
     .eqval_p = false,
     .minlen = 4,
     .full = "--side-by-side"
   };
-static const s_unique const minus_D =
+static const s_unique minus_D =
   {
     .eqval_p = true,
     .minlen = 4,
@@ -70,7 +70,7 @@ struct work
 };
 
 static inline bool
-longopt_maybe_p (const char *arg, const s_unique const *u)
+longopt_maybe_p (const char *arg, const s_unique *u)
 {
   const char *equal = u->eqval_p
     ? strchr (arg, '=')
