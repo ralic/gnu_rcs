@@ -150,7 +150,7 @@ lookup (char const *s, struct name_val const table[])
    returning val for first matching entry.  */
 {
   int j;
-  char buf[NAME_LENGTH_MAXIMUM];
+  char buf[NAME_LENGTH_MAXIMUM] = { 0 };
 
   for (j = 0; j < NAME_LENGTH_MAXIMUM; j++)
     {

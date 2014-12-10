@@ -1,3 +1,11 @@
+2014-12-10  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[C int] Init local var ‘buf’.
+
+	This avoids a "may be used uninitialized" warning from GCC.
+
+	* partime.c (lookup): ...here.
+
 2014-11-26  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[C int] Drop redundant ‘const’ declarations.
