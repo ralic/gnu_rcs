@@ -31,7 +31,7 @@ silence_means_death $wd/rlog.out "rlog $opts"
 noiselessness_rules $wd/rlog.err "rlog $opts"
 d=`sed '/^date: /!d;s///;s/ .*//;q' $wd/rlog.out | tee $wd/date`
 # Hmm, is ‘expr STRING : REGEX’ portable enough?
-expr "$d" : '^2010-04-1' || exit 1
+expr "$d" : '^2010-04-1' || problem "unexpected date format: $d"
 exit 0
 
 # t320 ends here

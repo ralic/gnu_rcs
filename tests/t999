@@ -71,12 +71,9 @@ case "`$DIFF -c a.11 a.3x1`" in
 esac
 
 rcs -i -L -ta.11 $q a.c &&
-test -r $RCSfile || {
-	echo "#rcs -i -L failed; perhaps RCS is not properly installed."
-	exit 1
-}
+test -r $RCSfile || problem 'rcs -i -L failed; perhaps improper install'
 
-rlog a.c >/dev/null || { echo "#rlog failed on empty RCS file"; exit 1; }
+rlog a.c >/dev/null || problem 'rlog failed on empty RCS file'
 rm -f $RCSfile || exit 2
 
 mm1='This is a log message that
@@ -95,66 +92,66 @@ we prefix and postfix several spurious newlines.
 cp a.11 a.c &&
 ci -ta.11 -m"$mm1" $q a.c &&
 test -r $RCSfile &&
-rcs -L $q a.c || { echo "#ci+rcs -L failed"; exit 1; }
-test ! -f a.c || { echo "#ci did not remove working file"; exit 1; }
+rcs -L $q a.c || problem 'ci+rcs -L failed'
+test ! -f a.c || problem 'ci did not remove working file'
 for l in '' '-l'
 do
 	co $l $q a.c &&
-	test -f a.c || { echo '#co' $l did not create working file; exit 1; }
-	$diff a.11 a.c || { echo '#ci' followed by co $l is not a no-op; exit 1; }
+	test -f a.c || problem co $l did not create working file
+	$diff a.11 a.c || problem ci followed by co $l is not a no-op
 done
 
 cp a.12 a.c &&
 ci -m"$mm2" $q a.c &&
 co $q a.c &&
-$diff a.12 a.c || { echo "#ci+co failed"; exit 1; }
+$diff a.12 a.c || problem 'ci+co failed'
 
 rm -f a.c &&
 co -r1.1 $q a.c &&
-$diff a.11 a.c || { echo "#can't retrieve first revision"; exit 1; }
+$diff a.11 a.c || problem 'cannot retrieve first revision'
 
 rm -f a.c &&
 cp a.3x1 a.c &&
 ci -r1.1.1 -mm $q a.c &&
 co -r1.1.1.1 $q a.c &&
-$diff a.3x1 a.c || { echo "#branches failed"; exit 1; }
+$diff a.3x1 a.c || problem 'branches failed'
 
 rm -f a.c &&
 co -l $q a.c &&
 ci -f -mm $q a.c &&
 co -r1.3 $q a.c &&
-$diff a.12 a.c || { echo "#(co -l; ci -f) failed"; exit 1; }
+$diff a.12 a.c || problem '(co -l; ci -f) failed'
 
 rm -f a.c &&
 co -l $q a.c &&
 echo 1.4 >a.c &&
 ci -l -mm $q a.c &&
 echo error >a.c &&
-ci -mm $q a.c || { echo "#ci -l failed"; exit 1; }
+ci -mm $q a.c || problem 'ci -l failed'
 
 rm -f a.c &&
 co -l $q a.c &&
 echo 1.5 >a.c &&
 ci -u -mm $q a.c &&
-test -r a.c || { echo "#ci -u didn't create a working file"; exit 1; }
+test -r a.c || problem 'ci -u did not create a working file'
 rm -f a.c &&
 echo error >a.c || exit 2
-ci -mm $q a.c 2>/dev/null && { echo "#ci -u didn't unlock the file"; exit 1; }
+ci -mm $q a.c 2>/dev/null && problem 'ci -u did not unlock the file'
 
 rm -f a.c &&
 rcs -l $q a.c &&
-co -u $q a.c || { echo "#rcs -l + co -u failed"; exit 1; }
+co -u $q a.c || problem 'rcs -l + co -u failed'
 rm -f a.c &&
 echo error >a.c || exit 2
-ci -mm $q a.c 2>/dev/null && { echo "#co -u didn't unlock the file"; exit 1; }
+ci -mm $q a.c 2>/dev/null && problem 'co -u did not unlock the file'
 
 rm -f a.c &&
 cp a.11 a.c &&
-co -f $q a.c || { echo "#co -f failed"; exit 1; }
-$diff a.11 a.c >/dev/null && { echo "#co -f had no effect"; exit 1; }
+co -f $q a.c || problem 'co -f failed'
+$diff a.11 a.c >/dev/null && problem 'co -f had no effect'
 
 co -p1.1 $q a.c >a.t &&
-$diff a.11 a.t || { echo "#co -p failed"; exit 1; }
+$diff a.11 a.t || problem 'co -p failed'
 
 for n in n N
 do
@@ -164,7 +161,7 @@ do
 	cp a.$n a.c &&
 	ci -${n}n -mm $q a.c &&
 	co -rn $q a.c &&
-	$diff a.$n a.c || { echo "#ci -$n failed"; exit 1; }
+	$diff a.$n a.c || problem "ci -$n failed"
 done
 
 case $LOGNAME in
@@ -185,7 +182,7 @@ esac
 date=`rlog -r a.c | sed -n '/^date: /{ s///; s/;.*//; p; q; }'` || exit
 case $date in
 [0-9][0-9][0-9]*[0-9]/[0-1][0-9]/[0-3][0-9]\ [0-2][0-9]:[0-5][0-9]:[0-6][0-9]);;
-*) echo >&2 "$0: $date: bad rlog date output"; exit 1
+*) problem "bad rlog date output: $date"
 esac
 PWD=`pwd` && export PWD &&
 rm -f a.c &&
@@ -215,20 +212,20 @@ sed -e '/\$/!d' -e 's/\$$/: old $/' a.k >a.o &&
 sed -e 's/\$[^ ]*: //' -e 's/ \$//' a.kv >a.v &&
 cp a.o a.c &&
 ci -d"$date" -nOz -sseriously-spurious -ww -u2.1 -mm $q a.c &&
-$diff a.kv a.c || { echo "#keyword expansion failed"; exit 1; }
+$diff a.kv a.c || problem 'keyword expansion failed'
 co -pOz -ko $q a.c >a.oo &&
-$diff a.o a.oo || { echo "#co -p -ko failed"; exit 1; }
+$diff a.o a.oo || problem 'co -p -ko failed'
 cp a.kv a.o && cp a.o a.b || exit 2
 rcs -oOz $q a.c &&
 rcs -l $q a.c &&
 ci -k -u $q a.c &&
-$diff a.kv a.c || { echo "#ci -k failed"; exit 1; }
+$diff a.kv a.c || problem 'ci -k failed'
 sed -n 's/^[^$]*\$/$/p' a.kv >a.i &&
 ident a.c >a.i1 &&
 sed -e 1d -e 's/^[	 ]*//' a.i1 >a.i2 &&
-$diff a.i a.i2 || { echo "#ident failed"; exit 1; }
+$diff a.i a.i2 || problem 'ident failed'
 
-rcs -i $q a.c 2>/dev/null && { echo "#rcs -i permitted existing file"; exit 1; }
+rcs -i $q a.c 2>/dev/null && problem 'rcs -i permitted existing file'
 
 rm -f a.c &&
 co -l $q a.c &&
@@ -238,94 +235,92 @@ echo 1.1.1.2 >a.c &&
 rcs -l1.1.1 $q a.c &&
 ci -r1.1.1.2 -mm $q a.c &&
 rcs -b1.1.1 $q a.c &&
-test " `co -p $q a.c`" = ' 1.1.1.2' || { echo "#rcs -b1.1.1 failed"; exit 1; }
+test " `co -p $q a.c`" = ' 1.1.1.2' || problem 'rcs -b1.1.1 failed'
 rcs -b $q a.c &&
-test " `co -p $q a.c`" = ' 2.2' || { echo "#rcs -b failed"; exit 1; }
+test " `co -p $q a.c`" = ' 2.2' || problem 'rcs -b failed'
 
 echo 2.3 >a.c || exit 2
-rcs -U $q a.c || { echo "#rcs -U failed"; exit 1; }
-ci -mm $q a.c || { echo "#rcs -U didn't unset strict locking"; exit 1; }
-rcs -L $q a.c || { echo "#rcs -L failed"; exit 1; }
+rcs -U $q a.c || problem 'rcs -U failed'
+ci -mm $q a.c || problem 'rcs -U did not unset strict locking'
+rcs -L $q a.c || problem 'rcs -L failed'
 echo error >a.c || exit 2
-ci -mm $q a.c 2>/dev/null && { echo "#ci retest failed"; exit 1; }
+ci -mm $q a.c 2>/dev/null && problem 'ci retest failed'
 
 rm -f a.c &&
 log0=`rlog -h a.c` &&
 co -l $q a.c &&
 ci -mm $q a.c &&
 log1=`rlog -h a.c` &&
-test " $log0" = " $log1" || { echo "#unchanged ci didn't revert"; exit 1; }
+test " $log0" = " $log1" || problem 'unchanged ci did not revert'
 
 rm -f a.c &&
 rcs -nN:1.1 $q a.c &&
 co -rN $q a.c &&
-$diff a.11 a.c || { echo "#rcs -n failed"; exit 1; }
+$diff a.11 a.c || problem 'rcs -n failed'
 
 rm -f a.c &&
 rcs -NN:2.1 $q a.c &&
 co -rN $q a.c &&
-$diff a.N a.c || { echo "#rcs -N failed"; exit 1; }
+$diff a.N a.c || problem 'rcs -N failed'
 
 rm -f a.c &&
 co -l $q a.c &&
 echo ':::$''Log$' >a.c &&
 ci -u -mm $q a.c &&
-test " `sed '$!d' a.c`" = ' :::' || { echo "#comment leader failed"; exit 1; }
+test " `sed '$!d' a.c`" = ' :::' || problem 'comment leader failed'
 
 rm -f a.c &&
 rcs -o2.2: $q a.c &&
 co $q a.c &&
-$diff a.e a.c || { echo "#rcs -o failed"; exit 1; }
+$diff a.e a.c || problem 'rcs -o failed'
 
 rcsdiff -r1.1 -rOz $q a.c >a.0
 case $? in
 1) ;;
-*) echo "#rcsdiff bad status"; exit 1
+*) problem 'rcsdiff bad status'
 esac
 $DIFF a.11 a.kv >a.1
-$diff a.0 a.1 || { echo "#rcsdiff failed"; exit 1; }
+$diff a.0 a.1 || problem 'rcsdiff failed'
 
-rcs -l2.1 $q a.c || { echo "#rcs -l2.1 failed"; exit 1; }
+rcs -l2.1 $q a.c || problem 'rcs -l2.1 failed'
 for i in b k kv kvl o v
 do
 	rm -f a.c &&
 	cp a.$i a.c &&
-	rcsdiff -k$i -rOz $q a.c || { echo "#rcsdiff -k$i failed"; exit 1; }
+	rcsdiff -k$i -rOz $q a.c || problem "rcsdiff -k$i failed"
 done
 co -p1.1 -ko $q a.c >a.t &&
-$diff a.11 a.t || { echo "#co -p1.1 -ko failed"; exit 1; }
-rcs -u2.1 $q a.c || { echo "#rcs -u2.1 failed"; exit 1; }
+$diff a.11 a.t || problem 'co -p1.1 -ko failed'
+rcs -u2.1 $q a.c || problem 'rcs -u2.1 failed'
 
 rm -f a.c &&
 rcsclean $q a.c &&
-rcsclean -u $q a.c || { echo "#rcsclean botched a nonexistent file"; exit 1; }
+rcsclean -u $q a.c || problem 'rcsclean botched a nonexistent file'
 
 rm -f a.c &&
 co $q a.c &&
 rcsclean -n $q a.c &&
 rcsclean -n -u $q a.c &&
-test -f a.c || { echo "#rcsclean -n removed a file"; exit 1; }
+test -f a.c || problem 'rcsclean -n removed a file'
 
 rm -f a.c &&
 co $q a.c &&
 rcsclean $q a.c &&
-test ! -f a.c || { echo "#rcsclean missed an unlocked file"; exit 1; }
+test ! -f a.c || problem 'rcsclean missed an unlocked file'
 
 rm -f a.c &&
 co -l $q a.c &&
 rcsclean $q a.c &&
-test -f a.c || { echo "#rcsclean removed a locked file"; exit 1; }
+test -f a.c || problem 'rcsclean removed a locked file'
 rcsclean -u $q a.c &&
-test ! -f a.c || {
-	echo "#rcsclean -u missed an unchanged locked file"; exit 1;
-}
+test ! -f a.c || problem 'rcsclean -u missed an unchanged locked file'
 
 rm -f a.c &&
 co -l $q a.c &&
 echo change >>a.c &&
 rcsclean $q a.c &&
 rcsclean $q -u a.c &&
-test -f a.c || { echo "#rcsclean removed a changed file"; exit 1; }
+test -f a.c || problem 'rcsclean removed a changed file'
 
 rm -f a.c &&
 co -l $q a.c &&
@@ -366,16 +361,16 @@ case $? in
 	then echo "#warning: diff3 -E does not work, " \
 		"so merge and rcsmerge ignore overlaps and suppress overlap lines."
 	else
-		$diff a.1 a.c || { echo "#rcsmerge failed (status 0)"; exit 1; }
+		$diff a.1 a.c || problem 'rcsmerge failed (status 0)'
 		echo "#warning: The diff3 lib program exit status ignores overlaps," \
 			"so rcsmerge does not warn about overlap lines that it generates."
 	fi
 	;;
 1)
-	$diff a.1 a.c || { echo "#rcsmerge failed (status 1)"; exit 1; }
+	$diff a.1 a.c || problem 'rcsmerge failed (status 1)'
 	;;
 *)
-	echo "#rcsmerge bad status"; exit 1
+	problem 'rcsmerge bad status'
 esac
 
 cat >a.c <<'EOF'
@@ -403,9 +398,9 @@ EOF
 	rcsdiff -r2.4 $q a.c >/dev/null
 } || echo "#warning: Traditional diff is used, so RCS is limited to text files."
 
-rcs -u -o2.4: $q a.c || { echo "#rcs -u -o failed"; exit 1; }
+rcs -u -o2.4: $q a.c || problem 'rcs -u -o failed'
 
-rcs -i -Aa.c -t- $q a.d || { echo "#rcs -i -A failed"; exit 1; }
+rcs -i -Aa.c -t- $q a.d || problem 'rcs -i -A failed'
 
 # The ordering of symbolic names is inverted between RCS 5.7 and 5.8.
 # That's why we sort.  Ugly but true.  Probably it would be best to
@@ -435,12 +430,12 @@ revision 2.1
 date: $date;  author: w;  state: seriously-spurious;  lines: +14 -1
 =============================================================================
 EOF
-test $? = 0 || { echo "#rlog failed"; exit 1; }
+test $? = 0 || problem 'rlog failed'
 
 rlog a.c a.c >/dev/null
-test $? = 0 || { echo "#rlog with working file repeated failed"; exit 1; }
+test $? = 0 || problem 'rlog with working file repeated failed'
 
-test ! -f $lockfile || { echo "#lock file not removed"; exit 1; }
+test ! -f $lockfile || problem 'lock file not removed'
 
 cd ..
 

@@ -1,3 +1,11 @@
+2014-12-12  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[v int] Use ‘problem’ more.
+
+	* t320: ...here, instead of ‘exit 1’.
+	* t999: Likewise, replacing ‘{ echo TEXT; exit 1; }’.  Also,
+	replace an incorrect scaffolding-error-exit w/ call to ‘problem’.
+
 2014-11-07  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[v slog] Fix bug: Use printf(1), not yes(1) and head(1).
