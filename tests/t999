@@ -170,19 +170,18 @@ do
 	$diff a.$n a.c || failed "ci -$n"
 done
 
-case $LOGNAME in
-?*) me=$LOGNAME;;
-*)
-	case $USER in
-	?*) me=$USER;;
-	*)
-		me=`id -un` || exit 2
-		case $me in
-		'') echo >&2 "$0: cannot deduce user name"; exit 2
-		esac
-	esac
-esac
-
+# Try POSIX, then BSD, then env vars.
+me=`id -un 2>/dev/null`
+if [ -z "$me" ] ; then
+    me=`whoami 2>/dev/null`
+    if [ -z "$me" ] ; then
+        me=$LOGNAME
+        if [ -z "$me" ] ; then
+            me=$USER
+            test "$me" || { echo >&2 "$0: cannot deduce user name" ; exit 2 ; }
+        fi
+    fi
+fi
 
 # Get the date of the previous revision in UTC.
 date=`rlog -r a.c | sed -n '/^date: /{ s///; s/;.*//; p; q; }'` || exit

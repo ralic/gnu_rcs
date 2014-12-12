@@ -1,5 +1,12 @@
 2014-12-12  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[v] To deduce user, prefer POSIX over BSD over env vars.
+
+	* t999 (me): Rewrite code to set this var, first trying
+	‘id -un’, then ‘whoami’, then the env vars ‘LOGNAME’, ‘USER’.
+
+2014-12-12  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v int] Add abstraction: failed
 
 	* t999 (failed): New func.
