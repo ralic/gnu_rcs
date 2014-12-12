@@ -31,6 +31,12 @@
 ##
 
 . $srcdir/common
+
+failed ()
+{
+    problem "$@" failed
+}
+
 split_std_out_err
 cd $wd
 # Avoid tr(1) if possible; it's not portable, and it can't handle
@@ -92,7 +98,7 @@ we prefix and postfix several spurious newlines.
 cp a.11 a.c &&
 ci -ta.11 -m"$mm1" $q a.c &&
 test -r $RCSfile &&
-rcs -L $q a.c || problem 'ci+rcs -L failed'
+rcs -L $q a.c || failed 'ci+rcs -L'
 test ! -f a.c || problem 'ci did not remove working file'
 for l in '' '-l'
 do
@@ -104,7 +110,7 @@ done
 cp a.12 a.c &&
 ci -m"$mm2" $q a.c &&
 co $q a.c &&
-$diff a.12 a.c || problem 'ci+co failed'
+$diff a.12 a.c || failed 'ci+co'
 
 rm -f a.c &&
 co -r1.1 $q a.c &&
@@ -114,20 +120,20 @@ rm -f a.c &&
 cp a.3x1 a.c &&
 ci -r1.1.1 -mm $q a.c &&
 co -r1.1.1.1 $q a.c &&
-$diff a.3x1 a.c || problem 'branches failed'
+$diff a.3x1 a.c || failed 'branches'
 
 rm -f a.c &&
 co -l $q a.c &&
 ci -f -mm $q a.c &&
 co -r1.3 $q a.c &&
-$diff a.12 a.c || problem '(co -l; ci -f) failed'
+$diff a.12 a.c || failed '(co -l; ci -f)'
 
 rm -f a.c &&
 co -l $q a.c &&
 echo 1.4 >a.c &&
 ci -l -mm $q a.c &&
 echo error >a.c &&
-ci -mm $q a.c || problem 'ci -l failed'
+ci -mm $q a.c || failed 'ci -l'
 
 rm -f a.c &&
 co -l $q a.c &&
@@ -140,18 +146,18 @@ ci -mm $q a.c 2>/dev/null && problem 'ci -u did not unlock the file'
 
 rm -f a.c &&
 rcs -l $q a.c &&
-co -u $q a.c || problem 'rcs -l + co -u failed'
+co -u $q a.c || failed 'rcs -l + co -u'
 rm -f a.c &&
 echo error >a.c || exit 2
 ci -mm $q a.c 2>/dev/null && problem 'co -u did not unlock the file'
 
 rm -f a.c &&
 cp a.11 a.c &&
-co -f $q a.c || problem 'co -f failed'
+co -f $q a.c || failed 'co -f'
 $diff a.11 a.c >/dev/null && problem 'co -f had no effect'
 
 co -p1.1 $q a.c >a.t &&
-$diff a.11 a.t || problem 'co -p failed'
+$diff a.11 a.t || failed 'co -p'
 
 for n in n N
 do
@@ -161,7 +167,7 @@ do
 	cp a.$n a.c &&
 	ci -${n}n -mm $q a.c &&
 	co -rn $q a.c &&
-	$diff a.$n a.c || problem "ci -$n failed"
+	$diff a.$n a.c || failed "ci -$n"
 done
 
 case $LOGNAME in
@@ -212,18 +218,18 @@ sed -e '/\$/!d' -e 's/\$$/: old $/' a.k >a.o &&
 sed -e 's/\$[^ ]*: //' -e 's/ \$//' a.kv >a.v &&
 cp a.o a.c &&
 ci -d"$date" -nOz -sseriously-spurious -ww -u2.1 -mm $q a.c &&
-$diff a.kv a.c || problem 'keyword expansion failed'
+$diff a.kv a.c || failed 'keyword expansion'
 co -pOz -ko $q a.c >a.oo &&
-$diff a.o a.oo || problem 'co -p -ko failed'
+$diff a.o a.oo || failed 'co -p -ko'
 cp a.kv a.o && cp a.o a.b || exit 2
 rcs -oOz $q a.c &&
 rcs -l $q a.c &&
 ci -k -u $q a.c &&
-$diff a.kv a.c || problem 'ci -k failed'
+$diff a.kv a.c || failed 'ci -k'
 sed -n 's/^[^$]*\$/$/p' a.kv >a.i &&
 ident a.c >a.i1 &&
 sed -e 1d -e 's/^[	 ]*//' a.i1 >a.i2 &&
-$diff a.i a.i2 || problem 'ident failed'
+$diff a.i a.i2 || failed 'ident'
 
 rcs -i $q a.c 2>/dev/null && problem 'rcs -i permitted existing file'
 
@@ -235,16 +241,16 @@ echo 1.1.1.2 >a.c &&
 rcs -l1.1.1 $q a.c &&
 ci -r1.1.1.2 -mm $q a.c &&
 rcs -b1.1.1 $q a.c &&
-test " `co -p $q a.c`" = ' 1.1.1.2' || problem 'rcs -b1.1.1 failed'
+test " `co -p $q a.c`" = ' 1.1.1.2' || failed 'rcs -b1.1.1'
 rcs -b $q a.c &&
-test " `co -p $q a.c`" = ' 2.2' || problem 'rcs -b failed'
+test " `co -p $q a.c`" = ' 2.2' || failed 'rcs -b'
 
 echo 2.3 >a.c || exit 2
-rcs -U $q a.c || problem 'rcs -U failed'
+rcs -U $q a.c || failed 'rcs -U'
 ci -mm $q a.c || problem 'rcs -U did not unset strict locking'
-rcs -L $q a.c || problem 'rcs -L failed'
+rcs -L $q a.c || failed 'rcs -L'
 echo error >a.c || exit 2
-ci -mm $q a.c 2>/dev/null && problem 'ci retest failed'
+ci -mm $q a.c 2>/dev/null && failed 'ci retest'
 
 rm -f a.c &&
 log0=`rlog -h a.c` &&
@@ -256,23 +262,23 @@ test " $log0" = " $log1" || problem 'unchanged ci did not revert'
 rm -f a.c &&
 rcs -nN:1.1 $q a.c &&
 co -rN $q a.c &&
-$diff a.11 a.c || problem 'rcs -n failed'
+$diff a.11 a.c || failed 'rcs -n'
 
 rm -f a.c &&
 rcs -NN:2.1 $q a.c &&
 co -rN $q a.c &&
-$diff a.N a.c || problem 'rcs -N failed'
+$diff a.N a.c || failed 'rcs -N'
 
 rm -f a.c &&
 co -l $q a.c &&
 echo ':::$''Log$' >a.c &&
 ci -u -mm $q a.c &&
-test " `sed '$!d' a.c`" = ' :::' || problem 'comment leader failed'
+test " `sed '$!d' a.c`" = ' :::' || failed 'comment leader'
 
 rm -f a.c &&
 rcs -o2.2: $q a.c &&
 co $q a.c &&
-$diff a.e a.c || problem 'rcs -o failed'
+$diff a.e a.c || failed 'rcs -o'
 
 rcsdiff -r1.1 -rOz $q a.c >a.0
 case $? in
@@ -280,18 +286,18 @@ case $? in
 *) problem 'rcsdiff bad status'
 esac
 $DIFF a.11 a.kv >a.1
-$diff a.0 a.1 || problem 'rcsdiff failed'
+$diff a.0 a.1 || failed 'rcsdiff'
 
-rcs -l2.1 $q a.c || problem 'rcs -l2.1 failed'
+rcs -l2.1 $q a.c || failed 'rcs -l2.1'
 for i in b k kv kvl o v
 do
 	rm -f a.c &&
 	cp a.$i a.c &&
-	rcsdiff -k$i -rOz $q a.c || problem "rcsdiff -k$i failed"
+	rcsdiff -k$i -rOz $q a.c || failed "rcsdiff -k$i"
 done
 co -p1.1 -ko $q a.c >a.t &&
-$diff a.11 a.t || problem 'co -p1.1 -ko failed'
-rcs -u2.1 $q a.c || problem 'rcs -u2.1 failed'
+$diff a.11 a.t || failed 'co -p1.1 -ko'
+rcs -u2.1 $q a.c || failed 'rcs -u2.1'
 
 rm -f a.c &&
 rcsclean $q a.c &&
@@ -398,9 +404,9 @@ EOF
 	rcsdiff -r2.4 $q a.c >/dev/null
 } || echo "#warning: Traditional diff is used, so RCS is limited to text files."
 
-rcs -u -o2.4: $q a.c || problem 'rcs -u -o failed'
+rcs -u -o2.4: $q a.c || failed 'rcs -u -o'
 
-rcs -i -Aa.c -t- $q a.d || problem 'rcs -i -A failed'
+rcs -i -Aa.c -t- $q a.d || failed 'rcs -i -A'
 
 # The ordering of symbolic names is inverted between RCS 5.7 and 5.8.
 # That's why we sort.  Ugly but true.  Probably it would be best to
@@ -430,10 +436,10 @@ revision 2.1
 date: $date;  author: w;  state: seriously-spurious;  lines: +14 -1
 =============================================================================
 EOF
-test $? = 0 || problem 'rlog failed'
+test $? = 0 || failed 'rlog'
 
 rlog a.c a.c >/dev/null
-test $? = 0 || problem 'rlog with working file repeated failed'
+test $? = 0 || failed 'rlog with working file repeated'
 
 test ! -f $lockfile || problem 'lock file not removed'
 

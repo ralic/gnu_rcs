@@ -1,5 +1,12 @@
 2014-12-12  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[v int] Add abstraction: failed
+
+	* t999 (failed): New func.
+	<top-level>: Use it to replace ‘problem’ calls that end w/ "failed".
+
+2014-12-12  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[v int] Use ‘problem’ more.
 
 	* t320: ...here, instead of ‘exit 1’.
