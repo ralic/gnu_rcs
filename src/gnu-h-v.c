@@ -1,6 +1,6 @@
 /* gnu-h-v.c --- GNUish --help and --version handling
 
-   Copyright (C) 2010-2014 Thien-Thi Nguyen
+   Copyright (C) 2010-2015 Thien-Thi Nguyen
 
    This file is part of GNU RCS.
 
@@ -41,7 +41,7 @@ nice_getopt (int argc, char **argv, const struct option *longopts)
 
 #define COMMAND_VERSION                                         \
   (" (" PACKAGE_NAME ") " PACKAGE_VERSION "\n"                  \
-   "Copyright (C) 2010-2014 Thien-Thi Nguyen\n"                      \
+   "Copyright (C) 2010-2015 Thien-Thi Nguyen\n"                      \
    "Copyright (C) 1990-1995 Paul Eggert\n"                      \
    "Copyright (C) 1982,1988,1989 Walter F. Tichy, Purdue CS\n"  \
    "License GPLv3+: GNU GPL version 3 or later"                 \

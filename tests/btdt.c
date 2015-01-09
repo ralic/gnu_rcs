@@ -1,6 +1,6 @@
 /* btdt.c --- been there done that
 
-   Copyright (C) 2010-2014 Thien-Thi Nguyen
+   Copyright (C) 2010-2015 Thien-Thi Nguyen
 
    This file is part of GNU RCS.
 
@@ -165,7 +165,7 @@ main (int argc, char *argv[VLA_ELEMS (argc)])
   if (STR_SAME ("--version", argv[1]))
     {
       printf ("btdt (%s) %s\n", PACKAGE_NAME, PACKAGE_VERSION);
-      printf ("Copyright (C) 2010-2014 Thien-Thi Nguyen\n");
+      printf ("Copyright (C) 2010-2015 Thien-Thi Nguyen\n");
       printf ("License GPLv3+; GNU GPL version 3 or later"
               " <http://gnu.org/licenses/gpl.html>\n\n");
       argv[1] = "--help";
