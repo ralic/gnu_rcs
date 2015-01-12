@@ -1,3 +1,9 @@
+2015-01-12  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[boot] Invoke autoreconf(1) w/ option ‘--force’.
+
+	* autogen.sh: ...here.
+
 2014-10-09  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[dist] Don't distribute HACKING.

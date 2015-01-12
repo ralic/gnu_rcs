@@ -23,7 +23,7 @@ w .gnulib-utility
 x
 '
 
-autoreconf --install --symlink
+autoreconf --install --symlink --force
 
 # These override what ‘autoreconf --install’ creates.
 # Another way is to use gnulib's config/srclist-update.
