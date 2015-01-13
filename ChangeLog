@@ -1,3 +1,9 @@
+2015-01-13  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[doc] Use @r in examples.
+
+	* doc/rcs.texi (Quick tour, Common elements, Environment): ...here.
+
 2015-01-12  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[boot] Invoke autoreconf(1) w/ option ‘--force’.

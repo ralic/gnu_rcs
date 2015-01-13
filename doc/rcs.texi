@@ -521,8 +521,8 @@ for checkin; all others still do.  Turning strict locking off
 and on is done with the commands:
 
 @example
-rcs -U f.c    # disable strict locking
-rcs -L f.c    # enable strict locking
+rcs -U f.c    # @r{disable strict locking}
+rcs -L f.c    # @r{enable strict locking}
 @end example
 
 If you don't want to clutter your working directory with
@@ -536,8 +536,8 @@ To avoid the deletion of the working file during checkin (in
 case you want to continue editing or compiling), invoke one of:
 
 @example
-ci -l f.c     # checkin + locked checkout
-ci -u f.c     # checkin + unlocked checkout
+ci -l f.c     # @r{checkin + locked checkout}
+ci -u f.c     # @r{checkin + unlocked checkout}
 @end example
 
 @noindent
@@ -634,8 +634,8 @@ specified, the extra information @strong{must} abut the letter; there
 can be no intervening whitespace.
 
 @example
-co -u 1.4 foo   # wrong, space between -u and 1.4
-co -u1.4  foo   # ok
+co -u 1.4 foo   # @r{wrong, space between} -u @r{and} 1.4
+co -u1.4  foo   # @r{ok}
 @end example
 
 @noindent
@@ -644,8 +644,8 @@ Furthermore, options must appear before file names (if any) on the
 command line.
 
 @example
-ident foo -q    # wrong, option after file name
-ident -q foo    # ok
+ident foo -q    # @r{wrong, option after file name}
+ident -q foo    # @r{ok}
 @end example
 
 @noindent
@@ -973,11 +973,11 @@ environment variable.  This is a space-separated list of options.
 Use @samp{\} (backslash) to escape significant space.  For example:
 
 @example
-# Set the value; make it available to subsequent commands.
+# @r{Set the value; make it available to subsequent commands.}
 RCSINIT="-q -x/,v -zLT"
 export RCSINIT
 
-# Use it (implicitly).
+# @r{Use it (implicitly).}
 rlog -L foo
 @end example
 
