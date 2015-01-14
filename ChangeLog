@@ -1,5 +1,12 @@
 2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Index implicit checkout.
+
+	* doc/rcs.texi (Quick tour): Add two @cindex.
+	(ci): Likewise, one for ‘ci -l’, one for ‘ci -u’.
+
+2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[doc] Index keywords.
 
 	* doc/rcs.texi (Substitution mode option):

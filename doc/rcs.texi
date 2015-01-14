@@ -548,6 +548,8 @@ will look first into that directory to find needed files.  All
 the commands discussed above will still work, without any
 modification.  @xref{Common elements}.
 
+@cindex checkout, implicit
+@cindex implicit checkout, circumstance
 To avoid the deletion of the working file during checkin (in
 case you want to continue editing or compiling), invoke one of:
 
@@ -1081,10 +1083,12 @@ Release lock and delete working file.
 @item -r@var{rev}
 Do normal checkin.
 
+@cindex implicit checkout, locked
 @cindex locking on implicit checkout
 @item -l[@var{rev}]
 Like @option{-r}, but immediately checkout locked (@command{co -l}) afterwards.
 
+@cindex implicit checkout, unlocked
 @item -u[@var{rev}]
 Like @option{-l}, but checkout unlocked (@command{co -u}).
 
