@@ -1,5 +1,12 @@
 2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Index locking concepts, operations.
+
+	* doc/rcs.texi (Concepts, Quick tour, ci, rcs):
+	Add @cindex for various locks/locking-related topics.
+
+2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[doc] Index ‘frob -o’ more.
 
 	* doc/rcs.texi (rcs): Use "delete" in ‘-o’ explanation,

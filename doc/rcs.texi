@@ -307,6 +307,7 @@ corresponds to the most recent checkin; as well as the @dfn{symbolic
 names}, a list of associations between a user-supplied (and presumably
 meaningful) symbol and an underlying branch or revision number.
 
+@cindex locks in @repo{}
 @cindex access control policy
 The @repo{} contains two pieces of information used to implement its
 @dfn{access control policy}.  The first is a list of usernames.  If
@@ -513,6 +514,10 @@ same file.  Even if a revision is locked, it can still be
 checked out for reading, compiling, etc.  All that locking
 prevents is a checkin by anybody but the locker.
 
+@cindex strict locking
+@cindex locking, strict
+@cindex non-strict locking
+@cindex locking, non-strict
 If your @repo{} is private, i.e., if you are the only person
 who is going to deposit revisions into it, strict locking is
 not needed and you can turn it off.  If strict locking is
@@ -1065,6 +1070,7 @@ Release lock and delete working file.
 @item -r@var{rev}
 Do normal checkin.
 
+@cindex locking on implicit checkout
 @item -l[@var{rev}]
 Like @option{-r}, but immediately checkout locked (@command{co -l}) afterwards.
 
@@ -1319,9 +1325,11 @@ on the @repo{}, depending on the options given.
 @item -i
 Create and initialize a new @repo{}.
 
+@cindex locking, set strict
 @item -L
 Set strict locking.
 
+@cindex locking, set non-strict
 @item -U
 Set non-strict locking.
 
@@ -1350,9 +1358,11 @@ Append access-list of @var{file-name} to current access-list.
 Set default branch to that of @var{rev} or
 highest branch on trunk if @var{rev} is omitted.
 
+@cindex locking a revision
 @item -l[@var{rev}]
 Lock a revision.
 
+@cindex unlocking a revision
 @item -u[@var{rev}]
 Unlock a revision.
 
