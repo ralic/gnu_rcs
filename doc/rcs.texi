@@ -347,25 +347,31 @@ The keywords and their values are:
 
 @cindex keywords, table of
 @table @code
+@vindex Author
 @item Author
 The login name of the user who checked in the revision.
 
+@vindex Date
 @item Date
 The date and time the revision was checked in.
 May include an appended timezone offset.
 
+@vindex Header
 @item Header
 A standard header containing the absolute @repo{}name, the
 revision number, the date and time, the author, the state, and the
 locker (if locked).  May include an appended timezone offset.
 
+@vindex Id
 @item Id
 Same as @samp{Header}, except that only the
 basename appears (no directory components).
 
+@vindex Locker
 @item Locker
 The login name of the user who locked the revision (empty if not locked).
 
+@vindex Log
 @item Log
 The log message supplied during checkin, preceded by a header containing
 the @repo{}name, the revision number, the author, and the date
@@ -403,20 +409,25 @@ prefix is @samp{/*} or @samp{(*} surrounded by optional white space,
 inserted log lines contain a space instead of @samp{/} or @samp{(};
 however, this usage is obsolescent and should not be relied on.
 
+@vindex Name
 @item Name
 The symbolic name used to check out the revision, if any.
 For example, @samp{co -rJoe} generates @samp{$Name: Joe $}.
 Plain @rcscommand{co} generates just @samp{$Name: $}.
 
+@vindex RCSfile
 @item RCSfile
 The basename of the @repo{}.
 
+@vindex Revision
 @item Revision
 The revision number assigned to the revision.
 
+@vindex Source
 @item Source
 The absolute @repo{}name.
 
+@vindex State
 @item State
 The state assigned to the revision with the @option{-s} option
 of @rcscommand{rcs} or @rcscommand{ci}.

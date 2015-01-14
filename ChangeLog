@@ -1,5 +1,12 @@
 2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Index keywords.
+
+	* doc/rcs.texi (Substitution mode option):
+	...here, in the keywords table, via @vindex.
+
+2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[doc] Move @cindex before @item.
 
 	* doc/rcs.texi (Substitution mode option, Misc common options):
