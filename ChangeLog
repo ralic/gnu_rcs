@@ -1,5 +1,12 @@
 2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[doc] Move @cindex before @item.
+
+	* doc/rcs.texi (Substitution mode option, Misc common options):
+	...here, in table of subst modes and common options, respectively.
+
+2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[doc] Index locking concepts, operations.
 
 	* doc/rcs.texi (Concepts, Quick tour, ci, rcs):

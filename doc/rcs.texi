@@ -801,9 +801,9 @@ file.  In the following table of @var{subst} values, the example keyword
 is @samp{Revision} and its value is @samp{5.13}.
 
 @table @code
-@item kv
 @cindex substitution mode, default
 @cindex keyword-value substitution mode
+@item kv
 Generate @samp{$Revision: 5.13 $} (dollar-sign, keyword, colon, space,
 value, space, dollar-sign).
 A locker's name is inserted in the value of the @code{Header},
@@ -811,35 +811,35 @@ A locker's name is inserted in the value of the @code{Header},
 i.e., by @command{ci -l} and @command{co -l}.
 This is the default substitution mode.
 
-@item kvl
 @cindex keyword-value-locker substitution mode
+@item kvl
 Like @option{-kkv}, except that a locker's name is always inserted
 if the given revision is currently locked.
 
-@item k
 @cindex keyword-only substitution mode
+@item k
 Generate @samp{$Revision$} (dollar-sign, keyword, dollar-sign).
 This is useful when comparing different revisions of a file.  Log
 messages are inserted after @code{Log} keywords even if @option{-kk} is
 specified, since this tends to be more useful when merging changes.
 
-@item o
 @cindex old-keyword-value substitution mode
+@item o
 Like @option{-kkv}, but use the old value present in the working file
 just before it was checked in.  This can be useful for file formats that
 cannot tolerate any changes to substrings that happen to take the form
 of keyword strings.
 
-@item b
 @cindex binary-old-keyword-value substitution mode
+@item b
 Like @option{-ko}, but do all file i/o in binary mode.  This makes
 little difference on POSIX and Unix hosts, but on DOS-like hosts one
 should use @command{rcs -i -kb} to initialize an @repo{} intended to be
 used for binary files.  Also, on all hosts, @rcscommand{rcsmerge} normally
 refuses to merge files when @option{-kb} is in effect.
 
-@item v
 @cindex value-only substitution mode
+@item v
 Generate @samp{5.13} (value only).  Further keyword substitution cannot
 be performed once the keyword names are removed, so this should be used
 with care.  Because of this danger of losing keywords, @option{-kv}
@@ -867,8 +867,8 @@ Other common options are @option{-I}, @option{-q}, @option{-s},
 @option{-T}, @option{-V}, @option{-w}, @option{-x}.
 
 @table @code
-@item -I
 @cindex interactive mode
+@item -I
 This option enables @dfn{interactive mode}.
 More precisely, it @strong{forces} interactive mode, whereby RCS
 commands believe that their standard input is a terminal, normally a
@@ -879,15 +879,15 @@ input is actually not a terminal but you know beforehand (without
 prompting) that input is needed and you are ready to provide it on
 standard input anyway.
 
-@item -q
 @cindex quiet mode
+@item -q
 This option enables @dfn{quiet mode}.
 Commands work silently (unless there is an error condition),
 and suppress warnings and prompts.
 
-@item -s@var{state}
 @cindex specifying a state
 @cindex state, specifying
+@item -s@var{state}
 Specify the state to be @var{state}.
 
 @item -T
@@ -910,9 +910,9 @@ information and exit successfully.
 @strong{NB}: This option is obsolete and its
 @strong{support will be removed} in some future release.
 
-@item -V@var{n}
 @cindex emulation, previous RCS versions
 @cindex RCS version emulation
+@item -V@var{n}
 @var{n} specifies the RCS (major) version to emulate.
 Valid values for @var{n} are: 3, 4, 5.
 Version 5 is the current version, so @code{-V5} does nothing special.
@@ -934,16 +934,16 @@ were specified (@pxref{Substitution mode option}).
 For version 3, the @code{Header} expansion omits the directories from
 the filename and says only @code{Locked} instead of the state.
 
-@item -w@var{login}
 @cindex specifying author
 @cindex author, specifying
+@item -w@var{login}
 Some commands accept an option of the form @samp{-w@var{login}}
 to specify the login name of the author of a revision, i.e.,
 ``who'' is responsible.
 
-@item -x@var{suff}
 @cindex specifying a suffix list
 @cindex suffix list, specifying
+@item -x@var{suff}
 Specify @var{suff} as the slash-separated list of file name suffixes
 used to recognize an @repo{}.  The default value is @samp{,v/}, that
 is, first try with @samp{,v} then try with an empty suffix.
