@@ -1373,8 +1373,11 @@ Otherwise, associate @var{name} with @var{rev}; @var{name} must be new.
 @item -N@var{name}[:[@var{rev}]]
 Like @option{-n}, but overwrite any previous assignment.
 
+@cindex deleting revisions
+@cindex removing revisions
+@cindex outdating revisions
 @item -o@var{range}
-Outdate revisions in @var{range}:
+Delete (also known as ``outdate'') revisions in @var{range}:
 
 @table @asis
 @item @var{rev}
