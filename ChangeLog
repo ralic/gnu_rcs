@@ -1,3 +1,15 @@
+2015-01-17  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[doc] Reorganize introspective stuff into new chapter.
+
+	* doc/rcs.texi (Top): Remove "File format", "Still missing"
+	and "Reporting bugs" from menu; add "Hacking" in their place;
+	Add appropriate entries to the detailmenu.
+	(Hacking): New node/chapter.
+	(File format): Demote to section of "Hacking"; update footnote.
+	(comma-v grammar, comma-v particulars): Demote to subsection.
+	(Still missing, Reporting bugs): Demote to section of "Hacking".
+
 2015-01-14  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	[doc] Index implicit checkout.

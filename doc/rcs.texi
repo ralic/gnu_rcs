@@ -91,10 +91,7 @@ Texts.  A copy of the license is included in the appendix entitled
 @menu
 * Overview::            General purpose and information.
 * Usage::               How to use RCS.
-* File format::         What is stored on disk.
-
-* Still missing::       What RCS lacks, perhaps perpetually.
-* Reporting bugs::      Sending bug reports and feature suggestions.
+* Hacking::             With source, you can help improve things.
 * GNU FDL::             Copying and sharing this documentation.
 * Index::
 
@@ -126,6 +123,10 @@ Common elements
 * Misc common options::
 * Environment::
 
+Hacking
+* File format::
+* Still missing::
+* Reporting bugs::
 @end detailmenu
 @end menu
 
@@ -1658,14 +1659,30 @@ or by the user if @var{who} is omitted.
 
 @ineffectual @samp{-q}, @samp{-T}
 
+
+@c ---------------------------------------------------------------------------
+@node Hacking
+@chapter Hacking
+
+This chapter, in contrast to the previous (@pxref{Usage}),
+is introspective.  It describes an important aspect of RCS interop
+with other programs, and development ideas and methods.
+
+@menu
+* File format::         What is stored on disk.
+* Still missing::       What RCS lacks, perhaps perpetually.
+* Reporting bugs::      Sending bug reports and feature suggestions.
+@end menu
+
+
 @c ---------------------------------------------------------------------------
 @node File format
-@chapter File format
+@section File format
 @cindex RCSfile format
 @cindex format, RCSfile
 
 An @repo{}'s contents are described by the grammar below@footnote{This
-chapter is adapted from the @samp{rcsfile(5)} manpage, written by
+section is adapted from the @samp{rcsfile(5)} manpage, written by
 @WFT{}.}.
 @cindex encoding, file format
 Overall, the format is free--format text.
@@ -1680,7 +1697,7 @@ characters are codes 010--015 and 040.
 @end menu
 
 @node comma-v grammar
-@section File format grammar
+@subsection File format grammar
 @cindex grammar, file format
 
 The meta syntax in this section uses the following conventions:
@@ -1743,7 +1760,7 @@ intstring ::= "@@" @{intchar@}* @{thirdp@}* "@@"
 @end example
 
 @node comma-v particulars
-@section Additional particulars of the file format
+@subsection Additional particulars of the file format
 
 @itemize
 @item
@@ -1863,7 +1880,7 @@ This list is ordered in increasing numbers.
 
 @c ---------------------------------------------------------------------------
 @node Still missing
-@chapter Still missing
+@section Still missing
 @cindex features, still missing
 
 RCS is still missing some features.  The following is an unordered list
@@ -1972,7 +1989,7 @@ of @code{vc-annotate}, q.v.  ---ttn]
 
 @c ---------------------------------------------------------------------------
 @node Reporting bugs
-@chapter Reporting bugs
+@section Reporting bugs
 
 @cindex bug reporting
 @cindex problems
