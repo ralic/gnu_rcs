@@ -277,6 +277,8 @@ are positive.  For example:
 @end example
 
 @noindent
+@cindex tip
+@cindex branch tip
 The @dfn{branch point} of a non-trunk branch is the revision number
 formed by removing the branch's trailing integer.  To compute the
 @dfn{next higher} branch or revision number, add one to the trailing
@@ -302,6 +304,8 @@ integer.  The highest-numbered revision on a branch is called the
 @cindex revisions, tree of
 @cindex symbolic names
 @cindex names, symbolic
+@cindex default branch
+@cindex branch, default
 In addition to this ``tree'' of thus-linked revisions, the @repo{}
 keeps track of the @dfn{default branch}, i.e., the branch whose tip
 corresponds to the most recent checkin; as well as the @dfn{symbolic
@@ -712,6 +716,8 @@ Like @var{br}.@var{n}, using the default branch.
 @item @var{br}
 Like @var{br}.@var{n}, using the a command-specific computation of
 @var{n}, given the current tip @var{i}.
+@cindex branch growth
+@cindex tip increment
 For @rcscommand{ci} (@pxref{ci}), @var{n} would be @code{@var{i} + 1},
 while for other commands @var{n} would be simply @var{i}.
 
@@ -1370,6 +1376,7 @@ If @var{logins} is omitted, clear the access-list.
 @item -A@var{file-name}
 Append access-list of @var{file-name} to current access-list.
 
+@cindex default branch, setting
 @item -b[@var{rev}]
 Set default branch to that of @var{rev} or
 highest branch on trunk if @var{rev} is omitted.
