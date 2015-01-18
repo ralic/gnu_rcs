@@ -1,5 +1,11 @@
 2015-01-18  Thien-Thi Nguyen  <ttn@gnu.org>
 
+	[C int] Use a local variable.
+
+	* b-grok.c (full): ...here, in "revisions"-chaining loop.
+
+2015-01-18  Thien-Thi Nguyen  <ttn@gnu.org>
+
 	[int] Use ‘MEM_SAME’ more.
 
 	* b-anchor.c (pool_lookup): ...here.

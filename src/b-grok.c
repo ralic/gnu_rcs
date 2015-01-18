@@ -709,18 +709,20 @@ full (struct divvy *to, struct fro *f)
         box.next = NULL, tp = &box;
         while (MAYBE_REVNO (g))
           {
+            const char *gs = XREP (g).string;
+
             /* Branches must begin with the branch point revision.  */
             if (numlen >= XREP (g).size
-                || strncmp (d->num, XREP (g).string, numlen)
-                || '.' != XREP (g).string[numlen]
-                || 2 != countnumflds (XREP (g).string + numlen + 1))
+                || strncmp (d->num, gs, numlen)
+                || '.' != gs[numlen]
+                || 2 != countnumflds (gs + numlen + 1))
               BUMMER ("invalid branch `%s' at branchpoint `%s'",
-                      XREP (g).string, d->num);
+                      gs, d->num);
             fw = STRUCTALLOC (g->tranquil, struct fwref);
-            fw->revno = XREP (g).string;
+            fw->revno = gs;
             fw->lno = g->lno;
             all_br = wprepend (fw, all_br, g->tranquil);
-            HANG (XREP (g).string);
+            HANG (gs);
           }
         ny->branches = box.next;
         SEMI (g, branches);
