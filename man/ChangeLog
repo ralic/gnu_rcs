@@ -1,3 +1,12 @@
+2015-01-18  Thien-Thi Nguyen  <ttn@gnu.org>
+
+	[man] Fix bug: Update ‘RCS_MEM_LIMIT’ blurb.
+
+	Omission from 2013-10-20, "Relax RCS_MEM_LIMIT
+	default; fall back if unspecified".
+
+	* b-environment (RCS_MEM_LIMIT): Rewrite to mimic rcs.texi.
+
 2013-10-04  Thien-Thi Nguyen  <ttn@gnu.org>
 
 	Release: 5.9.1
