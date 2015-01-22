@@ -81,7 +81,9 @@ It lives in the repo but is not included in the distribution.
     #+BEGIN: insert-file :filename ".gnulib-utility"
     ;  _Exit
     ;    absolute-header
+    ;    alignof
     ;    alloca-opt
+    ;    assure
     ;    at-internal
     ;    chdir
     ;    chdir-long

@@ -130,6 +130,11 @@ exit 0
 * 5.9.2
   t804 ; revert on unchanged on a branch (fixed in 5.9.3)
 
+* 5.9.3
+  ;; t805 under OSX (see "bletcherous hack" above)
+
+* 5.9.4
+
 * end matter
 *** Local variables:
 *** mode: org

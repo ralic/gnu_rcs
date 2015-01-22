@@ -2,6 +2,57 @@ NEWS for GNU RCS (Revision Control System)
 See the end for copying conditions.
 
 
+- 5.9.4 | 2015-01-22
+
+  - portability fix in "make check" for OSX
+
+    We now avoid ‘head -N’, where N is a number, since that
+    construct is not portable.  See:
+    http://lists.gnu.org/archive/html/bug-rcs/2014-11/msg00000.html
+
+  - doc improvements
+
+    - index ‘rcs -o’ better
+
+      It seems the term "outdate" is itself outdated, nowadays (sigh).
+      This command is now indexed under "deleting" and "removing", as
+      well as "outdating".
+
+    - move ‘@cindex’ before ‘@item’ in tables
+
+      The tables of substitution mode options and common options are
+      now indexed such that selecting the indexed item in Emacs leaves
+      point on the item's line and not the one after.
+
+    - new index entries
+
+      For concepts (locking, implicit checkout, branching-related
+      stuff) and keywords.
+
+    - introspective stuff moved into chapter "Hacking"
+
+      These former chapters have been moved into chapter "Hacking":
+      "File format", "Still missing", "Reporting bugs".  As a nice
+      side-effect, the table of contents of the PDF now is one page.
+
+    - ‘RCS_MEM_LIMIT’ on manpages updated
+
+      RCS 5.9.2 (released 2013-11-28) changed how ‘RCS_MEM_LIMIT’
+      works.  The Texinfo docs were updated but not the manpages.
+
+  - maintenance tools
+
+    upgraded:
+
+     GNU Automake 1.15
+     GNU gnulib 2015-01-20 09:09:03
+     GNU texinfo 5.2
+
+    as before:
+
+     GNU Autoconf 2.69
+
+
 - 5.9.3 | 2014-09-17
 
   - compatibility w/ RCS 2.x file format dropped
